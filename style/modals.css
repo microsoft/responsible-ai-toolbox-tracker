@@ -1,0 +1,321 @@
+.modalFluent {
+  font-family: 'Segoe UI';
+  width: 450px;
+  padding: 0rem 1rem 0rem 1rem;
+}
+
+.colorSelectorModal {
+  width: 400px;
+  align-self: 'top';
+}
+
+.importNotebookModal {
+  width: 400px;
+  align-self: 'center';
+}
+
+.importNotebookContent {
+  width: 100%;
+  padding: 0rem 0rem 1rem 0rem;
+}
+
+.modalFluentHeader {
+  font-weight: 700;
+  font-size: 1rem;
+  text-align: center;
+  align-items: flex-end;
+  display: flex;
+  flex-shrink: 0;
+  justify-content: space-between;
+  padding: 1rem 0rem 1rem 0;
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+}
+
+.modalFluentHeader.cancelIcon:hover {
+  color: darkgray;
+}
+
+#settingsEmptyRow {
+  height: 25px;
+}
+
+.modalFluentBody {
+  font-weight: 500;
+  position: relative;
+  flex: 1 1 auto;
+  padding: 0.2rem 0rem 0.3rem 0rem;
+  font-size: 0.8rem;
+  width: 100%;
+}
+
+.modalFluentBody a:hover {
+  color: #4f6bed;
+  text-decoration: underline;
+}
+
+.modalRegisterModel {
+  width: 400px;
+  padding: 0rem 1rem 0rem 1rem;
+}
+
+.spanChangeFile a:hover {
+  color: #004578;
+  text-decoration: underline;
+}
+
+.modalRegisterLink {
+  font-weight: 400;
+  align-content: left;
+  text-align: left;
+  color: #4f6bed;
+  text-decoration: underline;
+}
+
+.modelContainer {
+  display: 'flex';
+  flex-flow: 'column nowrap';
+  align-items: 'stretch';
+}
+
+#propR11,
+#propR12,
+#propR13,
+#propR14 {
+  width: 130px;
+  font-weight: 500;
+}
+
+#propR22,
+#propR24 {
+  width: 200px;
+  font-weight: 400;
+}
+
+#propR32,
+#propR34 {
+  width: 100px;
+  font-weight: 500;
+}
+
+#propR21,
+#propR23 {
+  width: 110px;
+  font-weight: 500;
+}
+
+#propR31,
+#propR33 {
+  width: 220px;
+  font-weight: 400;
+}
+
+.modalFluentFooter {
+  display: flex;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 1.5rem 0rem 1rem 0rem;
+  border-bottom-right-radius: calc(0.3rem - 1px);
+  border-bottom-left-radius: calc(0.3rem - 1px);
+}
+
+.deleteDialog {
+  width: 300px;
+}
+
+.deleteDialogLabel {
+  align-items: left;
+  width: 100%;
+  font-weight: 400;
+  font-size: 0.8rem;
+}
+
+.projectModalFluentBody {
+  font-weight: 500;
+  position: relative;
+  flex: 1 1 auto;
+  padding: 0.2rem 0rem 0.3rem 0rem;
+  font-size: 0.8rem;
+  width: 100%;
+}
+
+#cancelIcon:hover {
+  background-color: #f3f2f1;
+  cursor: pointer;
+}
+
+.cancelIconStyles {
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+  align-content: center;
+  color: darkgray;
+}
+
+.modelRegisteredIcon {
+  align-self: right;
+  transform: scale(1);
+  color: #43B27C;
+}
+
+.btnUploadFile {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  cursor: pointer;
+  width: 100%;
+}
+
+#labelUploadModel:hover {
+  background-color: #f3f2f1;
+}
+
+#labelUploadNotebook:hover {
+  background-color: #f3f2f1;
+}
+
+#labelUploadDataset:hover {
+  background-color: #f3f2f1;
+}
+
+.projectModalFluentBody a:hover {
+  color: #5c2e91;
+  text-decoration: underline;
+}
+
+.registerModelHeader {
+  font-weight: 700;
+  font-size: 1rem;
+  text-align: right;
+  align-content: right;
+  align-items: right;
+  width: 67%;
+}
+
+.modalLabelHeader {
+  font-weight: 700;
+  font-size: 1rem;
+  text-align: center;
+  width: 100%;
+}
+
+.spanChangeFile {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: left;
+  justify-content: left;
+}
+
+.LabelText {
+  font-size: 0.8rem;
+  display: flex;
+}
+
+.labelChangeFile {
+  height: 32px;
+  width: 100%;
+  display: block;
+  position: relative;
+  cursor: pointer;
+}
+
+.labelChooseFile {
+  width: 140px;
+  border: 1px solid;
+  height: 32px;
+  display: block;
+  position: relative;
+  cursor: pointer;
+}
+
+.requiredAsterik::after {
+  content: "*";
+  vertical-align: top;
+  margin-left: 5px;
+  color: red;
+}
+
+.spanChooseFile {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.projectLabelChooseFile {
+  border: 1px solid;
+  width: 120px;
+  height: 32px;
+  display: block;
+  position: relative;
+  cursor: pointer;
+}
+
+.labelTextOutput {
+  font-weight: 500;
+  font-size: 0.7rem;
+  align-items: left;
+  vertical-align: center;
+  width: 220px;
+  justify-content: center;
+}
+
+.registerModelLabelText {
+  width: 120px;
+  font-weight: 500;
+  font-size: 0.8rem;
+  display: flex;
+}
+
+.registerModelExp {
+  width: 100%;
+  font-weight: 400;
+  color: #868686;
+  font-size: 14px;
+  line-height: 19px;
+}
+
+.projectLabelText {
+  width: 100%;
+  font-weight: 500;
+  font-size: 0.8rem;
+  display: flex;
+}
+
+.projectLabelTextOutput {
+  font-weight: 500;
+  font-size: 0.7rem;
+  align-items: left;
+  text-align: left;
+  vertical-align: bottom;
+  width: 100%;
+}
+
+.LabelTextErrorOutput {
+  font-weight: 500;
+  font-size: 0.7rem;
+  align-items: left;
+  width: 100%;
+  color: darkred;
+
+}
+
+.RegisterModelErrorOutput {
+  font-weight: 500;
+  font-size: 0.7rem;
+  align-items: center;
+  width: 100%;
+  color: red;
+}
+
+.iconButtonStyles {
+  color: darkgray;
+}

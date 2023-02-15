@@ -1,0 +1,12 @@
+[
+	{
+		"key": "0cdddcfa-5afe-4495-99b0-3a2a05080117",
+		"name": "Scikit-Learn",
+		"value": "sklearn"
+	},
+	{
+		"key": "5d03ef7b-7e14-4362-bb82-bc2e4b9670dc",
+		"name": "PyTorch",
+		"value": "pytorch"
+	}
+]

@@ -1,0 +1,7 @@
+{
+	"serverUri":  "http://127.0.0.1:22205/",
+	"headers":  "{'Content-Type': 'application/json'}",
+	"method": "POST",
+	"experimentName": "mlflowRaiMitigation",
+	"artifactLocation": "workspace/mlflow"
+}

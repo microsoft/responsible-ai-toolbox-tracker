@@ -1,0 +1,157 @@
+.cohortBody {
+    font-weight: 400;
+    font-size: 0.8rem;
+    width: 100%;
+    height: 95%;
+    text-align: left;
+    align-content: left;
+    margin-bottom: 2rem;
+}
+
+.cohortHeaders {
+    text-align: left;
+    align-content: left;
+    font-size: 13px;
+    font-weight: 500;
+    width: 100%;
+    display: flex;
+    cursor: pointer;
+}
+
+.cohortErrorOutput {
+    font-weight: 500;
+    font-size: 0.7rem;
+    align-items: left;
+    width: 100%;
+    color: red;
+    visibility: hidden;
+}
+
+.cohortHeaders :hover {
+    color: #868686;
+}
+
+.cohortDialogHeaders {
+    text-align: left;
+    align-content: left;
+    font-size: 13px;
+    font-weight: 500;
+    width: 90px;
+    display: flex;
+}
+
+.cohortLabel {
+    align-items: left;
+    width: 200px;
+    font-weight: 400;
+    font-size: 0.8rem;
+}
+
+.cohortBodyLabel {
+    text-align: left;
+    align-items: left;
+    font-weight: 400;
+    font-size: 15px;
+}
+
+.cohortBody th {
+    border: 0px solid black;
+}
+
+.cohortFooter {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.filterStyles {
+    font-weight: 400;
+    font-size: 0.8rem;
+}
+
+.filterStyles span:hover {
+    background-color: #eee;
+}
+
+#deleteFilterSpan {
+    align-items: right;
+    align-content: right;
+    vertical-align: top;
+}
+
+#filterOutputSpan {
+    align-self: center;
+    vertical-align: bottom;
+}
+
+.clearFiltersStyles {
+    width: 100%;
+    color: #a4262c;
+}
+
+.fileIconHeaderIcon {
+    padding: 0;
+    font-size: 16px;
+}
+
+.fileIconCell {
+    text-align: center;
+    display: 'inline-block';
+    vertical-align: 'middle';
+    height: 100%;
+    width: 0px;
+    visibility: 'hidden';
+}
+
+.fileIconImg {
+    vertical-align: 'middle';
+    max-height: '16px';
+    max-width: '16px';
+}
+
+.controlWrapper {
+    display: 'flex';
+    flex-wrap: 'wrap';
+}
+
+.cohortListStyle {
+    vertical-align: 'top';
+    text-align: left;
+    align-content: left;
+    align-items: flex-start;
+}
+
+.cohortsSettingsIcon {
+    vertical-align: middle;
+    align-self: center;
+    width: 22px;
+    height: 20px;
+    transform: scale(1.2);
+    padding: 0rem 0rem 0rem 0rem;
+    margin: 0rem 0rem 0.1rem 0rem;
+}
+
+.cohortsSettingsLink {
+    vertical-align: 'center';
+    text-align: center;
+    align-content: center;
+    padding: 0rem 0rem 0rem 0rem;
+}
+
+.cohortsSettingsLink i:hover {
+    background-color: #eee;
+}
+
+.filterDupError {
+    width: auto;
+    vertical-align: middle;
+    background-color: #f7dfe3;
+    padding: 0.3rem 0.3rem 0.3rem 0.3rem;
+}
+
+.filterDupErrorIcon {
+    vertical-align: middle;
+    color: #9b141b;
+    padding: 0.3rem 0.5rem 0.3rem 0.3rem;
+}

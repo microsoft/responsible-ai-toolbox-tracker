@@ -1,0 +1,310 @@
+.modelsMainDiv {
+    font-family: 'Segoe UI';
+    padding: 0.8rem 0rem 0rem 1rem;
+    width: 100%;
+}
+
+table {
+    font-family: 'Segoe UI';
+    border-collapse: collapse;
+}
+
+.modelsSettingsTable {
+    font-family: 'Segoe UI';
+    width: 887px;
+    margin: 0.2rem 0rem 0.5rem 0rem;
+    background-color: white;
+}
+
+.modelsSettingsTable th {
+    text-align: left;
+    vertical-align: bottom;
+    padding: 0rem 0rem 0rem 0.5rem;
+
+}
+
+.modelsTableBody {
+    font-family: 'Segoe UI';
+    width: 100%;
+}
+
+.modelsTable {
+    font-family: 'Segoe UI';
+    display: contents;
+    flex-wrap: nowrap;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    vertical-align: bottom;
+    background-color: white;
+}
+
+.lineSeparator {
+    width: 100%;
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    padding: 0.5rem 0rem 0rem 0rem;
+}
+
+.baselineSeparator {
+    border-bottom: 5px solid #eee;
+    width: 100%;
+    padding: 0rem 0rem 0rem 0rem;
+    background-color: rgb(146, 13, 13);
+}
+
+
+.modelsTable th {
+    border-right: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+    vertical-align: top;
+    line-height: 40px;
+    background-color: white;
+}
+
+.modelsTable td {
+    border-right: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+    vertical-align: middle;
+    background-color: white;
+}
+
+#noBordersTd {
+    border-right: 1px solid #eee;
+    border-top: 0px;
+    border-left: 0px;
+    border-bottom: 0px;
+    vertical-align: top;
+    vertical-align: text-top;
+}
+
+#rightBorderTd {
+    border-right: 1px solid #eee;
+    border-top: 0px;
+    border-left: 0px;
+    border-bottom: 0px;
+    vertical-align: top;
+    vertical-align: text-top;
+    padding: 0.2rem 0rem 0rem 0rem;
+}
+
+#bottomBorderTd {
+    border-right: 0px;
+    border-top: 0px;
+    border-left: 0px;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+    vertical-align: text-top;
+}
+
+.hiddenElement {
+    visibility: hidden;
+}
+
+.modelDropdownStyle {
+    padding: 0rem 0.2rem 0.2rem 0.2rem;
+    width: 220px;
+    height: auto;
+    overflow: visible;
+    white-space: inherit;
+    align-content: left;
+    align-items: left;
+    text-align: left;
+}
+
+.modelsSettingOptions {
+    font-family: 'Segoe UI';
+    font-size: 14px;
+    font-weight: 400;
+    margin-left: -8px;
+}
+
+.notebookHeader {
+    width: 100%;
+    font-weight: 500;
+    font-size: 13px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 40px;
+}
+
+.notebookHeader :hover {
+    color: darkgray;
+    cursor: pointer;
+}
+
+.testDataTableHeader {
+    width: 100%;
+    font-weight: 500;
+    font-size: 13px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 40px;
+}
+
+.testDataTableHeader :hover {
+    color: darkgray;
+    cursor: pointer;
+}
+
+.modelsMetricsHeader {
+    font-family: 'Segoe UI';
+    font-size: 13px;
+    font-weight: 500;
+    width: 100px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 10px;
+    padding: 0.7rem 0rem 0.5rem 0.7rem;
+}
+
+.modelsMetricsHeader :hover {
+    color: darkgray;
+    cursor: pointer;
+}
+
+.modelsMetricsHeaderC {
+    font-family: 'Segoe UI';
+    font-size: 13px;
+    font-weight: 500;
+    width: 100px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 10px;
+    padding: 0.7rem 0rem 1rem 0.7rem;
+}
+
+.modelsMetricsHeaderC :hover {
+    color: darkgray;
+    cursor: pointer;
+}
+
+.metricLegend div {
+    width: 50px;
+    line-height: 8px;
+    background-image: linear-gradient(90deg, #dfedff, #4693FD);
+}
+
+._metricLegend div {
+    width: 50px;
+    line-height: 8px;
+    background-image: linear-gradient(90deg, #4693FD, #dfedff);
+}
+
+.metricLegend span {
+    font-family: 'Segoe UI';
+    font-size: 8px;
+}
+
+.comparativeMetricLegend div {
+    width: 50px;
+    line-height: 8px;
+    background-image: linear-gradient(90deg, #fc5866, #ffc0be, #cee5b0, #61a30b);
+}
+
+._comparativeMetricLegend div {
+    width: 50px;
+    line-height: 8px;
+    background-image: linear-gradient(90deg, #61a30b, #cee5b0, #ffc0be, #fc5866);
+}
+
+.metricLegendRed div {
+    width: 50px;
+    line-height: 8px;
+    background-image: linear-gradient(90deg, #ffc0be, #fc5866);
+}
+
+._metricLegendRed div {
+    width: 50px;
+    line-height: 8px;
+    background-image: linear-gradient(90deg, #fc5866, #ffc0be);
+}
+
+.accuracyFieldValue span {
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    width: 100%;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 40px;
+    background-color: white;
+}
+
+.metricSortIcon {
+    transform: scale(1);
+    padding: 0rem 0rem 0rem 0.2rem;
+}
+
+._metricSortIcon {
+    visibility: hidden;
+}
+
+.spaceStyle {
+    width: 20px;
+}
+
+.roundedCornersAll {
+    width: 20px;
+    font-size: 10px;
+    border-radius: 1rem;
+    vertical-align: middle;
+    text-align: center;
+    background-color: #FDE7BC;
+}
+
+.roundedCorners {
+    width: 40px;
+    font-size: 10px;
+    border-radius: 1rem;
+    vertical-align: middle;
+    text-align: center;
+    background-color: #BAE1FF;
+}
+
+.testDatasetHeader {
+    align-content: left;
+    text-align: left;
+    color: #868686;
+    padding: 0rem 0rem 0rem 0.5rem;
+}
+
+.absTestDatasetHeader {
+    align-content: left;
+    text-align: left;
+    color: #868686;
+    padding: 0rem 0rem 0rem 0.5rem;
+}
+
+.selectCohortsFooter {
+    color: #4f6bed;
+    vertical-align: bottom;
+    text-align: left;
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.selectCohortsFooter span:hover {
+    cursor: pointer;
+    color: #004578;
+    text-decoration: underline;
+}
+
+.colorSelectorIcon {
+    vertical-align: middle;
+    align-self: center;
+    width: 22px;
+    height: 20px;
+    transform: scale(1.2);
+    padding: 0rem 0rem 0rem 0rem;
+}
+
+.unregisterWaitSpinner {
+    margin: 0 auto;
+}

@@ -1,0 +1,378 @@
+/*-----------------------------------------------------------------------------
+| Variables
+|----------------------------------------------------------------------------*/
+:root {
+  --rai-icon-logo: url("img/trackerIcon.svg");
+  --font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+  --body-font-family: var(--font-sans-serif);
+  --body-font-size: 0.8rem;
+  --body-font-weight: 400;
+  --body-line-height: 1.5;
+}
+
+body {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size);
+  font-weight: var(--body-font-weight);
+  line-height: var(--body-line-height);
+  background: var(--jp-layout-color1);
+}
+
+.raiPanel {
+  width: 400px;
+  display: flex;
+  padding: 0rem 0rem 0rem 0rem;
+  min-width: var(--jp-sidebar-min-width);
+  background: var(--jp-layout-color1);
+  overflow: visible;
+}
+
+.raiMainPanel {
+  width: 100%;
+  display: flex;
+  padding: 0rem 0rem 0rem 0rem;
+  background-color: #faf9f8;
+}
+
+.rai-log-icon svg {
+  fill: var(--jp-inverse-layout-color3);
+}
+
+.marginLeft {
+  padding: 0rem 0rem 0rem 1rem;
+}
+
+.mainMenu {
+  display: flex;
+  vertical-align: bottom;
+  padding: 0rem 0rem 0rem 0rem;
+}
+
+.IconButtonStyle {
+  color: black;
+  width: 25px;
+  height: 25px;
+  transform: scale(1.3);
+  padding: 0rem 0rem 0rem 0rem;
+}
+
+.mainMenuClass {
+  color: black;
+  transform: scale(0.8);
+}
+
+.mifHeader {
+  display: flex;
+  align-content: right;
+  vertical-align: bottom;
+  padding: 1.5rem 0rem 2rem 1rem;
+}
+
+.mifLabel {
+  text-align: left;
+  vertical-align: top;
+  font-family: 'Segoe UI';
+  font-size: 17px;
+  font-weight: 650;
+  width: 300px;
+  display: flex;
+  padding: 0rem 0rem 0rem 0.5rem;
+}
+
+.ScrollablePaneWrapper {
+  position: relative;
+  height: 100%;
+}
+
+.stickyFooter {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid #ccc;
+}
+
+.stickyFooter div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btnCompareModels {
+  text-align: center;
+  height: 32px;
+  width: 180px;
+}
+
+.ActiveProjectTitle {
+  display: flex;
+  align-content: left;
+}
+
+#propCol1 {
+  width: 20px;
+  display: flex;
+  align-content: left;
+  vertical-align: bottom;
+}
+
+#propCol2 {
+  width: 320px;
+  text-align: left;
+}
+
+#propCol3 {
+  align-content: right;
+}
+
+.selectProjectStyle {
+  background-color: #eee;
+}
+
+.projectListIcon {
+  background-color: #eee;
+
+}
+
+.projectIcon {
+  transform: scale(1.2);
+  padding: 0.2rem 0rem 0.2rem 0rem;
+}
+
+.labelSubTextHeader {
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 0rem 0rem 0.4rem 0rem;
+}
+
+.projectSettingsIcon {
+  vertical-align: middle;
+  align-self: center;
+  width: 22px;
+  height: 20px;
+  transform: scale(1.2);
+  padding: 0rem 0rem 0rem 0rem;
+  margin: 0.1rem 0rem 0.1rem 0rem;
+}
+
+.projectSettingsLinkStyle {
+  vertical-align: middle;
+  align-self: center;
+  align-content: center;
+  align-items: baseline;
+}
+
+.projectSettingsLinkStyle i:hover {
+  background-color: #eee;
+}
+
+.notebookIcon {
+  display: inline-block;
+  width: 22px;
+  vertical-align: middle;
+}
+
+.btnNewProjectAlign div {
+  display: flex;
+  align-content: left;
+  align-items: flex-start;
+  padding: 0rem 0rem 0rem 1rem;
+}
+
+.newProjectIcon {
+  transform: scale(1.6);
+  padding: 0.1rem 0.2rem 0rem 0.2rem;
+}
+
+.pageIcon {
+  transform: scale(1);
+  padding: 0rem 0.5rem 0rem 0rem;
+}
+
+.SortIcon {
+  transform: scale(0.8);
+  padding: 0rem 0rem 0rem 0rem;
+}
+
+.spanTableHeader {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: left;
+  justify-content: left;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.dataTableHeader {
+  width: 100%;
+  display: flex;
+  cursor: pointer;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  padding: 0.5rem 0rem 0.5rem 0rem;
+}
+
+.dataTableHeader :hover {
+  color: #868686;
+}
+
+.NotebookTableHeader {
+  width: 215px;
+  vertical-align: middle;
+}
+
+.NotebookTableColumn {
+  width: 190px;
+  vertical-align: text-top;
+}
+
+.ModelTableColumn {
+  width: 90px;
+}
+
+.AccuracyTableColumn {
+  width: 80px;
+}
+
+.dataTable {
+  text-align: left;
+  align-content: left;
+  width: 380px;
+  border-collapse: collapse;
+}
+
+.dataTable Label {
+  align-content: left;
+}
+
+.dataTable td {
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  align-content: left;
+  text-align: left;
+}
+
+.dataTableBody td {
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
+  vertical-align: text-top;
+  align-content: left;
+  text-align: left;
+  font-weight: 400;
+}
+
+.dataTableBody {
+  text-align: left;
+  align-content: left;
+  width: 380px;
+  border-collapse: collapse;
+}
+
+.dataTableBody tr:hover {
+  background-color: #eee;
+}
+
+.openNotebookLink {
+  align-content: left;
+  text-align: left;
+}
+
+.registerLink {
+  align-content: left;
+  text-align: left;
+  color: #4f6bed;
+}
+
+
+.dataTableBody a:hover {
+  color: #005a9e;
+  text-decoration: underline;
+}
+
+.FormControl {
+  border-color: #ffffff;
+  width: 200;
+  height: 200;
+  box-sizing: 'border-box';
+}
+
+.datasetTooltip {
+  padding: 0.5rem 0.5rem 0rem 0.5rem;
+  margin: 0;
+}
+
+.btnNewProject {
+  height: 60px;
+  width: 220px;
+  font-size: 0.9rem;
+  font-family: 'Segoe UI';
+  vertical-align: middle;
+}
+
+.registerModelTooltip {
+  padding: 0rem 0rem 0rem 0rem;
+  margin: 0;
+  align-content: left;
+  text-align: left;
+}
+
+.registerModelInfoStyles {
+  text-align: left;
+  vertical-align: top;
+  width: 20%;
+}
+
+.registerModelInfoStyles:hover {
+  cursor: default;
+}
+
+.confirmDeleteStyle {
+  font-family: inherit;
+  font-weight: 400;
+  font-size: 13px;
+  width: 100%;
+}
+
+.confirmDeleteWarning {
+  color: red;
+  vertical-align: auto;
+  width: 30px;
+  height: 30px;
+  padding: 0rem 0rem 0rem 0.7rem;
+}
+
+.scrollableList {
+  margin-top: -1rem;
+  overflow: auto;
+  width: 100%;
+}
+
+#rai-landing {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  text-align: center;
+  padding: 0px 10%;
+}
+
+#rai-landing-message {
+  color: var(--jp-ui-font-color2);
+  font-style: italic;
+  font-size: var(--jp-content-font-size1);
+}
+
+#rai-landing-img {
+  background-image: var(--rai-icon-logo);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 5em;
+  height: 5em;
+  margin-top: 20px;
+}

@@ -1,0 +1,24 @@
+[
+	{
+		"key": "900a2a10-3062-7243-dfb1-bf0da2b56b08",
+		"name": "Classification",
+		"metrics": {
+			"Accuracy": "",
+			"Precision": "",
+			"Recall": "",
+			"ROC AUC": "",
+			"Log Loss": "",
+			"F1 Score": ""
+		}
+	},
+	{
+		"key": "7f10ca92-8153-11ec-a8a3-0242ac120002",
+		"name": "Regression",
+		"metrics": {
+		"mae": "",
+		"mse": "",
+		"r2": "",
+		"rmse": ""
+		}
+	}
+]
