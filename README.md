@@ -93,3 +93,8 @@ Responsible AI Tracker uses a the Microsoft open source license. All code is lic
 ### Microsoft Open Source Code of conduct
 
 Microsoft code of conduct outlines expectations for participation in Microsoft-managed open source communities [Microsoft  Code of conduct](https://github.com/microsoft/responsible-ai-toolbox-tracker/blob/main/CODE_OF_CONDUCT.md).
+
+
+### Microsoft security 
+
+Microsoft security standards [Microsoft security](https://github.com/microsoft/responsible-ai-toolbox-tracker/blob/main/SECURITY.md).
