@@ -61,76 +61,35 @@ The extension should be available in the left vertical bar.
 
 ---
 
+## Getting help
+
+We encourage you to check the RAI Tracker help documentation [RAI Tracker help](https://responsible-ai-toolbox-tracker.readthedocs.io/en/latest/). 
+
+For Responsible AI Mitigation help [RAI Mitigation help](https://responsible-ai-toolbox-mitigations.readthedocs.io/en/latest/).  
+
+For more support [RAI Tracker support](https://github.com/microsoft/responsible-ai-toolbox-tracker/blob/main/SUPPORT.md).
+
+
+### Bug report
+
+To report a bug please read the [guidelines](https://responsible-ai-toolbox-tracker.readthedocs.io/en/latest/) and then open a [Github issue](https://github.com/microsoft/responsible-ai-toolbox-tracker/issues/new). 
+
+
+### Feature request
+
+We also welcome suggestions for new features as they help make the project more useful for everyone. To request a feature please use the [feature request template](https://github.com/microsoft/responsible-ai-toolbox-tracker/labels/enhancement).
+
+
 ## Development
 
-### Clone repository
+### Contributing
 
-```
-git clone https://msresearch@dev.azure.com/msresearch/MLMitigationWorkflows/_git/ErrorsMitigationClient
-```
+To contribute code or documentation to the Responsible AI Tracker, please read the [contributor documentation](https://responsible-ai-toolbox-tracker.readthedocs.io/en/latest/).
 
-### Using Anaconda
+### License
 
-**Anaconda:** [Miniconda](https://docs.conda.io/en/latest/miniconda.html)
+Responsible AI Tracker uses a the Microsoft open source license. All code is licensed under the terms of [Microsoft license](https://github.com/microsoft/responsible-ai-toolbox-tracker/blob/main/LICENSE).
 
-```
-cd ErrorsMitigationClient
+### Microsoft Open Source Code of conduct
 
-conda create -n <env name> --override-channels --strict-channel-priority -c conda-forge -c nodefaults jupyterlab=3.5.2 python=3.10.6
-
-conda activate <env name>
-```
-
-## Install the required software
-
-### Using npm
-
-```
-npm install
-```
-
-### Build the client code
-
-```
-npm run build
-```
-
-### Install python build
-
-```
-python -m pip install build
-```
-
-### Build the codebase every time you make code changes.
-
-```
-python -m build
-```
-
-### Install the extension
-
-```
-pip install -e .
-```
-
-## Running
-
-Run JupyterLab:
-
-```
-jupyter lab
-```
-The extension should be available in the left vertical bar.
-
-### Coding
-After every client code change run: 
-```
-npm run build 
-```
-Refresh your browser to see the changes.
-
-For the server python code changes run: 
-```
-python -m build
-```
-Refresh your browser to see the changes.
+Microsoft code of conduct outlines expectations for participation in Microsoft-managed open source communities [Microsoft  Code of conduct](https://github.com/microsoft/responsible-ai-toolbox-tracker/blob/main/CODE_OF_CONDUCT.md).

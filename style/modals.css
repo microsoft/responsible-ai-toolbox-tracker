@@ -305,7 +305,13 @@
   align-items: left;
   width: 100%;
   color: darkred;
+}
 
+.existingRegistrationOutput {
+  font-weight: 500;
+  font-size: 0.7rem;
+  align-items: left;
+  width: 100%;
 }
 
 .RegisterModelErrorOutput {

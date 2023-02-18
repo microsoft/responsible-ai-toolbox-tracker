@@ -397,7 +397,7 @@ export const ModelsData: React.FunctionComponent = () => {
     <>
       <div className="modelsMainDiv">
         <table className='modelsSettingsTable'>
-          <thead>
+          <tbody>
             <tr>
               <td>
                 <Dropdown
@@ -444,7 +444,7 @@ export const ModelsData: React.FunctionComponent = () => {
                   <a tabIndex={13} onClick={openCohortPanel} className="cohortsSettingsLink" >
                     <FontIcon aria-label="Cohorts Settings" iconName="Settings" className="cohortsSettingsIcon" />
                   </a>
-                </TooltipHost>&nbsp;&nbsp;
+                </TooltipHost>
               </td>
             </tr>
             <tr><td colSpan={4}>&nbsp;</td></tr>
@@ -468,7 +468,7 @@ export const ModelsData: React.FunctionComponent = () => {
               </td>
               <td>&nbsp;</td>
             </tr>
-          </thead>
+          </tbody>
         </table>
         <div key='absoluteView' hidden={absoluteHidden}>
           <Absolute

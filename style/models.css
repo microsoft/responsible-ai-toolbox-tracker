@@ -16,11 +16,9 @@ table {
     background-color: white;
 }
 
-.modelsSettingsTable th {
-    text-align: left;
+.modelsSettingsTable td {
+    text-align: center;
     vertical-align: bottom;
-    padding: 0rem 0rem 0rem 0.5rem;
-
 }
 
 .modelsTableBody {
@@ -137,7 +135,7 @@ table {
 }
 
 .testDataTableHeader {
-    width: 100%;
+    width: 155px;
     font-weight: 500;
     font-size: 13px;
     text-align: center;

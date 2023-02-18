@@ -22,8 +22,6 @@ def _log_and_get_results(param_dict: dict):
 
 # -----------------------------------
 def process_request(request):
-    # todo: setup project path, model path, and test data path globally to be used by all requests.
-    # make sure it is deployable on different OS. keep required local path in their respective modules.
     param_dict = {}
     ROOT_DIR = os.getcwd()
     param_dict[ParametersJson.project_path] = Path(ROOT_DIR)
@@ -49,13 +47,11 @@ def process_request(request):
 
 
 # -----------------------------------
-#todo: remove before code check in
 def local_process_request(request):
     param_dict = {}
     ROOT_DIR = os.getcwd()
     param_dict[ParametersJson.project_path] = Path(ROOT_DIR).parent.resolve()
     param_dict[ParametersJson.artifact_dir] = "model"
-
     param_dict[ParametersJson.run_id] = str(request['run_id'])
     param_dict[ParametersJson.model_path] = str(request['model_path'])
     param_dict[ParametersJson.test_data_path] = str(request['test_data_path'])
@@ -64,6 +60,5 @@ def local_process_request(request):
     param_dict[ParametersJson.ml_platform] = str(request['ml_platform_selected'])
     param_dict[ParametersJson.separator] = str(request['separator'])
     param_dict[ParametersJson.header] = int(request['header'])
-
     metrics = _log_and_get_results(param_dict)
     return metrics

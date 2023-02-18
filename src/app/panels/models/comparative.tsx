@@ -307,7 +307,7 @@ export const Comparative: React.FunctionComponent = (props) => {
     const datasetStackItemStyles: IStackItemStyles = {
         root: {
             paddingLeft: 5,
-            width: 105,
+            width: 150,
             alignItems: 'left',
             alignContent: 'left',
             textAlign: 'left',

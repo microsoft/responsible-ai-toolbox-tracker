@@ -504,8 +504,8 @@ export const absoluteHeatmapData = (items: any, problemType: string, selectedCoh
  * @returns 
 */
 const getMetricMinMax = (metricData: any): [number, number] => {
-    let max = Number.MIN_SAFE_INTEGER;
     let min = Number.MAX_SAFE_INTEGER;
+    let max = Number.MIN_SAFE_INTEGER;
 
     for (let i in metricData) {
         const v = metricData[i];
@@ -517,6 +517,10 @@ const getMetricMinMax = (metricData: any): [number, number] => {
             min = v;
         }
     }
+    
+    if (min === Number.MAX_SAFE_INTEGER) { min = -1; }
+    if (max === Number.MIN_SAFE_INTEGER) { max = 1; }
+
     return [min, max];
 }
 /**
@@ -585,6 +589,7 @@ const absoluteClassificationData = (items: any, selectedCohortsKeys: any): [any,
         const index = classificationMetrics[m];
         let metricData = [metricsData[index]];
         let [min, max] = getMetricMinMax(metricData[0]);
+
         if (m === 'F1Score') { m = 'F1 Score'; }
         else if (m === 'LogLoss') { m = 'Log Loss'; }
         else if (m === 'ROCAUC') { m = 'ROC AUC'; }

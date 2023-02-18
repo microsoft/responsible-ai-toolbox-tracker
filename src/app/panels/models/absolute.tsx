@@ -292,7 +292,7 @@ export const Absolute: React.FunctionComponent = (props) => {
     const dbStackItemStyles: IStackItemStyles = {
         root: {
             paddingLeft: 5,
-            width: 125,
+            width: 160,
             alignItems: 'left',
             alignContent: 'left',
             textAlign: 'left',

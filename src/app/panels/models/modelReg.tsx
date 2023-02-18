@@ -50,9 +50,18 @@ export const ModelRegistration = () => {
     let [uploadModelErrorHidden, setUploadModelErrorHidden] = useState(true);
     let [registerModelValidated, setRegisterModelValidated] = useState(false);
     let [uploadDatasetValidated, setUploadDatasetValidated] = useState(false);
+
+    let [datasetLabelValidated, setDatasetLabelValidated] = useState(false);
+
+    let [registeredDatasetMessageHidden, setRegisteredDatasetMessageHidden] = useState(true);
+
     let [uploadDatasetErrorHidden, setUploadDatasetErrorHidden] = useState(true);
+
     const [registerModelError, setRegisterModelError] = useState(MODEL_REQUIRED);
     const [uploadDatasetError, setUploadDatasetError] = useState(DATASET_REQUIRED);
+    const [registeredDatasetMessage, setRegisteredDatasetMessage] = useState(DATASET_REQUIRED);
+
+
     let [mlPlatformSelected, setMlPlatformSelected] = useState<IDropdownOption>();
     let [datasetLabelSelected, setDatasetLabelSelected] = useState<IDropdownOption>();
     let [preRegisteredDisabled, setPreRegisteredDisabled] = useState(false);
@@ -142,7 +151,7 @@ export const ModelRegistration = () => {
             setUploadModelErrorHidden(true)
             setRegisterModelError('');
             setMlFlowModelError('');
-            setModelFiles(files);            
+            setModelFiles(files);
         }
     }
     const getSeparator = (separatorOptions: any): string => {
@@ -286,9 +295,11 @@ export const ModelRegistration = () => {
                     option = { key: 'tab', text: 'Tab delimited' };
                 }
                 setPreRegisteredDisabled(true);
-                setUploadDatasetErrorHidden(false);
+                setUploadDatasetErrorHidden(true);
                 setDatasetLabelHidden(false);
-                setUploadDatasetError('Test dataset previously registered');
+                setUploadDatasetError('');
+                setRegisteredDatasetMessageHidden(false);
+                setRegisteredDatasetMessage('Test dataset previously registered');
                 updateDatasetFields(files, option);
                 setDatasetHeader(!!ent.header);
                 setDatasetLabelSelected({ key: ent?.labelIndex.toString(), text: ent?.label });
@@ -299,6 +310,8 @@ export const ModelRegistration = () => {
                 setDatasetLabelSelected({ key: 'Select an option', text: 'Select an option', hidden: false });
                 setPreRegisteredDisabled(false);
                 setUploadDatasetErrorHidden(true);
+                setRegisteredDatasetMessageHidden(true);
+                setRegisteredDatasetMessage('');
                 setUploadDatasetError('');
             }
         }
@@ -314,6 +327,7 @@ export const ModelRegistration = () => {
             setDatasetLabelError('');
             setDatasetName(files[0].name);
             setUploadDatasetValidated(true);
+            setDatasetLabelValidated(true);
             setDbFiles(files);
         }
     }
@@ -372,11 +386,14 @@ export const ModelRegistration = () => {
     const updateLabel = (event, option, index) => {
         if (!verifyLabelData(option)) {
             setDatasetLabelError(LABEL_CATEGORICAL);
+            setDatasetLabelValidated(false);
+
         }
         else {
+            setDatasetLabelValidated(true);
             dispatch({ type: 'SELECTED_DATASET_LABEL', payload: option });
             setDatasetLabelSelected(option);
-            datasetEntity.labelIndex = index;
+            datasetEntity.labelIndex = Number(option.key);
             datasetEntity.label = option.text;
             setDatasetEntity(datasetEntity);
             setDatasetLabelError('');
@@ -490,6 +507,9 @@ export const ModelRegistration = () => {
                     dispatch({ type: 'SELECTED_MODELS_VISUAL', payload: projectSettings['selectedModels'] });
                     dispatch({ type: 'SELECTED_METRICS_VISUAL', payload: projectSettings['selectedMetrics'] });
                     dispatch({ type: 'SELECTED_COHORTS_VISUAL', payload: projectSettings['selectedCohorts'] });
+                    dispatch({ type: 'PROJECT_PROPERTIES_STATE', payload: projectSettings });
+
+
                     /**
                      * 
                     */
@@ -522,7 +542,7 @@ export const ModelRegistration = () => {
     const handleSubmit = async (event) => {
         setMlFlowModelError('');
         const current_event = event.currentTarget;
-        if (!registerModelValidated || !uploadDatasetValidated || !datasetLabelSelected
+        if (!registerModelValidated || !uploadDatasetValidated || !datasetLabelValidated || !datasetLabelSelected
             || datasetLabelSelected?.text?.length === 0 || !mlPlatformSelected || mlPlatformSelected?.text?.length === 0
             || !separatorSelected || separatorSelected?.text?.length === 0) {
             if (current_event.upload_model.value === '') {
@@ -556,6 +576,9 @@ export const ModelRegistration = () => {
             if (!DatasetLabelHidden) {
                 if (datasetLabelRef.current.selectedOptions.length === 0) {
                     setDatasetLabelError(LABEL_REQUIRED);
+                }
+                else if (!datasetLabelValidated) {
+                    setDatasetLabelError(LABEL_CATEGORICAL);
                 }
                 else {
                     setDatasetLabelError('');
@@ -624,7 +647,8 @@ export const ModelRegistration = () => {
         setUploadDatasetErrorHidden(true);
         setDatasetLabelError('');
         setDatasetLabelHidden(true);
-        // setDatasetLabelSelected(undefined);
+        setRegisteredDatasetMessageHidden(true);
+        setRegisteredDatasetMessage('');
         setSeparatorError('');
         setSeparatorSelected(undefined);
         setFeatureOptions(undefined);
@@ -711,6 +735,10 @@ export const ModelRegistration = () => {
                                     <tr hidden={uploadDatasetErrorHidden}>
                                         <td>&nbsp;</td>
                                         <td colSpan={2} className='LabelTextErrorOutput'><span>{uploadDatasetError}&nbsp;</span></td>
+                                    </tr>
+                                    <tr hidden={registeredDatasetMessageHidden}>
+                                        <td>&nbsp;</td>
+                                        <td colSpan={2} className='existingRegistrationOutput'><span>{registeredDatasetMessage}&nbsp;</span></td>
                                     </tr>
                                     <tr>
                                         <td>&nbsp;</td>

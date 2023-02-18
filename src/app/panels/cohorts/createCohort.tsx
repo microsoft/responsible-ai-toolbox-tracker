@@ -36,7 +36,7 @@ import { RegisterModel } from '../../../core/mlflowUtils';
 export const CreateCohort: React.FunctionComponent = () => {
     const COHORT_NAME_INVALID = 'Name length should be less than 100 characters, and not include “/“, “\\”, or “:”';
     const FILTER_ERROR = "Duplicate filters are not allowed.";
-    const RECORDS_COUNT_ERROR = "The cohort you're trying to create has zero records.  Your filters could be too restrictive.  Your filters have been reset. Try again!";
+    const RECORDS_COUNT_ERROR = "The cohort you're trying to create has less than the minimum required records count of 5.  Your filters could be too restrictive.  Your filters have been reset. Try again!";
     const WORKSPACE_DIR = 'workspace';
     const ARTIFACTS_DIR = 'artifacts';
     const COHORTS_DIR = "cohorts";
@@ -91,6 +91,11 @@ export const CreateCohort: React.FunctionComponent = () => {
     const [btnSaveCohortDisabled, setBtnSaveCohortDisabled] = useState(true);
     const [isCategoricalDisabled, setIsCategoricalDisabled] = useState(true);
     const [operationMaxMinHidden, setOperationMaxMinHidden] = useState(true);
+
+    
+    const [cohortRegistrationFailed, setCohortRegistrationFailed] = useState('');
+    const [cohortRegistrationFailedHidden, setCohortRegistrationFailedHidden] = useState(true);
+
     /**
      * Cohort entries validation.
     */
@@ -451,11 +456,13 @@ export const CreateCohort: React.FunctionComponent = () => {
      * Clear all filters.
     */
     const clearAllFilters = (): void => {
-        dispatch({ type: 'FILTER_VALUES_LIST', payload: [] });
         setFilterValuesList([]);
         setBtnSaveCohortDisabled(true);
         setValidateFilterHidden(true);
         setRecordsCountErrorHidden(true);
+        setCohortRegistrationFailedHidden(true);
+        setCohortRegistrationFailed('');
+        dispatch({ type: 'FILTER_VALUES_LIST', payload: [] });
     }
     /**
      * Clear one filter.
@@ -477,15 +484,10 @@ export const CreateCohort: React.FunctionComponent = () => {
 
         setValidateFilterHidden(true);
         setRecordsCountErrorHidden(true);
+        setCohortRegistrationFailedHidden(true);
+        setCohortRegistrationFailed('');
         dispatch({ type: 'FILTER_VALUES_LIST', payload: filterValuesList });
-    }
-    /**
-     * Dismiss cohort panel
-    */
-    const dismissCohortManagerPanel = (): void => {
-        dispatch({ type: 'FILTER_VALUES_LIST', payload: [] });
-        dispatch({ type: 'COHORT_CREATE_PANEL_STATE', payload: false });
-    }
+    }   
     /**
      * Update the project settings 
      * @param transformedCohort 
@@ -507,7 +509,6 @@ export const CreateCohort: React.FunctionComponent = () => {
         db.mlPlatform = transformedCohort.mlPlatform;
         db.mlFlowRunId = transformedCohort.mlFlowRunId;
         db.lastUpdated = transformedCohort.lastUpdated;
-
         let _datasets = projectSettings['datasets'];
         let addItem = true;
         for (let i = 0; i < _datasets?.length; i++) {
@@ -585,7 +586,7 @@ export const CreateCohort: React.FunctionComponent = () => {
      * @param count 
      */
     const validateRecordCount = (count: number) => {
-        if (!count || count === 0) {
+        if (!count || count < 6) {
             setWaitSpinner(false);
             clearAllFilters();
             setRecordsCountErrorHidden(false);
@@ -633,10 +634,11 @@ export const CreateCohort: React.FunctionComponent = () => {
                         }
                     })
                     .catch((error) => {
-                        // rollBackSaveCohort(ent.key);
-                        setWaitSpinner(false);
-                        dispatch({ type: 'COHORT_CREATE_PANEL_STATE', payload: false });
-                        throw error;
+                        // rollBackSaveCohort(ent.key, _utils);
+                        setWaitSpinner(false);                        
+                        setCohortRegistrationFailedHidden(false);
+                        setCohortRegistrationFailed(error);
+                        // throw error;
                     });
             } else {
                 // rollBackSaveCohort(ent.key);
@@ -645,10 +647,6 @@ export const CreateCohort: React.FunctionComponent = () => {
             }
         });
     }
-    /**
-     * handle the cohort edit settings
-    */
-    const [isEdit, { toggle: setIsEdit }] = useBoolean(false);
     /**
     * Build the dataset options.
     */
@@ -713,6 +711,23 @@ export const CreateCohort: React.FunctionComponent = () => {
         event.stopPropagation();
     };
 
+    const handleClose = () => {
+        setCohortNameError('');
+        setCohortNameValidated(false);
+        setDataMatrix(undefined);
+        setFilterOptions(undefined);
+        setSelectedDatasetOptionValidated(false);
+        setSelectedDatasetOptionError('');
+        setCohortNameValidated(false);
+        setBtnSaveCohortDisabled(true);
+        
+        setCohortRegistrationFailedHidden(true);
+        setCohortRegistrationFailed('');
+
+        dispatch({ type: 'FILTER_VALUES_LIST', payload: [] });
+        dispatch({ type: 'COHORT_CREATE_PANEL_STATE', payload: false });
+    }
+   
     return (
         <>
             <form onSubmit={handleSubmit} id='frmCreateCohort' noValidate>
@@ -901,6 +916,13 @@ export const CreateCohort: React.FunctionComponent = () => {
                                                         {RECORDS_COUNT_ERROR}
                                                     </div>
                                                 </td>
+                                            </tr> 
+                                            <tr>
+                                                <td>
+                                                    <div className='filterDupError' hidden={cohortRegistrationFailedHidden}>
+                                                        {cohortRegistrationFailed}
+                                                    </div>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -919,7 +941,7 @@ export const CreateCohort: React.FunctionComponent = () => {
                 </table>
                 <div className="cohortFooter">
                     <PrimaryButton id="btnSaveCohort" type='submit' styles={buttonStyles} text="Save" disabled={btnSaveCohortDisabled} />
-                    <DefaultButton onClick={dismissCohortManagerPanel} text="Cancel" />
+                    <DefaultButton onClick={handleClose} text="Cancel" />
                 </div>
             </form>
         </>

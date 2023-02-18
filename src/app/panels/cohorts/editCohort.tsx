@@ -35,7 +35,8 @@ import { RegisterModel } from '../../../core/mlflowUtils';
 export const EditCohort: React.FunctionComponent = () => {
     const FILTER_ERROR = "Duplicate filters are not allowed.";
     const COHORT_NAME_INVALID = 'Name length should be less than 100 characters, and not include “/“, “\”, or “:”';
-    const RECORDS_COUNT_ERROR = "The cohort you're trying to create has zero records.  Your filters could be too restrictive.  Your filters have been reset. Try again!";
+    const RECORDS_COUNT_ERROR = "The cohort you're trying to create has less the minimum required records count of 5..  Your filters could be too restrictive.  Your filters have been reset. Try again!";
+    
     const WORKSPACE_DIR = 'workspace';
     const ARTIFACTS_DIR = 'artifacts';
     const COHORTS_DIR = "cohorts";
@@ -77,6 +78,12 @@ export const EditCohort: React.FunctionComponent = () => {
     const [operationMinValidated, setOperationMinValidated] = useState(false);
     const [operationMaxValidated, setOperationMaxValidated] = useState(false);
     const [recordsCountErrorHidden, setRecordsCountErrorHidden] = useState(true);
+
+    const [cohortRegistrationFailed, setCohortRegistrationFailed] = useState('');
+    const [cohortRegistrationFailedHidden, setCohortRegistrationFailedHidden] = useState(true);
+
+    
+
     const [operationValueValidated, setOperationValueValidated] = useState(false);
     const [selectedDatasetOptionError, setSelectedDatasetOptionError] = useState('');
     const [selectedDatasetFilterError, setSelectedDatasetFilterError] = useState('');
@@ -456,6 +463,8 @@ export const EditCohort: React.FunctionComponent = () => {
         setBtnSaveCohortDisabled(true);
         setValidateFilterHidden(true);
         setRecordsCountErrorHidden(true);
+        setCohortRegistrationFailedHidden(true);
+        setCohortRegistrationFailed('');
         dispatch({ type: 'FILTER_VALUES_LIST', payload: [] });
     }
     /**
@@ -481,7 +490,9 @@ export const EditCohort: React.FunctionComponent = () => {
             setBtnSaveCohortDisabled(false);
         } else {
             setBtnSaveCohortDisabled(true);
-        }
+        }        
+        setCohortRegistrationFailedHidden(true);
+        setCohortRegistrationFailed('');
         dispatch({ type: 'FILTER_VALUES_LIST', payload: filterValuesList });
     }
     /**
@@ -585,7 +596,7 @@ export const EditCohort: React.FunctionComponent = () => {
      * @param count 
      */
     const validateRecordCount = (count: number) => {
-        if (!count || count === 0) {
+        if (!count || count < 6) {
             setWaitSpinner(false);
             clearAllFilters();
             setRecordsCountErrorHidden(false);
@@ -633,9 +644,9 @@ export const EditCohort: React.FunctionComponent = () => {
                         }
                     })
                     .catch((error) => {
-                        // rollBackSaveCohort(ent.key);
+                        // rollBackSaveCohort(ent.key, _utils);
                         setWaitSpinner(false);
-                        dispatch({ type: 'COHORT_EDIT_PANEL_STATE', payload: false });
+                        // dispatch({ type: 'COHORT_EDIT_PANEL_STATE', payload: false });
                         throw error;
                     });
             } else {
@@ -684,11 +695,13 @@ export const EditCohort: React.FunctionComponent = () => {
                         }
                     })
                     .catch((error) => {
-                        // rollBackUpdateCohort(ent.key);
+                        // rollBackUpdateCohort(ent.key, _utils);
+                        setCohortRegistrationFailedHidden(false);
+                        setCohortRegistrationFailed(error);
                         console.log("Failed to register a model for this: " + error);
                         setWaitSpinner(false);
-                        dispatch({ type: 'COHORT_EDIT_PANEL_STATE', payload: false });
-                        throw error;
+                        // dispatch({ type: 'COHORT_EDIT_PANEL_STATE', payload: false });
+                        // throw error;
                     });
 
             } else {
@@ -801,6 +814,10 @@ export const EditCohort: React.FunctionComponent = () => {
         setSelectedDatasetOptionError('');
         setCohortNameValidated(false);
         setBtnSaveCohortDisabled(true);
+        
+        setCohortRegistrationFailedHidden(true);
+        setCohortRegistrationFailed('');
+
         dispatch({ type: 'COHORT_EDIT_PANEL_STATE', payload: false });
     }
 
@@ -991,6 +1008,13 @@ export const EditCohort: React.FunctionComponent = () => {
                                                 <td>
                                                     <div className='filterDupError' hidden={recordsCountErrorHidden}>
                                                         {RECORDS_COUNT_ERROR}
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div className='filterDupError' hidden={cohortRegistrationFailedHidden}>
+                                                        {cohortRegistrationFailed}
                                                     </div>
                                                 </td>
                                             </tr>

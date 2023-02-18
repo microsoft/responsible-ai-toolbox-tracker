@@ -123,20 +123,25 @@
 }
 
 .cohortsSettingsIcon {
-    vertical-align: middle;
-    align-self: center;
-    width: 22px;
+    vertical-align: bottom;
+    align-self: auto;
+    width: 20px;
     height: 20px;
     transform: scale(1.2);
     padding: 0rem 0rem 0rem 0rem;
-    margin: 0rem 0rem 0.1rem 0rem;
+    margin: 0rem 0rem 0rem 0rem;
+}
+
+.cohortSettingsContainer {
+    width: 40px;
+    align-items: start;
 }
 
 .cohortsSettingsLink {
-    vertical-align: 'center';
+    width: 24px;
+    vertical-align: 'bottom';
     text-align: center;
     align-content: center;
-    padding: 0rem 0rem 0rem 0rem;
 }
 
 .cohortsSettingsLink i:hover {

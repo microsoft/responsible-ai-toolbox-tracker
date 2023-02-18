@@ -122,7 +122,6 @@ export const DuplicateCohort: React.FunctionComponent = (props) => {
         let _selectedCohorts = projectSettings['selectedCohorts'];
         if (!_selectedCohorts.includes(datasetsCohort.name)) {
             _selectedCohorts.push(datasetsCohort.name);
-            dispatch({ type: 'SELECTED_COHORTS_VISUAL', payload: _selectedCohorts });
         }
         if (!cohortsList) {
             cohortsList = [];
@@ -131,6 +130,7 @@ export const DuplicateCohort: React.FunctionComponent = (props) => {
         updateCohortsList(cohortsList, dupCohort).then(content => {
             if (content) {
                 dispatch({ type: 'UPDATE_COHORT_SETTINGS_LIST', payload: content });
+                dispatch({ type: 'SELECTED_COHORTS_VISUAL', payload: _selectedCohorts });
                 return _utils.UpdateProjectSettings(projectSettings, undefined, undefined, undefined, undefined, datasets, _selectedCohorts, undefined, undefined, dupCohort, prevCohort)
                     .then(response => {
                         return response;
