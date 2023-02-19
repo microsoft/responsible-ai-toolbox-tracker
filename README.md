@@ -88,7 +88,7 @@ To contribute code or documentation to the Responsible AI Tracker, please read t
 
 ### License
 
-Responsible AI Tracker uses a the Microsoft open source license. All code is licensed under the terms of [Microsoft license](https://github.com/microsoft/responsible-ai-toolbox-tracker/blob/main/LICENSE).
+Responsible AI Tracker uses the Microsoft open source license. All code is licensed under the terms of [Microsoft license](https://github.com/microsoft/responsible-ai-toolbox-tracker/blob/main/LICENSE).
 
 ### Microsoft Open Source Code of conduct
 
