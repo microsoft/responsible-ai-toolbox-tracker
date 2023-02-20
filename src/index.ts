@@ -49,6 +49,11 @@ const extension: JupyterFrontEndPlugin<void> = {
       if (!currentWidget) {
         _openCompareModels(app, wTracker, store).then((currentWidget) => {
         })
+      } else {
+        if (!currentWidget.isAttached) {
+          app.shell.add(currentWidget, "main");
+        }
+        app.shell.activateById(currentWidget.id);
       }
       return currentWidget;
     }
@@ -235,7 +240,7 @@ function getCompareModelsWidget(wTracker: WidgetTracker, shell: JupyterFrontEnd.
   let el: any;
   wTracker?.forEach(element => {
     if (element) {
-      shell.activateById(element.id);
+      // shell.activateById(element.id);
       el = element;
       return element;
     }

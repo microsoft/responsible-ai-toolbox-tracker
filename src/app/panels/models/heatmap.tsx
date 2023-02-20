@@ -3,8 +3,8 @@ import { FontIcon, Icon } from '@fluentui/react/lib/Icon';
 import { trimDisplayMetric } from './modelsUtils';
 import { IColorValuesType } from '../../../core/components';
 import {
-    ICompareMetricBounds, 
-    ICompareMetricsBounds, 
+    ICompareMetricBounds,
+    ICompareMetricsBounds,
     classificationMetrics,
     comparativeClassificationMetrics,
     comparativeRegressionMetrics,
@@ -153,6 +153,7 @@ const mapColorToScale = (normNum: number, lightColor: number[], darkColor: numbe
 const normalizeNum = (num: number, minRange: number, maxRange: number, minVal: number, maxVal: number) => {
     return (((num - minVal) / (maxVal - minVal)) * (maxRange - minRange) + minRange);
 }
+
 /**
  * 
  * @param percent 
@@ -237,6 +238,13 @@ export const getAbsoluteShading = (metric: string, num: number, metricHighLow: a
         backgroundColor: hexColor,
     };
 }
+
+const getStandardDeviation = (array: number[]) => {
+    const n = array.length;
+    const mean = array.reduce((a: number, b: number) => a + b) / n;
+    return Math.sqrt(array.map(x => Math.pow(x - mean, 2)).reduce((a, b) => a + b) / n);
+}
+
 /**
  * Calculate the color shade according to the accuracy value
  * @param num the accuracy value
@@ -258,7 +266,7 @@ export const getComparativeShading = (metric: string, num: number, metricsData: 
         darkDecline = defaultColors.comparativeDefaultDeclineUpper; // #fc5866
         lightImprove = defaultColors.comparativeDefaultImprovementLower; // #cee5b0
         darkImprove = defaultColors.comparativeDefaultImprovementUpper; // #61a30b
-    } else {        
+    } else {
         let lP = 0.4;
         let hP = -0.4;
         let [iRed, iGreen, iBlue] = userColorSelections.comparativeImprovementColor.split(",");
@@ -267,9 +275,9 @@ export const getComparativeShading = (metric: string, num: number, metricsData: 
 
         let [dRed, dGreen, dBlue] = userColorSelections.comparativeDeclineColor.split(",");
         lightDecline = colorShade(lP, dRed, dGreen, dBlue);
-        darkDecline = colorShade(hP, dRed, dGreen, dBlue);        
+        darkDecline = colorShade(hP, dRed, dGreen, dBlue);
 
-        if(!lightDecline || !darkDecline || !lightImprove || !darkImprove){
+        if (!lightDecline || !darkDecline || !lightImprove || !darkImprove) {
             lightDecline = defaultColors.comparativeDefaultDeclineLower; // #ffc0be
             darkDecline = defaultColors.comparativeDefaultDeclineUpper; // #fc5866
             lightImprove = defaultColors.comparativeDefaultImprovementLower; // #cee5b0
@@ -311,29 +319,57 @@ export const getComparativeShading = (metric: string, num: number, metricsData: 
             highShade = darkImprove;
         }
     }
-    /**
-     * Normalize the probability, using the min metric value and the ma metric value.
-    */
+    // /**
+    //  * Normalize the probability, using the min metric value and the ma metric value.
+    // */
     let deltaNum = Math.abs(num - compareNum);
-    let normDeltaNum: number;
-    if (maxDelta - minDelta === 0) {
-        normDeltaNum = deltaNum;
-    } else {
-        normDeltaNum = (deltaNum - minDelta) / (maxDelta - minDelta);
+    // let normDeltaNum: number;
+    // if (maxDelta - minDelta === 0) {
+    //     normDeltaNum = deltaNum;
+    // } else {
+    //     normDeltaNum = (deltaNum - minDelta) / (maxDelta - minDelta);
+    // }
+
+    let [red, green, blue]: any[] = [];
+    let shadedColor: any[] = [];
+    let numPercent = Math.abs(1 - Math.abs(num - compareNum) / maxDelta);
+    if (metric === 'Log Loss' || metric === 'mse' || metric === 'rmse' || metric === 'mae') {
+        if (num < compareNum) {
+            [red, green, blue] = darkImprove;
+            shadedColor = colorShade(numPercent, red, green, blue);
+        } else {
+            [red, green, blue] = darkDecline;
+            shadedColor = colorShade(numPercent, red, green, blue);
+        }
     }
-    /**
-     * 95% of the max value.
-    */
-    normDeltaNum = normDeltaNum / 1.01;
-    /**
-     * Get the color background shading.
-    */
-    const [r, g, b] = mapColorToScale(normDeltaNum, lowShade, highShade);
+    else {
+        if (num < compareNum) {
+            [red, green, blue] = darkDecline;
+            shadedColor = colorShade(numPercent, red, green, blue);
+
+        } else {
+            [red, green, blue] = darkImprove;
+            shadedColor = colorShade(numPercent, red, green, blue);
+        }
+    }
+
+
+    // /**
+    //  * % of the max value.
+    // */
+    // normDeltaNum = normDeltaNum / 1.01;
+    // /**
+    //  * Get the color background shading.
+    // */
+    // const [r, g, b] = mapColorToScale(normDeltaNum, lowShade, highShade);
+    let [r, g, b] = shadedColor;
     let hexColor = rgbToHex(r, g, b);
+
     const v = trimDisplayMetric(Math.abs(deltaNum));
     let numHtml: string;
     let metricStyle: string;
-    if (num === compareNum || compareNum === ERROR_CODE) {
+    // if (num === compareNum || compareNum === ERROR_CODE) {
+    if (num === 0 || compareNum === ERROR_CODE) {
         hexColor = '#ffffff';
         numHtml = num?.toString();
         metricStyle = '_metricSortIcon';
@@ -346,7 +382,6 @@ export const getComparativeShading = (metric: string, num: number, metricsData: 
         numHtml = num + " (" + v + ")";
         metricStyle = 'metricSortIcon';
     }
-
     let results: any;
     if (num < compareNum) {
         results = <span key={num} style={{ backgroundColor: hexColor }}>{numHtml}<FontIcon aria-label="SortDown" iconName="SortDown" className={metricStyle} /></span>;
@@ -517,7 +552,7 @@ const getMetricMinMax = (metricData: any): [number, number] => {
             min = v;
         }
     }
-    
+
     if (min === Number.MAX_SAFE_INTEGER) { min = -1; }
     if (max === Number.MIN_SAFE_INTEGER) { max = 1; }
 
@@ -751,9 +786,9 @@ const regressionDataBound = (metricsData: any, baselineData: any): [ICompareMetr
         metricBounds.maxCohort = trimDisplayMetric(maxCohort);
         metricBounds.minDelta = trimDisplayMetric(minDelta);
         metricBounds.maxDelta = trimDisplayMetric(maxDelta);
-        if (minMetric > metricBounds.minCohort) { minMetric = metricBounds.minCohort; }
+        // if (minMetric > metricBounds.minCohort) { minMetric = metricBounds.minCohort; }
         if (minMetric > metricBounds.minAll) { minMetric = metricBounds.minAll; }
-        if (maxMetric < metricBounds.maxCohort) { maxMetric = metricBounds.maxCohort; }
+        // if (maxMetric < metricBounds.maxCohort) { maxMetric = metricBounds.maxCohort; }
         if (maxMetric < metricBounds.maxAll) { maxMetric = metricBounds.maxAll; }
         metricBounds.minMetric = trimDisplayMetric(minMetric);
         metricBounds.maxMetric = trimDisplayMetric(maxMetric);
@@ -857,10 +892,12 @@ const classificationDataBound = (metricsData: any, baselineData: any): [ICompare
         metricBounds.maxCohort = trimDisplayMetric(maxCohort);
         metricBounds.minDelta = trimDisplayMetric(minDelta);
         metricBounds.maxDelta = trimDisplayMetric(maxDelta);
-        if (minMetric > metricBounds.minCohort) { minMetric = metricBounds.minCohort; }
+
+        // if (minMetric > metricBounds.minCohort) { minMetric = metricBounds.minCohort; }
         if (minMetric > metricBounds.minAll) { minMetric = metricBounds.minAll; }
-        if (maxMetric < metricBounds.maxCohort) { maxMetric = metricBounds.maxCohort; }
+        // if (maxMetric < metricBounds.maxCohort) { maxMetric = metricBounds.maxCohort; }
         if (maxMetric < metricBounds.maxAll) { maxMetric = metricBounds.maxAll; }
+
         metricBounds.minMetric = trimDisplayMetric(minMetric);
         metricBounds.maxMetric = trimDisplayMetric(maxMetric);
         if (m === 'F1Score') { m = 'F1 Score'; }

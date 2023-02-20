@@ -14,9 +14,9 @@ Responsible AI Toolbox Tracker is a JupyterLab Extension for managing, tracking,
 
 ## Installation
 
-The RAI Tracker can be deployed on Windows or Ubuntu Os, using anaconda or python.
+The Responsible AI Tracker can be deployed on Windows or Ubuntu Os, using anaconda or python.
 
-### The RAI tracker prerequisites:
+### The Responsible AI Tracker prerequisites:
 
 - NodeJs:
 
@@ -36,7 +36,7 @@ The RAI Tracker can be deployed on Windows or Ubuntu Os, using anaconda or pytho
   conda install -c conda-forge jupyterlab==3.5.2
   ```
 
-### RAI tracker has two installation options:
+### The Responsible AI Tracker has two installation options:
 
 - The default installation only installs the essential packages.
 
@@ -63,11 +63,11 @@ The extension should be available in the left vertical bar.
 
 ## Getting help
 
-We encourage you to check the RAI Tracker help documentation [RAI Tracker help](https://responsible-ai-toolbox-tracker.readthedocs.io/en/latest/). 
+We encourage you to check the Responsible AI Tracker help documentation [Responsible AI Tracker help](https://responsible-ai-toolbox-tracker.readthedocs.io/en/latest/). 
 
-For Responsible AI Mitigation help [RAI Mitigation help](https://responsible-ai-toolbox-mitigations.readthedocs.io/en/latest/).  
+For Responsible AI Mitigation help [Responsible AI Mitigation help](https://responsible-ai-toolbox-mitigations.readthedocs.io/en/latest/).  
 
-For more support [RAI Tracker support](https://github.com/microsoft/responsible-ai-toolbox-tracker/blob/main/SUPPORT.md).
+For more support [Responsible AI Tracker support](https://github.com/microsoft/responsible-ai-toolbox-tracker/blob/main/SUPPORT.md).
 
 
 ### Bug report
