@@ -53,9 +53,15 @@ export const EditModelRegistration = () => {
     }
     let fOptions: IDropdownOption[] = [];
     let [featureOptions, setFeatureOptions] = useState(fOptions);
-    let strId = state['inEditNotebookId'];
-    const inEditId = strId?.slice(strId?.lastIndexOf('_') + 1);
-    const notebook = projectSettings["notebooks"][inEditId];
+    let _notebookId = state['inEditNotebookId'];
+    const notebookId = _notebookId?.slice(_notebookId?.lastIndexOf('_') + 1);
+    let notebook: any;
+    for (let ent of state['projectSettings']["notebooks"]) {
+        if (ent.key === notebookId) {
+            notebook = ent;
+        }
+    }
+
     let [modelRegInfo, setModelRegInfo] = useState<IModelReg>();
     /**
      * Edit registration default values.
@@ -97,16 +103,35 @@ export const EditModelRegistration = () => {
             }
         }
     }
+
+    const modelInfoDiff = async (): Promise<boolean> => {
+        if (!modelRegInfo) { return true; }
+        for (let i in modelRegInfo) {
+            const info = modelRegInfo[i];
+            if (info.notebookName !== notebook['name'] ||
+                info.mlPlatform.key !== notebook['mlPlatform'] ||
+                info.testDataset !== notebook['testDataset'] ||
+                info.registeredModel !== notebook['registeredModel']) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     useEffect(() => {
         let isMounted = true;
         if (isMounted) {
             if (notebook) {
-                let _modelRegInfo = {} as IModelReg;
-                _modelRegInfo.notebookName = notebook['name'];
-                _modelRegInfo.mlPlatform = { key: notebook['mlPlatform'], text: notebook['mlPlatform'] };
-                _modelRegInfo.testDataset = notebook['testDataset'];
-                _modelRegInfo.modelName = notebook['registeredModel'];
-                updateEditDatasetFields(_modelRegInfo);
+                modelInfoDiff().then(resp => {
+                    if (resp === true) {
+                        let _modelRegInfo = {} as IModelReg;
+                        _modelRegInfo.notebookName = notebook['name'];
+                        _modelRegInfo.mlPlatform = { key: notebook['mlPlatform'], text: notebook['mlPlatform'] };
+                        _modelRegInfo.testDataset = notebook['testDataset'];
+                        _modelRegInfo.modelName = notebook['registeredModel'];
+                        updateEditDatasetFields(_modelRegInfo);
+                    }
+                });
             }
         }
         return () => {
@@ -114,21 +139,44 @@ export const EditModelRegistration = () => {
         }
     }, [notebook]);
 
-    if(notebook && modelRegInfo && notebook['registeredModel'] !== modelRegInfo.modelName){
-        let _modelRegInfo = {} as IModelReg;
-        _modelRegInfo.notebookName = notebook['name'];
-        _modelRegInfo.mlPlatform = { key: notebook['mlPlatform'], text: notebook['mlPlatform'] };
-        _modelRegInfo.testDataset = notebook['testDataset'];
-        _modelRegInfo.modelName = notebook['registeredModel'];
-        updateEditDatasetFields(_modelRegInfo);
-    }
+    useEffect(() => {
+        let isMounted = true;
+        if (isMounted) {
+            if (notebook) {
+                if (!modelRegInfo) {
+                    let _modelRegInfo = {} as IModelReg;
+                    _modelRegInfo.notebookName = notebook['name'];
+                    _modelRegInfo.mlPlatform = { key: notebook['mlPlatform'], text: notebook['mlPlatform'] };
+                    _modelRegInfo.testDataset = notebook['testDataset'];
+                    _modelRegInfo.modelName = notebook['registeredModel'];
+                    updateEditDatasetFields(_modelRegInfo);
+                }
+                modelInfoDiff().then(resp => {
+                    if (resp === true) {
+                        let _modelRegInfo = {} as IModelReg;
+                        _modelRegInfo.notebookName = notebook['name'];
+                        _modelRegInfo.mlPlatform = { key: notebook['mlPlatform'], text: notebook['mlPlatform'] };
+                        _modelRegInfo.testDataset = notebook['testDataset'];
+                        _modelRegInfo.modelName = notebook['registeredModel'];
+                        updateEditDatasetFields(_modelRegInfo);
+                    }
+                }).catch((error: Error) => {
+                    console.log("Checking model difference exception:" + error.message);
+                });
+            }
+        }
+        return () => {
+            isMounted = false;
+        }
+    }, []);
+
     /**
      * Support for comma and tab separators.
     */
     const optionSeparator: IDropdownOption[] = [];
     optionSeparator.push({ key: 'comma', text: 'Comma delimited' });
     optionSeparator.push({ key: 'tab', text: 'Tab delimited' });
-    const checkboxStyle: Partial<ICheckboxStyles> = { root: { marginBottom: 5, marginTop: 10 } }; 
+    const checkboxStyle: Partial<ICheckboxStyles> = { root: { marginBottom: 5, marginTop: 10 } };
     /**
      * Fluent inline style, and app refs.
      */
@@ -156,9 +204,6 @@ export const EditModelRegistration = () => {
     */
     const regModelStyle: Partial<ITextFieldStyles> = {
         fieldGroup: { width: 140, height: 32, alignContent: 'center', textAlign: 'center' }
-    }
-    const handleClose = () => {    
-        dispatch({ type: 'EDIT_MODEL_REGISTRATION_MODAL_STATE', payload: false });
     }
     /**
      * 
@@ -276,6 +321,11 @@ export const EditModelRegistration = () => {
             console.log("Failed to delete all notebook resources.")
         }
     }
+
+    const handleClose = () => {
+        dispatch({ type: 'EDIT_MODEL_REGISTRATION_MODAL_STATE', payload: false });
+    }
+
     return (
         <>
             <Modal

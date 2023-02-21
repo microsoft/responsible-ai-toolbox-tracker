@@ -50,21 +50,15 @@ export const ModelRegistration = () => {
     let [uploadModelErrorHidden, setUploadModelErrorHidden] = useState(true);
     let [registerModelValidated, setRegisterModelValidated] = useState(false);
     let [uploadDatasetValidated, setUploadDatasetValidated] = useState(false);
-
     let [datasetLabelValidated, setDatasetLabelValidated] = useState(false);
-
     let [registeredDatasetMessageHidden, setRegisteredDatasetMessageHidden] = useState(true);
-
     let [uploadDatasetErrorHidden, setUploadDatasetErrorHidden] = useState(true);
-
     const [registerModelError, setRegisterModelError] = useState(MODEL_REQUIRED);
     const [uploadDatasetError, setUploadDatasetError] = useState(DATASET_REQUIRED);
     const [registeredDatasetMessage, setRegisteredDatasetMessage] = useState(DATASET_REQUIRED);
-
-
+    let [preRegisteredDisabled, setPreRegisteredDisabled] = useState(false);
     let [mlPlatformSelected, setMlPlatformSelected] = useState<IDropdownOption>();
     let [datasetLabelSelected, setDatasetLabelSelected] = useState<IDropdownOption>();
-    let [preRegisteredDisabled, setPreRegisteredDisabled] = useState(false);
     let [dbFiles, setDbFiles] = useState<File[]>();
     let [modelFiles, setModelFiles] = useState<File[]>();
     /**
@@ -126,16 +120,22 @@ export const ModelRegistration = () => {
         setSeparatorError('');
         setDatasetLabelError('');
         if (datasetName && datasetName.length > 0) {
-            updateDatasetFields(dbFiles, option);
+            updateDatasetFields(dbFiles, option, datasetHeader);
             setDatasetLabelHidden(false);
         }
     }
 
     let notebookName: string;
     let mlFlowRunId: string;
-    let strId = state['inEditNotebookId'];
-    const inEditNotebookId = strId?.slice(strId?.lastIndexOf('_') + 1);
-    const notebook = state['projectSettings']["notebooks"][inEditNotebookId]
+    let _notebookId = state['inRegisterNotebookId'];
+    const notebookId = _notebookId?.slice(_notebookId?.lastIndexOf('_') + 1);
+    let notebook: any;
+    for(let ent of state['projectSettings']["notebooks"]){        
+        if(ent.key === notebookId){
+            notebook = ent;
+        }          
+    }
+
     if (notebook) {
         notebookName = notebook['name'];
         mlFlowRunId = notebook['mlFlowRunId'];
@@ -166,7 +166,7 @@ export const ModelRegistration = () => {
      * @param files
      * @returns
     */
-    const updateDatasetFields = (files: any, separatorOptions: any): void => {
+    const updateDatasetFields = async (files: any, separatorOptions: any, header: boolean = false): Promise<void> => {
         const _files = Array.prototype.slice.call(files) as File[];
         if (_files.length !== 0) {
             const dataset = _files[0];
@@ -181,7 +181,7 @@ export const ModelRegistration = () => {
                 const lineBreak = '\n';
                 let fields: string[];
                 let rawValues: string[][];
-                if (datasetHeader) {
+                if (header) {
                     fields = (fileReader.result as string).replace('\r', '').split(lineBreak).shift().split(separator);
                     rawValues = (fileReader.result as string).split(lineBreak).map(s => s.replace('\r', '').split(separator)).slice(1).filter(value => value.length >= fields.length);
                 } else {
@@ -193,7 +193,7 @@ export const ModelRegistration = () => {
                     rawValues = (fileReader.result as string).split(lineBreak).map(s => s.replace('\r', '').split(separator)).filter(value => value.length >= fields.length);
                 }
                 recordsCount = rawValues.length;
-
+                fOptions = [];
                 fOptions.push({ key: "Select an option", text: "Select an option", hidden: true });
                 for (let f in fields) {
                     fOptions.push({ key: f, text: fields[f] });
@@ -207,7 +207,6 @@ export const ModelRegistration = () => {
                     _fValues = {} as IFeatureValuesType;
                 }
                 setFeatureOptions(fOptions);
-                // setDatasetLabelSelected({ key: "Select an option", text: "Select an option", hidden: false });
                 datasetEntity.features = fields;
                 datasetEntity.featuresValues = fValuesList;
                 datasetEntity.recordsCount = recordsCount;
@@ -300,8 +299,8 @@ export const ModelRegistration = () => {
                 setUploadDatasetError('');
                 setRegisteredDatasetMessageHidden(false);
                 setRegisteredDatasetMessage('Test dataset previously registered');
-                updateDatasetFields(files, option);
-                setDatasetHeader(!!ent.header);
+                setDatasetHeader(ent.header);
+                updateDatasetFields(files, option, ent.header);
                 setDatasetLabelSelected({ key: ent?.labelIndex.toString(), text: ent?.label });
             } else {
                 setDatasetHeader(false);
@@ -654,6 +653,7 @@ export const ModelRegistration = () => {
         setFeatureOptions(undefined);
         setWaitSpinner(false);
         setPreRegisteredDisabled(false);
+        setDatasetHeader(false);
         dispatch({ type: 'MODEL_REGISTRATION_MODAL_STATE', payload: false });
     }
     return (

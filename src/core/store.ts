@@ -21,6 +21,7 @@ const MODEL_REGISTRATION_MODAL_STATE = "MODEL_REGISTRATION_MODAL_STATE";
 const EDIT_MODEL_REGISTRATION_MODAL_STATE = "EDIT_MODEL_REGISTRATION_MODAL_STATE";
 const MODEL_REGISTRATION_STATE = "MODEL_REGISTRATION_STATE";
 const IN_EDIT_NOTEBOOK_ID = "IN_EDIT_NOTEBOOK_ID";
+const IN_REGISTER_NOTEBOOK_ID = "IN_REGISTER_NOTEBOOK_ID";
 const SWITCH_PROJECT_MODAL_STATE = "SWITCH_PROJECT_MODAL_STATE";
 const SWITCH_PROJECT_STATE = "SWITCH_PROJECT_STATE";
 const IMPORT_NOTEBOOK_MODAL_STATE = "IMPORT_NOTEBOOK_MODAL_STATE";
@@ -116,6 +117,7 @@ export const createInitialState = (workspace: IWorkspaceType = undefined, projec
         editCohortPanelState: false,
         inEditCohort: undefined,
         inEditNotebookId: undefined,
+        inRegisterNotebookId: undefined,
         modelRegistrationModalState: false,
         editModelRegistrationModalState: false,
         colorSelectorModalState: false,
@@ -168,8 +170,8 @@ export const notebookListInitialState = (notebookList: INotebookType[] = undefin
         let notebookMetrics = {} as INotebookMetricsType;
         notebookMetrics.key = "";
         notebookMetrics.name = "";
-        notebookMetrics.metricsVisible = true; 
-        notebookMetrics.mapTo = ''; 
+        notebookMetrics.metricsVisible = true;
+        notebookMetrics.mapTo = '';
         notebookMetrics.metrics = metricsArr
         notebookMetricsArr.push(notebookMetrics);
         newNotebook.key = '';
@@ -341,6 +343,7 @@ export type ClientState = {
     editCohortPanelState: boolean;
     inEditCohort: IDatasetType;
     inEditNotebookId: number;
+    inRegisterNotebookId: number;
     modelRegistrationModalState: boolean;
     editModelRegistrationModalState: boolean;
     cohortDeleteDialogHiddenState: boolean;
@@ -408,8 +411,11 @@ export const ClientReducer = (state: ClientState, action: any) => {
                 state.projectSettings.notebooks[index] = action.payload;
             }
             return { ...state };
-        case IN_EDIT_NOTEBOOK_ID:
+        case IN_EDIT_NOTEBOOK_ID: 
             state.inEditNotebookId = action.payload;
+            return { ...state };
+        case IN_REGISTER_NOTEBOOK_ID: 
+            state.inRegisterNotebookId = action.payload;
             return { ...state };
         case SET_RESTORE_NOTEBOOK:
             return { ...state, restoreNotebooks: action.restoreNotebooks };

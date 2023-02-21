@@ -450,8 +450,12 @@ export const NewProjectModal: React.FunctionComponent = () => {
 
                         });
                     }
+                } else{
+                    console.log("failed to create project directories.  Refresh your browser and try again.  If the issue persists, please send us a bug report. ");
                 }
-            });
+            }).catch((error: Error) => {
+                console.log("failed to create project directories: " + error.message);
+            })
             event.preventDefault();
             event.stopPropagation();
         }
@@ -479,7 +483,6 @@ export const NewProjectModal: React.FunctionComponent = () => {
                 containerClassName={contentStyles.container}
                 componentRef={ModalRef}
             >
-
                 <div className='modalFluent'>
                     <form onSubmit={handleSubmit} id='fromCreateProject' noValidate >
                         <div className='modalFluentHeader'>
@@ -595,19 +598,3 @@ const contentStyles = mergeStyleSets({
         },
     },
 });
-// const stackProps: Partial<IStackProps> = {
-//     horizontal: true,
-//     tokens: { childrenGap: 40 },
-//     styles: { root: { marginBottom: 20 } },
-// };
-// const iconButtonStyles: Partial<IButtonStyles> = {
-//     root: {
-//         color: theme.palette.neutralPrimary,
-//         marginLeft: 'auto',
-//         marginTop: '4px',
-//         marginRight: '2px',
-//     },
-//     rootHovered: {
-//         color: theme.palette.neutralDark,
-//     },
-// };
