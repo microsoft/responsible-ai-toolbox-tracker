@@ -28,8 +28,8 @@ import { NotebookUtils } from '../../../core/notebookUtils';
 
 export const NewProjectModal: React.FunctionComponent = () => {
     const ARTIFACTS_DIR = 'artifacts';
-    const NOTEBOOK_DISPLAY = 20;
-    const PROJECT_NAME_VALIDATION_MESSAGE = 'Name length should be less than 100 characters, and not include “/“, “\”, or “:”';
+    const NOTEBOOK_DISPLAY = 20;    
+    const PROJECT_NAME_VALIDATION_MESSAGE = 'Name length should be between 1 and 100 characters, and not include “/“, “\”, "<", ">", "?", or “:”';
     const PROJECT_NAME_COLLISION = "Project name already exists in your workspace.  Choose a different one."
     const FILE_TYPE_ERROR_MESSAGE = "Only notebooks are supported.  Please try again.";
     const titleId = "newProjectModalId";
@@ -92,9 +92,14 @@ export const NewProjectModal: React.FunctionComponent = () => {
      * @returns 
     */
     const isValidName = (name: string): boolean => {
-        const validNameExp = /[\/\\:]/;
+        const validNameExp = /[\/\\\<\>\?:]/;
+        if (!name.replace(/\s/g, '').length) {
+            return false;
+        }
         return name.length > 0 && name.length < 101 && !validNameExp.test(name);
     }
+
+
     /**
      * 
      * @param projectName 
@@ -120,12 +125,12 @@ export const NewProjectModal: React.FunctionComponent = () => {
      * @param input 
      * @returns 
     */
-    const ValidateProjectName = (input: string): boolean => {
+    const ValidateProjectName = (input: string, _utils: Utils): boolean => {
         if (isValidProjectName(input) === false) {
             setTextfieldErrorValue(PROJECT_NAME_COLLISION);
             setProjectNameValidated(false);
             return false;
-        } else if (!isValidName(input)) {
+        } else if (!_utils.isValidName(input)) {
             setTextfieldErrorValue(PROJECT_NAME_VALIDATION_MESSAGE);
             setProjectNameValidated(false);
             return false;
@@ -170,7 +175,7 @@ export const NewProjectModal: React.FunctionComponent = () => {
                 setUploadedNotebook('');
                 return;
             } else {
-                const _utils = new Utils();
+                let _utils = new Utils();
                 setUploadFileTypeHidden(true);
                 setUploadFileTypeError('');
                 setUploadedNotebook(_utils.nbNameDisplay(fileName, NOTEBOOK_DISPLAY));
@@ -376,7 +381,8 @@ export const NewProjectModal: React.FunctionComponent = () => {
     */
     const handleSubmit = (event: any) => {
         const currentEvent = event.currentTarget;
-        if (!ValidateProjectName(currentEvent.project_name.value) || !projectTypeValidated) {
+        let _utils = new Utils();
+        if (!ValidateProjectName(currentEvent.project_name.value, _utils) || !projectTypeValidated) {
             if (!projectNameValidated) {
                 setProjectNameErrorHidden(false);
             }
@@ -393,10 +399,9 @@ export const NewProjectModal: React.FunctionComponent = () => {
             event.stopPropagation();
         }
         else {
-            const _utils = new Utils();
             let project = {} as IProjectType;
             project.key = UUID.UUID();
-            project.name = currentEvent.project_name.value;
+            project.name = currentEvent.project_name.value.trim();
             /**
              * Create the project folder.  Use a GUID for identification.  
              * Create project entities (datasets, models, cohorts) folders. 
@@ -427,7 +432,6 @@ export const NewProjectModal: React.FunctionComponent = () => {
                                         else {
                                             console.log('mlflow run creation failed');
                                         }
-
                                     });
 
                                 }
@@ -450,10 +454,10 @@ export const NewProjectModal: React.FunctionComponent = () => {
 
                         });
                     }
-                } else{
+                } else {
                     console.log("failed to create project directories.  Refresh your browser and try again.  If the issue persists, please send us a bug report. ");
                 }
-            }).catch((error: Error) => {
+            }).catch((error: Error) => {                
                 console.log("failed to create project directories: " + error.message);
             })
             event.preventDefault();
@@ -469,7 +473,8 @@ export const NewProjectModal: React.FunctionComponent = () => {
         setTextfieldErrorValue('');
         setDropdownErrorValue('');
         setTextfieldErrorValue('');
-        setUploadedNotebook('');
+        setUploadedNotebook('');        
+        setUploadFileTypeError('');
         dispatch({ type: 'NEW_PROJECT_MODAL_STATE', payload: false });
     }
 

@@ -1,0 +1,281 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>How this extension works with Responsible AI Toolbox &mdash; Responsible AI Tracker  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="_static/sg_gallery.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Responsible AI Tracker
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install_guide.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics_disaggregated.html">Basics of Disaggregated Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how.html">How This Extension Works With Responsible AI Toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tour.html">Tour</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frequently_asked.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="known_issues.html">Known Issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="get_involved.html">Get Involved</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="project_management.html">Project Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebook_model_management.html">Notebook and Model Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cohort_management.html">Cohort Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating_mitigations.html">Creating Mitigations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model_comparison.html">Model Comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integration_mlflow.html">Integration with MLFlow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metric_support.html">Metric_Support</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Responsible AI Tracker</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>How this extension works with Responsible AI Toolbox</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            
+              <a href="https://github.com//microsoft/responsible-ai-toolbox-tracker/blob/main/docs/rename.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="how-this-extension-works-with-responsible-ai-toolbox">
+<span id="integration-other-libs"></span><h1>How this extension works with Responsible AI Toolbox<a class="headerlink" href="#how-this-extension-works-with-responsible-ai-toolbox" title="Permalink to this heading">¶</a></h1>
+<p>Responsible AI Tracker works in conjunction with the Responsible AI Toolbox:</p>
+<p>Step 1. Detect and diagnose model failure modes using the Toolbox’s Responsible AI Dashboard. The Dashboard brings together Responsible AI tools for model interpretability, assessment and mitigation of fairness issues, error analysis, causal inference, and counterfactual analysis for debugging models and holistic disaggregated evaluation. (More on how you can leverage the Dashboard.)</p>
+<p>Step 2. Explore these compatible libraries for potential mitigation steps for data cohorts:</p>
+<ul class="simple">
+<li><p>Responsible AI Mitigations Library, which includes data balancing and synthesis; feature engineering; and imputing missing values, among others. Most importantly, the library simplifies programmatic application of different mitigation steps for different cohorts that have specific underlying data issues contributing to model errors.</p></li>
+<li><p>Fairlearn, which offers mitigations for fairness issues. The Fairlearn approach frames model underperformance for given cohorts as a cost-sensitive classification problem, where samples that satisfy a particular constraint (similar to the cohort definition) are weighed differently in the optimization process.</p></li>
+</ul>
+<p>Step 3. Conduct disaggregated model (re)evaluation and comparison using the Responsible AI Tracker to confirm that the issues you set out to mitigate are indeed mitigated and without negative side effects on other cohorts. The Responsible AI Tracker enables you to conduct systematic experimentation with careful tracking as it lets you view models, code, and visualization artifacts all in the same interface.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="imgs/responsible-ai-toolbox-mitigations.png"><img alt="Responsible AI Toolbox" src="imgs/responsible-ai-toolbox-mitigations.png" /></a>
+</figure>
+<p>The Responsible AI Mitigations Library is part of the <a class="reference external" href="https://responsibleaitoolbox.ai/">Responsible AI Toolbox</a>, a larger effort for integrating and building development tools for responsible AI.
+One of the central contributions of the Toolbox is the <a class="reference external" href="https://responsibleaitoolbox.ai/introducing-responsible-ai-dashboard/">dashboard</a>, which bringing together several mature Responsible AI tools in the areas of <a class="reference external" href="https://interpret.ml/">machine learning
+interpretability</a>, <a class="reference external" href="https://fairlearn.org/">unfairness assessment and mitigation</a>, <a class="reference external" href="https://erroranalysis.ai/">error analysis</a>, <a class="reference external" href="https://github.com/microsoft/EconML">causal inference</a>, and <a class="reference external" href="https://github.com/interpretml/DiCE">counterfactual analysis</a> for a holistic assessment and debugging of
+models and making informed business decisions.</p>
+<p><strong>A practitioner using the Responsible AI Mitigations Library may rely on the</strong> <a class="reference external" href="https://responsibleaitoolbox.ai/introducing-responsible-ai-dashboard/">Responsible AI Dashboard</a> <strong>: a dashboard to identify and diagnose failure
+modes.</strong> Take a look at this <a class="reference external" href="https://techcommunity.microsoft.com/t5/ai-machine-learning-blog/responsible-ai-dashboard-a-one-stop-shop-for-operationalizing/ba-p/3030944">technical blog</a> on how to leverage the dashboard for pre-mitigation steps.</p>
+<p>At a high level, components in the dashboard such as Error Analysis and Model Overview help with the identification stage by discovering cohorts of data for which
+the model underperforms. Other components like the Data Explorer, Interpretability, and Counterfactual Analysis assist with understanding underlying reasons for
+why the model is underperforming. These components go back to the data (Data Explorer) or to the model (Interpretability) to highlight data statistics and feature
+importance. As the practitioner investigates the data or the model, they may create hypotheses about how to map the diagnoses to mitigation steps and then implement
+them through the Responsible AI Mitigations library.</p>
+<p>From a mitigation perspective, <a class="reference external" href="https://fairlearn.org/">Fairlearn</a> is a closely relevant library in particular for mitigating fairness-related concerns. The set of mitigations in Fairlearn
+approach the problem of mitigating model underperformance for given cohorts by framing it as a cost-sensitive classification problem, where samples that satisfy a
+particular constraint (similar to the cohort definition) are weighed differently in the optimization process. These mitigations are complementary to the ones provided
+here and can be used in combination together.</p>
+<p>In addition, we also encourage practitioners to rigorously validate new post-mitigation models and compare them with previous versions to make sure that the mitigation
+step indeed improved the model in the way the practitioner expected and that the mitigation step did not lead to new mistakes. To assist with these steps,
+<a class="reference external" href="https://github.com/microsoft/BackwardCompatibilityML">BackwardCompatibilityML</a> is a package for an extended support on model comparison and backward compatible training.</p>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2023, Microsoft.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

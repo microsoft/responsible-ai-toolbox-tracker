@@ -18,6 +18,7 @@ import { IDatasetType } from '../../../core/components';
 import { updateCohortsList, duplicateName } from './cohortUtils';
 
 export const DuplicateCohort: React.FunctionComponent = (props) => {
+    const COHORT_NAME_INVALID = 'Name length should be between 1 and 100 characters, and not include “/“, “\”, "<", ">", "?", or “:”';
     /**
      * retrieve the app state.
     */
@@ -65,7 +66,6 @@ export const DuplicateCohort: React.FunctionComponent = (props) => {
     const cohortNameInputStyle: Partial<ITextFieldStyles> = {
         fieldGroup: { width: 250, height: 32 }
     };
-    const [duplicatedCohortNameValidated, setDuplicatedCohortNameValidated] = useState(false);
     const [duplicatedCohortName, setDuplicatedCohortName] = useState('');
     const [cohortNameError, setCohortNameError] = useState('');
     /**
@@ -74,12 +74,8 @@ export const DuplicateCohort: React.FunctionComponent = (props) => {
      */
     const onCohortNameChange = event => {
         if (event.target.value !== '') {
-            setDuplicatedCohortName(event.target.value);
-            setDuplicatedCohortNameValidated(true);
+            setDuplicatedCohortName(event.target.value.trim());
             setCohortNameError('');
-        }
-        else {
-            setDuplicatedCohortNameValidated(false);
         }
     }
     /**
@@ -148,10 +144,9 @@ export const DuplicateCohort: React.FunctionComponent = (props) => {
      * Duplicate cohort.  
      * Raise exception on failure.
     */
-    const duplicateCohort = () => {
+    const duplicateCohort = (_utils: Utils) => {
         let prevCohort = {} as IDatasetType;
         let dupCohort = {} as IDatasetType;
-        let _utils = new Utils();
         getCohortData(cohortKey, _utils).then(content => {
             if (content) {
                 prevCohort = Object.assign({}, content);
@@ -165,6 +160,7 @@ export const DuplicateCohort: React.FunctionComponent = (props) => {
                     if (content) {
                         _updateProjectSettings(dupCohort, prevCohort, _utils).then(resp => {
                             //do nothing
+                            _utils= undefined;
                         });
                     }
                 });
@@ -175,22 +171,18 @@ export const DuplicateCohort: React.FunctionComponent = (props) => {
      * Process create duplicate cohort.
     */
     const confirmDuplicate = () => {
-        if (duplicatedCohortNameValidated && cohortName !== duplicatedCohortName) {
+        let _utils = new Utils();
+        if (_utils.isValidName(duplicatedCohortName) && cohortName !== duplicatedCohortName) {
             if (duplicateName(duplicatedCohortName, cohortsList)) {
-                setCohortNameError('Cohort name is a duplicate. Enter a new name.');
+                setCohortNameError('Cohort name is a duplicate. Try again with a new name.');
             } else {
-                duplicateCohort();
+                duplicateCohort(_utils);
                 setCohortNameError('');
                 dispatch({ type: 'COHORT_DUPLICATE_DIALOG_STATE', payload: true });
             }
         }
         else {
-            if (!duplicatedCohortNameValidated) {
-                setCohortNameError('Please enter a new cohort name');
-            }
-            if (cohortName === duplicatedCohortName) {
-                setCohortNameError('Cohort and new duplicate cohort cannot have the same name');
-            }
+            setCohortNameError(COHORT_NAME_INVALID);
         }
     }
     const onDismiss = () => {

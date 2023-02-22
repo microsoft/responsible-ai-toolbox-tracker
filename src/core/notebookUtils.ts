@@ -8,7 +8,7 @@ import { DocumentManager } from '@jupyterlab/docmanager';
 import { Dialog, showDialog } from '@jupyterlab/apputils';
 import { DocumentRegistry } from '@jupyterlab/docregistry';
 import { URLExt, PageConfig, PathExt } from '@jupyterlab/coreutils';
-import { isValidFileName, renameFile } from '@jupyterlab/docmanager';
+import { renameFile } from '@jupyterlab/docmanager';
 import {
     INotebookType,
     IMetricsType,
@@ -389,7 +389,7 @@ export class NotebookUtils {
             method: 'GET'
         };
         if (token) {
-            request.headers = { Authorization: `Token ${token}` }; 
+            request.headers = { Authorization: `Token ${token}` };
         }
         let response: Response | null = null;
         try {
@@ -408,13 +408,23 @@ export class NotebookUtils {
      * @param notebookName 
      * @returns 
     */
-    validateNotebookName(notebookName: string) {
-        const validNameExp = /[\/\\:]/;
-        if (notebookName.length > 4 && notebookName.length < 101 && !validNameExp.test(notebookName)) {
+    validateNotebookName(nbName: string) {
+        if (!nbName) { return false; }
+        const validNameExp = /[\/\\\<\>\?:]/;
+        const ext = PathExt.extname(nbName);
+        const _name = PathExt.basename(nbName, ext);
+        if (!_name.replace(/\s/g, '').length) {
+            return false;
+        }
+        if (_name.replace(/\s/g, '') === '.ipynb') {
+            return false;
+        }
+        if (_name.length > 0 && _name.length < 101 && !validNameExp.test(_name)) {
             return true;
         }
         return false;
     }
+
     /**
      * Whether a file exists or not
      *
@@ -444,7 +454,14 @@ export class NotebookUtils {
                 if (!newName || newName === original) {
                     return original;
                 }
-                if (!isValidFileName(newName)) {
+                if (!this.validateNotebookName(newName)) {
+                    showDialog({
+                        title: 'Invalid file name.',
+                        body: 'Name length should be between 1 and 100 characters, and not include “/“, “\”, "<", ">", "?", or “:”',
+                        buttons: [Dialog.okButton({ label: 'Ok' })]
+                    }).then(result => {
+                        return original;
+                    });
                     return original;
                 }
                 const manager = this.docManager;
@@ -587,7 +604,7 @@ export class NotebookUtils {
         if (index !== -1) {
             projectContent.selectedModels?.splice(index, 1);
             projectContent.selectedModels.push(newName);
-        } 
+        }
         const index2 = projectContent.notebooksRestorer.indexOf(oldPath);
         if (index2 !== -1) {
             projectContent.notebooksRestorer?.splice(index2, 1);

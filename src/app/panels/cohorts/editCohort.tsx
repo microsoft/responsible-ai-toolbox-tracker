@@ -34,9 +34,9 @@ import { RegisterModel } from '../../../core/mlflowUtils';
 
 export const EditCohort: React.FunctionComponent = () => {
     const FILTER_ERROR = "Duplicate filters are not allowed.";
-    const COHORT_NAME_INVALID = 'Name length should be less than 100 characters, and not include “/“, “\”, or “:”';
+    const COHORT_NAME_INVALID = 'Name length should be between 1 and 100 characters, and not include “/“, “\”, "<", ">", "?", or “:”';
     const RECORDS_COUNT_ERROR = "The cohort you're trying to create has less the minimum required records count of 5..  Your filters could be too restrictive.  Your filters have been reset. Try again!";
-    
+
     const WORKSPACE_DIR = 'workspace';
     const ARTIFACTS_DIR = 'artifacts';
     const COHORTS_DIR = "cohorts";
@@ -73,17 +73,12 @@ export const EditCohort: React.FunctionComponent = () => {
     const [operationMaxError, setOperationMaxError] = useState('');
     const [operationMinError, setOperationMinError] = useState('');
     const [operationValueError, setOperationValueError] = useState('');
-    const [cohortNameValidated, setCohortNameValidated] = useState(false);
     const [selectedOperationError, setSelectedOperationError] = useState('');
     const [operationMinValidated, setOperationMinValidated] = useState(false);
     const [operationMaxValidated, setOperationMaxValidated] = useState(false);
     const [recordsCountErrorHidden, setRecordsCountErrorHidden] = useState(true);
-
     const [cohortRegistrationFailed, setCohortRegistrationFailed] = useState('');
     const [cohortRegistrationFailedHidden, setCohortRegistrationFailedHidden] = useState(true);
-
-    
-
     const [operationValueValidated, setOperationValueValidated] = useState(false);
     const [selectedDatasetOptionError, setSelectedDatasetOptionError] = useState('');
     const [selectedDatasetFilterError, setSelectedDatasetFilterError] = useState('');
@@ -143,44 +138,25 @@ export const EditCohort: React.FunctionComponent = () => {
     }
     buildOperationOptions();
     /**
-     * Check whether a name is a valid file or folder name.
-     * Disallows names with zero length, and "/", and "\", and ":" in file names.
-     * @param name 
-     * @returns 
-    */
-    const isValidName = (name: string): boolean => {
-        const validNameExp = /[\/\\:]/;
-        return name.length > 0 && name.length < 101 && !validNameExp.test(name);
-    }
-
-    /**
      * Capture the cohort name.
     */
     const onCohortNameChange = event => {
-        if (isValidName(event.target.value)) {
-            setCohortName(event.target.value);
-            setCohortNameValidated(true);
+        if (event.target.value !== '') {
+            setCohortName(event.target.value.trim());
             setBtnSaveCohortDisabled(false);
             setCohortNameError('');
-        } else {
-            setCohortName('');
-            setCohortNameValidated(false);
-            setBtnSaveCohortDisabled(true);
-            setCohortNameError(COHORT_NAME_INVALID);
         }
     }
     /**
      * Get Cohort data.
     */
     const getCohortData = async (cohortKey: string) => {
-        const _utils = new Utils();
-        return _utils.GetCohortData(projectSettings.name, cohortKey)
-            .then(response => {
-                return response;
-            })
-            .catch((error: Error) => {
-                return null;
-            });
+        let _utils = new Utils();
+        return _utils.GetCohortData(projectSettings.name, cohortKey).then(response => {
+            return response;
+        }).catch((error: Error) => {
+            return undefined;
+        });
     }
     /**
      * Select the dataset to build the cohort.
@@ -490,7 +466,7 @@ export const EditCohort: React.FunctionComponent = () => {
             setBtnSaveCohortDisabled(false);
         } else {
             setBtnSaveCohortDisabled(true);
-        }        
+        }
         setCohortRegistrationFailedHidden(true);
         setCohortRegistrationFailed('');
         dispatch({ type: 'FILTER_VALUES_LIST', payload: filterValuesList });
@@ -663,7 +639,7 @@ export const EditCohort: React.FunctionComponent = () => {
         let ent = {} as IDatasetType;
         let dateTime = new Date();
         ent.key = selectedDataset.key;
-        ent.name = cohortName;
+        ent.name = cohortName.trim();;
         ent.isCohort = true;
         ent.masterKey = selectedDatasetOption?.key;
         ent.masterName = selectedDatasetOption?.text;
@@ -754,7 +730,6 @@ export const EditCohort: React.FunctionComponent = () => {
         setFilterHidden(false);
         setCohortOptionsHidden(false);
         setSelectedDatasetOptionValidated(true);
-        setCohortNameValidated(true);
         setBtnSaveCohortDisabled(true);
         setSelectedDatasetOptionError('');
         state['inEditCohort']['isEditState'] = false;
@@ -765,12 +740,12 @@ export const EditCohort: React.FunctionComponent = () => {
     */
     const handleSubmit = (event: any) => {
         if (filterValuesList) {
-            if (cohortNameValidated && selectedDatasetOptionValidated) {
+            let _utils = new Utils();
+            if (_utils.isValidName(cohortName) && selectedDatasetOptionValidated) {
                 if (duplicateName(cohortName, cohortsList) && cohortName !== defaultCohortName) {
                     setCohortNameError('Cohort name is a duplicate. Enter a new name.');
                 } else {
                     setWaitSpinner(true);
-                    const _utils = new Utils();
                     /**
                      * Save the cohort. 
                     */
@@ -784,18 +759,14 @@ export const EditCohort: React.FunctionComponent = () => {
                         setWaitSpinner(false);
                         dispatch({ type: 'COHORT_EDIT_PANEL_STATE', payload: false });
                         throw error;
-                    } finally {
-                        setCohortNameError('');
                     }
                 }
             }
             else {
-                if (!cohortNameValidated) {
-                    setCohortNameError('Please enter a cohort name');
-                }
-                if (!selectedDatasetOptionValidated) {
-                    setSelectedDatasetOptionError('Please select a dataset');
-                }
+                setCohortNameError(COHORT_NAME_INVALID);
+            }
+            if (!selectedDatasetOptionValidated) {
+                setSelectedDatasetOptionError('Please select a dataset');
             }
         }
         else {
@@ -804,20 +775,15 @@ export const EditCohort: React.FunctionComponent = () => {
         event.preventDefault();
         event.stopPropagation();
     }
-
     const handleClose = () => {
         setCohortNameError('');
-        setCohortNameValidated(false);
         setDataMatrix(undefined);
         setFilterOptions(undefined);
         setSelectedDatasetOptionValidated(false);
         setSelectedDatasetOptionError('');
-        setCohortNameValidated(false);
         setBtnSaveCohortDisabled(true);
-        
         setCohortRegistrationFailedHidden(true);
         setCohortRegistrationFailed('');
-
         dispatch({ type: 'COHORT_EDIT_PANEL_STATE', payload: false });
     }
 

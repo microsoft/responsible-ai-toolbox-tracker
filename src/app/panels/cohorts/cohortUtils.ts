@@ -43,11 +43,7 @@ export function getFiltersString(filters: IFilter[]): string[] {
         if (filter.isCategorical) {
             const args = filter.args.map((arg) => arg.toFixed(2)).join(", ");
             return `${filter.column} includes (${args})`;
-        }
-        // let metaFilter: { [key: string]: IFilterMeta } = {};
-        // metaFilter[filter.column].categoricalValues = filter.args.map(String);
-        // metaFilter[filter.column].isCategorical = filter.isCategorical;        
-
+        }  
         if (filter.operation === FilterOperations.InTheRangeOf) {
             const arg0 = filter.args[0].toFixed(2);
             const arg1 = filter.args[1].toFixed(2);

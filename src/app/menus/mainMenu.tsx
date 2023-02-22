@@ -71,7 +71,7 @@ export const MainMenu: React.FunctionComponent = () => {
                 dispatch({ type: 'REFRESH_NOTEBOOK_LIST', payload: notebooks });
                 notebookUtils.FocusNewNotebook(projectName, projectId, notebook, notebooks)
                     .then(content => {
-                        if (content) {
+                        if (content) {                          
                             notebook.name = content.notebook.name;
                             /**
                              * Update notebooks if file was renamed.

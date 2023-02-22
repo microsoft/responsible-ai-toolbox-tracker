@@ -65,6 +65,7 @@ export const PropertiesModal: React.FunctionComponent = () => {
      * Set teh selected problem type option, and update the app state.     
     */
     const [optionMetrics, setOptionMetrics] = useState(items);
+    
     const updateProblemType = (event, option, index) => {
         items = [];
         for (let pt in problemTypes[index]['metrics']) {
@@ -101,12 +102,7 @@ export const PropertiesModal: React.FunctionComponent = () => {
                 return false;
             });
     }
-    /**
-     * Handle the window close and any other required cleaning.
-    */
-    const handleClose = () => {
-        dispatch({ type: 'PROJECT_PROPERTIES_MODAL_STATE', payload: false });
-    }
+
     /**
      * handle the form submit event  
     */
@@ -139,14 +135,19 @@ export const PropertiesModal: React.FunctionComponent = () => {
      * Inline required fluent styles   
     */
     const projectNameInput: Partial<ITextFieldStyles> = {
-        fieldGroup: { width: 490, height: 32 }
+        fieldGroup: { width: 350, height: 32 }
     };
     const projectTypeStyles: Partial<IDropdownStyles> = {
-        dropdown: { width: 300, height: 32 },
+        dropdown: { width: 200, height: 32 },
         dropdownOptionText: { overflow: 'visible', whiteSpace: 'normal' },
         dropdownItem: { height: 'auto' },
     };
-
+    /**
+      * Handle the window close and any other required cleaning.
+     */
+    const handleClose = () => {
+        dispatch({ type: 'PROJECT_PROPERTIES_MODAL_STATE', payload: false });
+    }
     return (
         <div>
             <Modal

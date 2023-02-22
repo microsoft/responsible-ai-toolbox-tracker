@@ -34,7 +34,7 @@ import { IDatasetType } from '../../../core/components';
 import { RegisterModel } from '../../../core/mlflowUtils';
 
 export const CreateCohort: React.FunctionComponent = () => {
-    const COHORT_NAME_INVALID = 'Name length should be less than 100 characters, and not include “/“, “\\”, or “:”';
+    const COHORT_NAME_INVALID = 'Name length should be between 1 and 100 characters, and not include “/“, “\”, "<", ">", "?", or “:”';
     const FILTER_ERROR = "Duplicate filters are not allowed.";
     const RECORDS_COUNT_ERROR = "The cohort you're trying to create has less than the minimum required records count of 5.  Your filters could be too restrictive.  Your filters have been reset. Try again!";
     const WORKSPACE_DIR = 'workspace';
@@ -53,8 +53,6 @@ export const CreateCohort: React.FunctionComponent = () => {
      * In edit cohort values.
     */
     let [waitSpinner, setWaitSpinner] = useState(false);
-    const [defaultCohortName, setDefaultCohortName] = useState('');
-    const [defaultSelectedDatasetKey, setDefaultSelectedDatasetKey] = useState('');
     const defaultOption = {} as IChoiceGroupOption;
     const defaultGroupOption = {} as IChoiceGroupOption;
     const cohortNameStyle: Partial<ITextFieldStyles> = {
@@ -92,7 +90,7 @@ export const CreateCohort: React.FunctionComponent = () => {
     const [isCategoricalDisabled, setIsCategoricalDisabled] = useState(true);
     const [operationMaxMinHidden, setOperationMaxMinHidden] = useState(true);
 
-    
+
     const [cohortRegistrationFailed, setCohortRegistrationFailed] = useState('');
     const [cohortRegistrationFailedHidden, setCohortRegistrationFailedHidden] = useState(true);
 
@@ -103,7 +101,6 @@ export const CreateCohort: React.FunctionComponent = () => {
     const [operationMaxError, setOperationMaxError] = useState('');
     const [operationMinError, setOperationMinError] = useState('');
     const [operationValueError, setOperationValueError] = useState('');
-    const [cohortNameValidated, setCohortNameValidated] = useState(false);
     const [selectedOperationError, setSelectedOperationError] = useState('');
     const [operationMinValidated, setOperationMinValidated] = useState(false);
     const [operationMaxValidated, setOperationMaxValidated] = useState(false);
@@ -142,27 +139,12 @@ export const CreateCohort: React.FunctionComponent = () => {
     }
     buildOperationOptions();
     /**
-     * Check whether a name is a valid file or folder name.
-     * Disallows names with zero length, and "/", and "\", and ":" in file names.
-     * @param name 
-     * @returns 
-    */
-    const isValidName = (name: string): boolean => {
-        const validNameExp = /[\/\\:]/;
-        return name.length > 0 && name.length < 101 && !validNameExp.test(name);
-    }
-    /**
      * Capture the cohort name.
     */
-    const onCohortNameChange = event => {
-        if (isValidName(event.target.value)) {
-            setCohortName(event.target.value);
-            setCohortNameValidated(true);
+    const onCohortNameChange = (event: any) => {
+        if (event.target.value !== '') {
+            setCohortName(event.target.value.trim());
             setCohortNameError('');
-        } else {
-            setCohortName('');
-            setCohortNameValidated(false);
-            setCohortNameError(COHORT_NAME_INVALID);
         }
     }
     /**
@@ -175,7 +157,7 @@ export const CreateCohort: React.FunctionComponent = () => {
                 return response;
             })
             .catch((error: Error) => {
-                return null;
+                return undefined;
             });
     }
     /**
@@ -487,7 +469,7 @@ export const CreateCohort: React.FunctionComponent = () => {
         setCohortRegistrationFailedHidden(true);
         setCohortRegistrationFailed('');
         dispatch({ type: 'FILTER_VALUES_LIST', payload: filterValuesList });
-    }   
+    }
     /**
      * Update the project settings 
      * @param transformedCohort 
@@ -603,7 +585,7 @@ export const CreateCohort: React.FunctionComponent = () => {
         let ent = {} as IDatasetType;
         let dateTime = new Date();
         ent.key = UUID.UUID();
-        ent.name = cohortName;
+        ent.name = cohortName.trim();
         ent.isCohort = true;
         ent.masterKey = selectedDatasetOption?.key;
         ent.masterName = selectedDatasetOption?.text;
@@ -635,7 +617,7 @@ export const CreateCohort: React.FunctionComponent = () => {
                     })
                     .catch((error) => {
                         // rollBackSaveCohort(ent.key, _utils);
-                        setWaitSpinner(false);                        
+                        setWaitSpinner(false);
                         setCohortRegistrationFailedHidden(false);
                         setCohortRegistrationFailed(error);
                         // throw error;
@@ -671,12 +653,13 @@ export const CreateCohort: React.FunctionComponent = () => {
     */
     const handleSubmit = (event) => {
         if (filterValuesList) {
-            if (cohortNameValidated && selectedDatasetOptionValidated) {
+            let _utils = new Utils();
+            if (_utils.isValidName(cohortName) && selectedDatasetOptionValidated) {
                 if (duplicateName(cohortName, cohortsList)) {
                     setCohortNameError('Cohort name is a duplicate. Enter a new name.');
                 } else {
                     setWaitSpinner(true);
-                    const _utils = new Utils();
+
                     /**
                      * Save the cohort. 
                     */
@@ -694,12 +677,10 @@ export const CreateCohort: React.FunctionComponent = () => {
 
             }
             else {
-                if (!cohortNameValidated) {
-                    setCohortNameError('Name length should be less than 100 characters, and no "/", "\", ":"');
-                }
-                if (!selectedDatasetOptionValidated) {
-                    setSelectedDatasetOptionError('Please select a dataset');
-                }
+                setCohortNameError(COHORT_NAME_INVALID);
+            }
+            if (!selectedDatasetOptionValidated) {
+                setSelectedDatasetOptionError('Please select a dataset');
             }
 
         }
@@ -713,21 +694,17 @@ export const CreateCohort: React.FunctionComponent = () => {
 
     const handleClose = () => {
         setCohortNameError('');
-        setCohortNameValidated(false);
         setDataMatrix(undefined);
         setFilterOptions(undefined);
         setSelectedDatasetOptionValidated(false);
         setSelectedDatasetOptionError('');
-        setCohortNameValidated(false);
         setBtnSaveCohortDisabled(true);
-        
         setCohortRegistrationFailedHidden(true);
         setCohortRegistrationFailed('');
-
         dispatch({ type: 'FILTER_VALUES_LIST', payload: [] });
         dispatch({ type: 'COHORT_CREATE_PANEL_STATE', payload: false });
     }
-   
+
     return (
         <>
             <form onSubmit={handleSubmit} id='frmCreateCohort' noValidate>
@@ -737,9 +714,8 @@ export const CreateCohort: React.FunctionComponent = () => {
                             <td>
                                 <TextField
                                     required
-                                    defaultValue={defaultCohortName}
                                     componentRef={cohortNameRef}
-                                    id='cohortName'
+                                    id='cohortNameField'
                                     label='Cohort name'
                                     styles={cohortNameStyle}
                                     placeholder='Enter a cohort name'
@@ -751,7 +727,6 @@ export const CreateCohort: React.FunctionComponent = () => {
                         <tr>
                             <td>
                                 <ChoiceGroup
-                                    defaultSelectedKey={defaultSelectedDatasetKey}
                                     options={datasetOptions}
                                     onChange={onDatasetChoiceChange}
                                     label="Select dataset"
@@ -916,7 +891,7 @@ export const CreateCohort: React.FunctionComponent = () => {
                                                         {RECORDS_COUNT_ERROR}
                                                     </div>
                                                 </td>
-                                            </tr> 
+                                            </tr>
                                             <tr>
                                                 <td>
                                                     <div className='filterDupError' hidden={cohortRegistrationFailedHidden}>

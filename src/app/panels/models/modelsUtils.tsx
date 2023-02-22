@@ -21,12 +21,13 @@ export const trimDisplayMetric = (metric: number, metricLength: number = 3) => {
 */
 const nbNameDisplay = (nbName: string, nbLength: number) => {
     if (nbName?.length < nbLength) { return nbName; }
-    let ext = PathExt.extname(nbName);
+    const ext = PathExt.extname(nbName);
     let name = PathExt.basename(nbName, ext);
     let displayName = name.substring(0, nbLength);
     displayName = displayName.concat('..', ext);
     return displayName;
 }
+
 /**
  * Dataset mapping to cohort.
  * @param datasetList 

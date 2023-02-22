@@ -25,7 +25,6 @@ import * as mlConfig from '../configs/mlPlatforms.json';
 import * as metricConfig from '../configs/problemTypesMetrics.json'
 
 export class Utils {
-    private readonly METRICS_ROUND_NUM = 3;
     private readonly WORKSPACE_DIR = 'workspace';
     private readonly WORKSPACE_FILE_NAME = 'workspace.json';
     private readonly ARTIFACTS_DIR = 'artifacts';
@@ -1511,13 +1510,17 @@ export class Utils {
         await this.docManager.services.contents.save(this.workspacePath, model);
     }
     /**
-     * Check whether a name is a valid file or folder name.
-     * Disallows names with zero length, and "/", and "\", and ":" in file names.
-     * @param name 
-     * @returns 
-    */
+    * Check whether a name is a valid file or folder name.
+    * Disallows names with zero length, and "/", and "\", and ":" in file names.
+    * @param name 
+    * @returns 
+   */
     isValidName(name: string): boolean {
-        const validNameExp = /[\/\\:]/;
+        if (!name) { return false; }
+        const validNameExp = /[\/\\\<\>\?:]/;
+        if (!name.replace(/\s/g, '').length) {
+            return false;
+        }
         return name.length > 0 && name.length < 101 && !validNameExp.test(name);
     }
     /**
