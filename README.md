@@ -29,11 +29,11 @@ The Responsible AI Tracker can be deployed on Windows or Ubuntu Os, using anacon
 - JupyterLab
   - If you use pip:
   ```shell
-  pip install jupyterlab==3.5.2
+  pip install jupyterlab==3.6.1
   ```
   - If you use conda:
   ```shell
-  conda install -c conda-forge jupyterlab==3.5.2
+  conda install -c conda-forge jupyterlab==3.6.1
   ```
 
 ### The Responsible AI Tracker has two installation options:

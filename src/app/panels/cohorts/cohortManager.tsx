@@ -13,7 +13,10 @@ export const CohortManager: React.FunctionComponent = () => {
    * Dismiss cohort panel
   */
   const dispatch = useDispatch();
-  const dismissPanel = (): void => {
+  const dismissEditPanel = (): void => {
+    dispatch({ type: 'COHORT_EDIT_PANEL_STATE', payload: false });
+  };
+  const dismissCreatePanel = (): void => {
     dispatch({ type: 'COHORT_CREATE_PANEL_STATE', payload: false });
   };
   let createCohortHeader = "Create new cohort";
@@ -25,7 +28,7 @@ export const CohortManager: React.FunctionComponent = () => {
         <Panel
           isOpen={isCreateOpen}
           headerText={createCohortHeader}
-          onDismiss={dismissPanel}
+          onDismiss={dismissCreatePanel}
           closeButtonAriaLabel="Close"
           type={PanelType.custom}
           customWidth='360px'
@@ -38,7 +41,7 @@ export const CohortManager: React.FunctionComponent = () => {
         <Panel
           isOpen={isEditOpen}
           headerText={editCohortHeader}
-          onDismiss={dismissPanel}
+          onDismiss={dismissEditPanel}
           closeButtonAriaLabel="Close"
           type={PanelType.custom}
           customWidth='360px'

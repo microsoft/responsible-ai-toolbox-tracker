@@ -1,0 +1,131 @@
+name: Release raitracker to Pypi
+
+# trigger manually ("collaborator" or above permissions should be required)
+on:
+  workflow_dispatch:
+    inputs:
+      releaseType:
+        type: choice
+        description: "Test or Prod PyPi"
+        options:
+          - Test
+          - Prod
+        required: true
+      bumpType:
+        type: choice
+        description: "Part of version number to bump"
+        options:
+          - major
+          - minor
+          - patch
+          - prerelease
+          - none
+        required: true
+        default: 'minor'
+
+jobs:
+  release-pypi:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Parameters
+        if: ${{ (github.event.inputs.bumpType != 'none') && (github.event.inputs.releaseType == 'Prod') }}
+        run: |
+           echo "If releaseType == 'Prod', then bumpType must be 'none'. Bump the version and send it to test.pypi first. Only then send it to PyPi."
+           exit 1
+
+      # -------------------
+      # Checkout code
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      # -------------------
+      # Setup environment in remote runner
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      # -------------------
+      # Install basic packages (not associated with the repo)
+      - name: update and upgrade pip, setuptools, wheel and twine
+        run: |
+           pip install --upgrade pip
+           pip install --upgrade setuptools wheel twine pip-tools
+           pip install configparser semver
+
+      # -------------------
+      # Update the package version by bumping the version to the next
+      - name: Bump version
+        run: |
+          python bump_version.py ${{github.event.inputs.bumpType}}
+
+
+      # -------------------
+      # Install the package and all its dependencies
+      # Needs to do this after bumping the version, otherwise
+      # package.__version__ will point to the previous version
+      - name: Install current package
+        run: |
+          npm run install
+          pip install --upgrade pip
+          pip install -e .[dev]
+          pip list
+
+      # -------------------
+      # install build
+      - name: Install pypa/build
+      run: >-
+        python -m  pip install build --user
+
+      # -------------------
+      # Run tests before uploading to PyPi
+      - name: run tests
+        run: pytest
+
+      # -------------------
+      # Build wheel
+      - name: build wheel
+        run: python -m build
+
+      # -------------------
+      # Publish package to PyPi as ...
+      # ...a Test package (in test.pypi.org)
+      - name: Publish package to Test Pypi
+        if: ${{ github.event.inputs.releaseType == 'Test'}}
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          user: __token__
+          password: ${{ secrets.TEST_PYPI_TOKEN }}
+          repository_url: https://test.pypi.org/legacy/
+      # ...an official pip package
+      - name: Publish package to Pypi
+        if: ${{ github.event.inputs.releaseType == 'Prod'}}
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          user: __token__
+          password: ${{ secrets.PYPI_TOKEN }}
+
+
+      # -------------------
+      # Commit the changes performed by the bump
+      # Also, tag the current commit with the version number
+      - name: commit new setup file
+        if: ${{ github.event.inputs.bumpType != 'none' }}
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+          git add setup.cfg
+          git commit -m "update version number"
+          VERSION=$(python bump_version.py 'none')
+          git tag -a $VERSION -m "Release $VERSION"
+
+      # -------------------
+      # Push the changes performed by bump2version to the current branch
+      - name: Push changes
+        if: ${{ github.event.inputs.bumpType != 'none' }}
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+          tags: true

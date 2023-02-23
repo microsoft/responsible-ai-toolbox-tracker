@@ -62,7 +62,6 @@ const getCompareNum = (num: number, mapToName: string, _metricData: any, _cohort
             return ERROR_CODE;
         }
     }
-
     /**
      * Loop through the baseline datasets, identify the mapTo value. 
     */
@@ -91,7 +90,6 @@ const getCompareNum = (num: number, mapToName: string, _metricData: any, _cohort
     }
     return ERROR_CODE;
 }
-
 /**
  * Return true if its finds a baseline cohort with the same master dataset. otherwise false.
  * Identify the cohort to compare to.
@@ -112,7 +110,6 @@ const compareToCohort = (num: number, _metricData: any, _cohortMetrics: any, _ma
     else if (isCohort && baselineMaster === cohortMaster) { return true; }
     return false;
 }
-
 /**
  * Round Dec tool
  * @param num 
@@ -122,7 +119,6 @@ const compareToCohort = (num: number, _metricData: any, _cohortMetrics: any, _ma
 const roundDec = (num: number, f: number): number => {
     return Number(num.toFixed(f));
 }
-
 /**
  * Takes an accuracy value and returns a color shade 
  * @param num Accuracy value
@@ -149,11 +145,9 @@ const mapColorToScale = (normNum: number, lightColor: number[], darkColor: numbe
 
     return [r, g, b];
 }
-
 const normalizeNum = (num: number, minRange: number, maxRange: number, minVal: number, maxVal: number) => {
     return (((num - minVal) / (maxVal - minVal)) * (maxRange - minRange) + minRange);
 }
-
 /**
  * 
  * @param percent 
@@ -238,13 +232,11 @@ export const getAbsoluteShading = (metric: string, num: number, metricHighLow: a
         backgroundColor: hexColor,
     };
 }
-
 const getStandardDeviation = (array: number[]) => {
     const n = array.length;
     const mean = array.reduce((a: number, b: number) => a + b) / n;
     return Math.sqrt(array.map(x => Math.pow(x - mean, 2)).reduce((a, b) => a + b) / n);
 }
-
 /**
  * Calculate the color shade according to the accuracy value
  * @param num the accuracy value
@@ -319,20 +311,21 @@ export const getComparativeShading = (metric: string, num: number, metricsData: 
             highShade = darkImprove;
         }
     }
-    // /**
-    //  * Normalize the probability, using the min metric value and the ma metric value.
-    // */
     let deltaNum = Math.abs(num - compareNum);
-    // let normDeltaNum: number;
-    // if (maxDelta - minDelta === 0) {
-    //     normDeltaNum = deltaNum;
-    // } else {
-    //     normDeltaNum = (deltaNum - minDelta) / (maxDelta - minDelta);
-    // }
-
     let [red, green, blue]: any[] = [];
     let shadedColor: any[] = [];
     let numPercent = Math.abs(1 - Math.abs(num - compareNum) / maxDelta);
+    /**
+     * allowed % of the max value to smooth the edges.
+    */
+    if (numPercent > 0.98) {
+        numPercent = 0.98;
+    } else if (numPercent > 0.96) {
+        numPercent = 0.96;
+    } else if (numPercent > 0.94) {
+        numPercent = 0.94;
+    }
+
     if (metric === 'Log Loss' || metric === 'mse' || metric === 'rmse' || metric === 'mae') {
         if (num < compareNum) {
             [red, green, blue] = darkImprove;
@@ -352,23 +345,12 @@ export const getComparativeShading = (metric: string, num: number, metricsData: 
             shadedColor = colorShade(numPercent, red, green, blue);
         }
     }
-
-
-    // /**
-    //  * % of the max value.
-    // */
-    // normDeltaNum = normDeltaNum / 1.01;
-    // /**
-    //  * Get the color background shading.
-    // */
-    // const [r, g, b] = mapColorToScale(normDeltaNum, lowShade, highShade);
     let [r, g, b] = shadedColor;
     let hexColor = rgbToHex(r, g, b);
 
     const v = trimDisplayMetric(Math.abs(deltaNum));
     let numHtml: string;
     let metricStyle: string;
-    // if (num === compareNum || compareNum === ERROR_CODE) {
     if (num === 0 || compareNum === ERROR_CODE) {
         hexColor = '#ffffff';
         numHtml = num?.toString();
@@ -535,7 +517,7 @@ export const absoluteHeatmapData = (items: any, problemType: string, selectedCoh
 }
 /**
  * 
- * @param metricData \
+ * @param metricData 
  * @returns 
 */
 const getMetricMinMax = (metricData: any): [number, number] => {
@@ -599,10 +581,8 @@ const absoluteClassificationData = (items: any, selectedCohortsKeys: any): [any,
         let v = classificationMetrics[m];
         metricsData[v] = [];
     }
-
     for (let i in items) {
         let _item = items[i];
-
         /**
          * Filter out unregistered models.
         */
@@ -786,9 +766,7 @@ const regressionDataBound = (metricsData: any, baselineData: any): [ICompareMetr
         metricBounds.maxCohort = trimDisplayMetric(maxCohort);
         metricBounds.minDelta = trimDisplayMetric(minDelta);
         metricBounds.maxDelta = trimDisplayMetric(maxDelta);
-        // if (minMetric > metricBounds.minCohort) { minMetric = metricBounds.minCohort; }
         if (minMetric > metricBounds.minAll) { minMetric = metricBounds.minAll; }
-        // if (maxMetric < metricBounds.maxCohort) { maxMetric = metricBounds.maxCohort; }
         if (maxMetric < metricBounds.maxAll) { maxMetric = metricBounds.maxAll; }
         metricBounds.minMetric = trimDisplayMetric(minMetric);
         metricBounds.maxMetric = trimDisplayMetric(maxMetric);
@@ -892,12 +870,8 @@ const classificationDataBound = (metricsData: any, baselineData: any): [ICompare
         metricBounds.maxCohort = trimDisplayMetric(maxCohort);
         metricBounds.minDelta = trimDisplayMetric(minDelta);
         metricBounds.maxDelta = trimDisplayMetric(maxDelta);
-
-        // if (minMetric > metricBounds.minCohort) { minMetric = metricBounds.minCohort; }
         if (minMetric > metricBounds.minAll) { minMetric = metricBounds.minAll; }
-        // if (maxMetric < metricBounds.maxCohort) { maxMetric = metricBounds.maxCohort; }
         if (maxMetric < metricBounds.maxAll) { maxMetric = metricBounds.maxAll; }
-
         metricBounds.minMetric = trimDisplayMetric(minMetric);
         metricBounds.maxMetric = trimDisplayMetric(maxMetric);
         if (m === 'F1Score') { m = 'F1 Score'; }

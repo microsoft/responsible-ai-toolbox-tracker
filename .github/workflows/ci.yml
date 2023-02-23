@@ -1,0 +1,50 @@
+name: CI
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.7", "3.8", "3.9"]
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+      # otherwise fails to push refs to dest repo
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install package
+      run: |
+        pip install --upgrade pip
+        pip install -e .[dev]
+
+    - name: Run Tests
+      run: |
+        pytest --cov=raitracker test/. --cov-report=html --cov-report=term
+
+    - name: Upload code coverage results
+      uses: actions/upload-artifact@v2
+      with:
+        name: raitracker-code-coverage-results
+        path: htmlcov
+      if: ${{ always() }}
+
+    - name: Upload coverage reports to Codecov
+      if: ${{ matrix.python-version == '3.9'}}
+      uses: codecov/codecov-action@v3
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+        #files: ./coverage
+        verbose: true
