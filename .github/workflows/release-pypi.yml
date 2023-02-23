@@ -31,7 +31,7 @@ jobs:
       - name: Check Parameters
         if: ${{ (github.event.inputs.bumpType != 'none') && (github.event.inputs.releaseType == 'Prod') }}
         run: |
-            echo "If releaseType == 'Prod', then bumpType must be 'none'. Bump the version and send it to test.pypi first. Only then send it to PyPi."
+            echo "If releaseType == 'Prod', then bumpType must be 'none'. Bump the version and send it to test.pypi first, and Only then send it to PyPi."
             exit 1
 
       # -------------------
