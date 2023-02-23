@@ -111,7 +111,7 @@ jobs:
       - name: cleanup artifacts
         run: |
           cd dist/
-          rm -v !(raitracker*)
+          rm -rv !(raitracker*)
           cd ..
 
       # -------------------
