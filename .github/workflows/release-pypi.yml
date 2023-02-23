@@ -76,70 +76,70 @@ jobs:
         run: >-
           python -m pip install build --user
 
-      # # -------------------
-      # # Run tests before uploading to PyPi
-      # - name: run tests
-      #   run: pytest
+      # -------------------
+      # Run tests before uploading to PyPi
+      - name: run tests
+        run: pytest
 
-      # # -------------------
-      # # Install node
-      # - name: Setup node
-      #   uses: actions/setup-node@v3
-      #   with:
-      #     node-version: 18.12.x
-      #     cache: npm
+      # -------------------
+      # Install node
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.12.x
+          cache: npm
 
-      # - name: Install package software
-      #   run: npm ci
+      - name: Install package software
+        run: npm ci
 
-      # # -------------------
-      # # Compile typescript code
-      # - name: Compile tracker client
-      #   run: npm run build
+      # -------------------
+      # Compile typescript code
+      - name: Compile tracker client
+        run: npm run build
 
-      # # -------------------
-      # # Build wheel
-      # - name: build wheel
-      #   run: python -m build
+      # -------------------
+      # Build wheel
+      - name: build wheel
+        run: python -m build
 
-      # # -------------------
-      # # Publish package to PyPi as ...
-      # # ...a Test package (in test.pypi.org)
-      # - name: Publish package to Test Pypi
-      #   if: ${{ github.event.inputs.releaseType == 'Test'}}
-      #   uses: pypa/gh-action-pypi-publish@release/v1
-      #   with:
-      #     user: __token__
-      #     password: ${{ secrets.TEST_PYPI_API_TOKEN }}
-      #     repository_url: https://test.pypi.org/legacy/
-      # # ...an official pip package
-      # - name: Publish package to Pypi
-      #   if: ${{ github.event.inputs.releaseType == 'Prod'}}
-      #   uses: pypa/gh-action-pypi-publish@release/v1
-      #   with:
-      #     user: __token__
-      #     password: ${{ secrets.PYPI_API_TOKEN }}
+      # -------------------
+      # Publish package to PyPi as ...
+      # ...a Test package (in test.pypi.org)
+      - name: Publish package to Test Pypi
+        if: ${{ github.event.inputs.releaseType == 'Test'}}
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          user: __token__
+          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
+          repository_url: https://test.pypi.org/legacy/
+      # ...an official pip package
+      - name: Publish package to Pypi
+        if: ${{ github.event.inputs.releaseType == 'Prod'}}
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          user: __token__
+          password: ${{ secrets.PYPI_API_TOKEN }}
 
 
-      # # -------------------
-      # # Commit the changes performed by the bump
-      # # Also, tag the current commit with the version number
-      # - name: commit new setup file
-      #   if: ${{ github.event.inputs.bumpType != 'none' }}
-      #   run: |
-      #     git config user.name "GitHub Actions Bot"
-      #     git config user.email "<>"
-      #     git add package.json raitracker/_version.py
-      #     git commit -m "update version number"
-      #     VERSION=$(python bump_version.py 'none')
-      #     git tag -a $VERSION -m "Release $VERSION"
+      # -------------------
+      # Commit the changes performed by the bump
+      # Also, tag the current commit with the version number
+      - name: commit new setup file
+        if: ${{ github.event.inputs.bumpType != 'none' }}
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+          git add package.json raitracker/_version.py
+          git commit -m "update version number"
+          VERSION=$(python bump_version.py 'none')
+          git tag -a $VERSION -m "Release $VERSION"
 
-      # # -------------------
-      # # Push the changes performed by bump2version to the current branch
-      # - name: Push changes
-      #   if: ${{ github.event.inputs.bumpType != 'none' }}
-      #   uses: ad-m/github-push-action@master
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     branch: ${{ github.ref }}
-      #     tags: true
+      # -------------------
+      # Push the changes performed by bump2version to the current branch
+      - name: Push changes
+        if: ${{ github.event.inputs.bumpType != 'none' }}
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+          tags: true
