@@ -27,13 +27,13 @@ jobs:
   release-pypi:
     name: release to pypi
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Check Parameters
         if: ${{ (github.event.inputs.bumpType != 'none') && (github.event.inputs.releaseType == 'Prod') }}
         run: |
-           echo "If releaseType == 'Prod', then bumpType must be 'none'. Bump the version and send it to test.pypi first. Only then send it to PyPi."
-           exit 1
+            echo "If releaseType == 'Prod', then bumpType must be 'none'. Bump the version and send it to test.pypi first. Only then send it to PyPi."
+            exit 1
 
       # -------------------
       # Checkout code
