@@ -111,7 +111,7 @@ jobs:
       - name: cleanup artifacts
         run: |
           cd dist/
-          rm -rv !(raitracker*)
+          rm -rv !(raitracker-0.1.0-py3-none-any.whl)
           cd ..
 
       # -------------------
