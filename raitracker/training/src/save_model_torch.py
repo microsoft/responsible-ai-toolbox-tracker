@@ -1,3 +1,5 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
 import os, sys
 import pandas as pd
 from toy_dataset import create_dummy_dataset, split_data

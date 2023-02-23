@@ -1,3 +1,5 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
 import os, time
 from abc import ABC, abstractmethod
 import numpy as np

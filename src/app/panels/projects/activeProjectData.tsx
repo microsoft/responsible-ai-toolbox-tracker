@@ -1,3 +1,5 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
 import { useStore } from 'react-redux';
 import React, { useEffect } from 'react';
 import { PathExt } from '@jupyterlab/coreutils';

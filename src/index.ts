@@ -1,3 +1,5 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
 import { Store } from "redux";
 import { Signal } from "@lumino/signaling";
 import { ServiceManager } from '@jupyterlab/services';

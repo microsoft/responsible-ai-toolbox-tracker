@@ -1,3 +1,5 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
 import os
 from pathlib import Path
 from ..dataset.load_data import load_data

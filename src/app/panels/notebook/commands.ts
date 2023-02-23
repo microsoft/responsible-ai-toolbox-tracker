@@ -1,6 +1,5 @@
-/**
- * Set up keyboard shortcuts & commands for notebook
- */
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
 import { CommandRegistry } from '@lumino/commands';
 import { sessionContextDialogs } from '@jupyterlab/apputils';
 import { CompletionHandler } from '@jupyterlab/completer';

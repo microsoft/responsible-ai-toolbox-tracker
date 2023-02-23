@@ -1,3 +1,5 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
 from typing import List
 from math import log2, ceil, floor
 import pandas as pd

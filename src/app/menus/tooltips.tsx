@@ -1,4 +1,5 @@
-
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
 import React from 'react';
 import { useId } from '@fluentui/react-hooks';
 import { FontIcon } from '@fluentui/react/lib/Icon';

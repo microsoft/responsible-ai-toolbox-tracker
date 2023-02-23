@@ -1,3 +1,5 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
 import React from 'react';
 import { Label } from '@fluentui/react/lib/Label';
 import { FontIcon } from '@fluentui/react/lib/Icon';

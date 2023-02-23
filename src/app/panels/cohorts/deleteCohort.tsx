@@ -1,3 +1,5 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
 import React, { useState } from 'react';
 import { Contents } from '@jupyterlab/services';
 import { Label } from '@fluentui/react/lib/Label';

@@ -1,3 +1,5 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
 import { UUID } from 'angular2-uuid';
 import React, { useState } from 'react';
 import { PathExt } from '@jupyterlab/coreutils';

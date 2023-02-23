@@ -1,3 +1,5 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
 from .torch.torch_model import DataBuilder
 from .torch.classifier import TorchClassifier
 from .torch.classifier_err_mult_out import TorchClassifierMultOut

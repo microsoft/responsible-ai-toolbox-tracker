@@ -1,3 +1,5 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
 import React from 'react';
 import { useState } from 'react';
 import { Label } from '@fluentui/react/lib/Label';

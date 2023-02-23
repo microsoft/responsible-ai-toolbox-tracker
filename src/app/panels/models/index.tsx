@@ -1,3 +1,5 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
 /* eslint-disable curly */
 /* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/quotes */

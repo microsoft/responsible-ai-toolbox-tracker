@@ -1,3 +1,5 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
 import React from 'react';
 import { FontIcon, Icon } from '@fluentui/react/lib/Icon';
 import { trimDisplayMetric } from './modelsUtils';
@@ -315,17 +317,16 @@ export const getComparativeShading = (metric: string, num: number, metricsData: 
     let [red, green, blue]: any[] = [];
     let shadedColor: any[] = [];
     let numPercent = Math.abs(1 - Math.abs(num - compareNum) / maxDelta);
-    /**
-     * allowed % of the max value to smooth the edges.
-    */
-    if (numPercent > 0.98) {
-        numPercent = 0.98;
-    } else if (numPercent > 0.96) {
-        numPercent = 0.96;
-    } else if (numPercent > 0.94) {
-        numPercent = 0.94;
-    }
-
+    // /**
+    //  * allowed % of the max value to smooth the edges.
+    // */
+    // if (numPercent > 0.98) {
+    //     numPercent = 0.98;
+    // } else if (numPercent > 0.96) {
+    //     numPercent = 0.96;
+    // } else if (numPercent > 0.94) {
+    //     numPercent = 0.94;
+    // }
     if (metric === 'Log Loss' || metric === 'mse' || metric === 'rmse' || metric === 'mae') {
         if (num < compareNum) {
             [red, green, blue] = darkImprove;

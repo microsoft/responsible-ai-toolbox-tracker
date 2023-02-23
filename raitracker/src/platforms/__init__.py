@@ -1,3 +1,5 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
 from .constants import ParametersJson
 from .sklearn import sklearn_model_register
 from .keras import keras_model_register

@@ -1,3 +1,5 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { raiUI } from '../app';
 import { Utils } from './utils';

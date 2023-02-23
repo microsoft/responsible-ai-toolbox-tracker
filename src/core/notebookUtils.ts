@@ -1,3 +1,5 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
 import { UUID } from 'angular2-uuid';
 import { CreateRun } from './mlflowUtils';
 import { Widget } from '@lumino/widgets';

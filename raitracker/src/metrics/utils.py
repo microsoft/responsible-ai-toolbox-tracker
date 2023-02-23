@@ -1,3 +1,5 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
 class MetricNames():
     RMSE_KEY = "rmse"
     MSE_KEY = "mse"

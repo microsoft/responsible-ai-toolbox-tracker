@@ -1,3 +1,5 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
 import React from 'react';
 import { PathExt } from '@jupyterlab/coreutils';
 import { FontIcon } from '@fluentui/react/lib/Icon';

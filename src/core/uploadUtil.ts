@@ -1,3 +1,5 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
 import { Widget } from '@lumino/widgets';
 import { Signal } from '@lumino/signaling';
 import { ArrayExt } from '@lumino/algorithm';

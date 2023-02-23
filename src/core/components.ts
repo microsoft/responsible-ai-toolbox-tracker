@@ -1,4 +1,5 @@
-
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
 import { IFilter, ICohortList } from "../app/panels/cohorts/cohortTypes";
 
 /**

@@ -22,7 +22,7 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
 ]
 dependencies = [
-    "jupyterlab>=3",
+    "jupyterlab==3.6.1",
     "mlflow",
     "matplotlib",
     "numpy",

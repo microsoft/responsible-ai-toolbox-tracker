@@ -1,3 +1,5 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
 #!/bin/bash
 
 python3 save_model_torch.py bin

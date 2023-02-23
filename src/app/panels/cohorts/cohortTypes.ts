@@ -1,4 +1,5 @@
-
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
 import { IDatasetType } from "src/core/components";
 import { IColumn } from '@fluentui/react/lib/DetailsList';
 /**

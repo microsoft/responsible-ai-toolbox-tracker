@@ -1,3 +1,5 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
 class ParametersJson:
     project_path = "project_path"
     artifact_dir = "artifacts_dir"

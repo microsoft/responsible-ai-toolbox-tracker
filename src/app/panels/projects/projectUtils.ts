@@ -1,5 +1,5 @@
-
-
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
 import { useState, useMemo } from 'react';
 export const WorkModeData = (dataItems, config = null) => {
     const [sortConfig, setSortConfig] = useState(config);

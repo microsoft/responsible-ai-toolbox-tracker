@@ -1,3 +1,5 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
 declare module '*.svg' {
     const value: string;
     export default value;

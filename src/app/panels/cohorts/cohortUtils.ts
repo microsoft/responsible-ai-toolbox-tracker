@@ -1,4 +1,5 @@
-
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
 import { FilterOperations, IFilter, ICohortList } from "./cohortTypes";
 import { IDatasetType } from '../../../core/components';
 

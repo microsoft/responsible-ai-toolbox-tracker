@@ -1,4 +1,5 @@
-
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
 import React from 'react';
 import { useConst } from '@fluentui/react-hooks';
 import { INotebookType } from '../../core/components';

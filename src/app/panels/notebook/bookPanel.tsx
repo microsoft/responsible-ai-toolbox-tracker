@@ -1,4 +1,5 @@
-
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
 import React from 'react';
 import { Store } from 'redux';
 import { CommandRegistry } from '@lumino/commands';

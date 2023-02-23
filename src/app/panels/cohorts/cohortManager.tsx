@@ -1,3 +1,5 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
 import * as React from 'react';
 import { CreateCohort } from "./createCohort";
 import { useSelector, useDispatch } from 'react-redux';

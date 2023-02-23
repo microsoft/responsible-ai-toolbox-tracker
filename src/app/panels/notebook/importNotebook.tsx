@@ -1,3 +1,5 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
 import * as React from 'react';
 import { UUID } from 'angular2-uuid';
 import { useState, useMemo } from 'react';

@@ -1,3 +1,5 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
 from math import log2, ceil, floor
 import pandas as pd
 import torch
