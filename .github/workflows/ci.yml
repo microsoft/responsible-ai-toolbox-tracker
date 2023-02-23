@@ -38,7 +38,7 @@ jobs:
           cache: npm
 
       - name: Install node packages
-        run: npm ci
+        run: npm run build
 
       # -------------------
       # Compile typescript code
