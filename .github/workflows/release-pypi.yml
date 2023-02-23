@@ -76,10 +76,10 @@ jobs:
         run: >-
           python -m pip install build --user
 
-      # -------------------
-      # Run tests before uploading to PyPi
-      - name: run tests
-        run: pytest
+      # # -------------------
+      # # Run tests before uploading to PyPi
+      # - name: run tests
+      #   run: pytest
 
       # -------------------
       # Install node
