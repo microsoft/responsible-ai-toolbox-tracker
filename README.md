@@ -41,12 +41,12 @@ The Responsible AI Tracker can be deployed on Windows or Ubuntu Os, using anacon
 - The default installation only installs the essential packages.
 
   ```shell
-  pip install raitracker-0.1.0-py3-none-any.whl
+  pip install raitracker
   ```
 
 - The installation With the [all] flag installs the essential packages plus PyTorch, and Tensorflow.
   ```shell
-  pip install raitracker-0.1.0-py3-none-any.whl[all]
+  pip install raitracker[all]
   ```
 
 ### Running

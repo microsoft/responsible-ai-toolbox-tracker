@@ -1,9 +1,8 @@
 import sys
-
-from configparser import ConfigParser
+import json
 import semver
 
-SETUP_FILE = "pyproject.toml"
+SETUP_FILE = "package.json"
 NONE = "none"
 VALID_BUMPS = ["major", "minor", "patch", "prerelease", NONE]
 
@@ -46,11 +45,11 @@ def _bump_version(version:str, bump_type:str):
 
 # -----------------------------------
 def _update_version(bump_type:str):
-    config = ConfigParser()
-    config.read(SETUP_FILE)
+    with open(SETUP_FILE) as json_data:
+        metadata = json.load(json_data)
 
     try:
-        version = config["metadata"]["version"]
+        version = metadata["version"]
     except:
         raise ValueError(
             f"ERROR: Unable to fetch package version from {SETUP_FILE} file. "
@@ -59,9 +58,9 @@ def _update_version(bump_type:str):
 
     new_version = _bump_version(version, bump_type)
 
-    config["metadata"]["version"] = new_version
-    with open(SETUP_FILE, 'w') as configfile:
-        config.write(configfile)
+    metadata["version"] = new_version
+    with open(SETUP_FILE, "w") as file:
+        json.dump(metadata, file, indent=4)
 
     return new_version
 

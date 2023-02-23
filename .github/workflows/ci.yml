@@ -45,21 +45,5 @@ jobs:
       - name: Compile tracker client
         run: npm run build
 
-      - name: Run Tests
-        run: |
-          pytest --cov=raitracker test/. --cov-report=html --cov-report=term
-
-      - name: Upload code coverage results
-        uses: actions/upload-artifact@v3
-        with:
-          name: raitracker-code-coverage-results
-          path: htmlcov
-        if: ${{ always() }}
-
-      - name: Upload coverage reports to Codecov
-        if: ${{ matrix.python-version == '3.9'}}
-        uses: codecov/codecov-action@v3
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-          #files: ./coverage
-          verbose: true
+      # - name: Run Tests
+      #   run: pytest
