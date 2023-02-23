@@ -90,7 +90,7 @@ jobs:
           cache: npm
 
       - name: Install package software
-        run: npm ci
+        run: npm install
 
       # -------------------
       # Compile typescript code
