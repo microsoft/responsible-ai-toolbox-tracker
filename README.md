@@ -1,30 +1,35 @@
+![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)
+
 # Responsible AI Tracker
 
-Responsible AI Toolbox Tracker is a JupyterLab Extension for managing, tracking, and comparing results of machine learning experiments for model improvement. Using this extension, users can view models, code, and visualization artifacts within the same framework enabling therefore fast model iteration and evaluation processes.
+Responsible AI Tracker is a JupyterLab Extension for managing, tracking, and comparing results of machine learning experiments for model improvement. Using this extension, users can view models, code, and visualization artifacts within the same framework enabling fast model iteration and evaluation processes. The extension is a work-in-progress research prototype to test and understand tooling functionalities and visualizations that can be helpful to data scientists. If you would like to propose new ideas for improvement feel free to contact the development team at [rai-toolbox@microsoft.com](mailto:rai-toolbox@microsoft.com) or create new issues in this repository.
 
-### Main functionalities include:
+This repo is a part of the [Responsible AI Toolbox](https://github.com/microsoft/responsible-ai-toolbox#responsible-ai-toolbox), a suite of tools providing a collection of model and data exploration and assessment user interfaces and libraries that enable a better understanding of AI systems. These interfaces and libraries empower developers and stakeholders of AI systems to develop and monitor AI more responsibly, and take better data-driven actions.
+
+### Main functionalities of the tracker include:
 
 - **Managing and linking model improvement artifacts**: the extension encourages clean and systematic data science practices by allowing users to associate the notebook used to create a model with the resulting model. These practices support careful model tracking and systematic experimentation.
 
-- **Disaggregated model evaluation and comparisons**: the model comparison table in the extension provides an in-depth comparison between the different models registered in the extension. This comparison contrasts performance results across different data cohorts and metrics, following therefore a disaggregated approach, which goes beyond single-score performance numbers and highlights cohorts of data for which a model may perform worse than its older versions.
+- **Disaggregated model evaluation and comparisons**: the model comparison table in the extension provides an in-depth comparison between the different models registered in the extension. This comparison contrasts performance results across different data cohorts and metrics, following a disaggregated approach, which goes beyond single-score performance numbers and highlights cohorts of data for which a model may perform worse than its older versions. Read more about disaggregated analysis [here](https://responsible-ai-toolbox-tracker.readthedocs.io/en/latest/basics_disaggregated.html).
 
-- **Integration with the Responsible AI Mitigations library**: as data scientists experiment and ideate different steps for model improvement, the Responsible AI Mitigations library helps them implement different mitigation techniques in python that may improve model performance and can be targeted towards specified cohorts of interests.
+- **Integration with the Responsible AI Mitigations library**: as data scientists experiment and ideate different steps for model improvement, the [Responsible AI Mitigations Library](https://github.com/microsoft/responsible-ai-toolbox-mitigations) helps them implement different mitigation techniques in python that may improve model performance and can be targeted towards specified cohorts of interests.
 
-- **Integration with mlflow**: all models registered in a project in the Responsible AI Tracker can be fully synchronized with a corresponding project in mlflow. This integration brings the best of both worlds and at the same time allows practitioners to continue their usual MLOps practices via commonly used tools such as mlflow.
+## Tour
+
+Watch a [video tour](https://www.youtube.com/watch?v=jN6LWFzSLaU) of the Responsible AI Tracker and follow along using the notebooks and dataset [here](./tour).
+<p align="center">
+<img src="./docs/imgs/RAI%20Tracker%20full%20view.png" alt="ResponsibleAITrackerOverview" width="750"/>
+
+
 
 ## Installation
 
-The Responsible AI Tracker can be deployed on Windows or Ubuntu Os, using anaconda or python.
+The Responsible AI Tracker can be deployed on Windows or Ubuntu, using anaconda or python.
 
 ### The Responsible AI Tracker prerequisites:
 
-- NodeJs:
-
-  - **NodeJs:** [Nodejs](https://nodejs.org/)<br /><br />
-
-- Python (versions supported 3.9 **to** 3.10.6)
-
-  - **Python:** [Python](https://www.python.org/downloads/)<br /><br />
+- [Nodejs](https://nodejs.org/)
+- [Python](https://www.python.org/downloads/) (versions supported 3.9 **to** 3.10.6)
 
 - JupyterLab
   - If you use pip:
@@ -49,6 +54,8 @@ The Responsible AI Tracker can be deployed on Windows or Ubuntu Os, using anacon
   pip install raitracker[all]
   ```
 
+Installation through the JupyterLab Extension Manager coming soon. 
+
 ### Running
 
 Start up JupyterLab using:
@@ -57,44 +64,72 @@ Start up JupyterLab using:
 jupyter lab
 ```
 
-The extension should be available in the left vertical bar.
+The extension should be available in the left vertical bar. For ideas on getting started, watch the [video tour](https://www.youtube.com/watch?v=jN6LWFzSLaU) and follow along using the notebooks and dataset [here](./tour).
+ 
+<details><summary>Dependencies</summary>
+<ul>
+
+<li>jupyterlab</li>
+<li>fluentui</li>
+<li>nodejs</li>
+<li>react</li>
+<li>redux</li>
+<li>lumino</li>
+<li>lodash</li>
+<li>babel</li>
+<li>codeMirror</li>
+<li>webpack</li>
+<li>mlflow</li>
+<li>numpy</li>
+<li>pandas</li>
+<li>scikit-learn</li>
+<li>pytorch</li>
+</ul>
+</details>
 
 ---
 
 ## Getting help
 
-We encourage you to check the Responsible AI Tracker help documentation [Responsible AI Tracker help](https://responsible-ai-toolbox-tracker.readthedocs.io/en/latest/). 
+We encourage you to check the Responsible AI Tracker [documentation](https://responsible-ai-toolbox-tracker.readthedocs.io/en/latest/). 
 
-For Responsible AI Mitigation help [Responsible AI Mitigation help](https://responsible-ai-toolbox-mitigations.readthedocs.io/en/latest/).  
+For Responsible AI Mitigations Library help see [Responsible AI Mitigations documentation](https://responsible-ai-toolbox-mitigations.readthedocs.io/en/latest/).  
 
-For more support [Responsible AI Tracker support](https://github.com/microsoft/responsible-ai-toolbox-tracker/blob/main/SUPPORT.md).
+See [here](https://github.com/microsoft/responsible-ai-toolbox-tracker/blob/main/SUPPORT.md) for further support information.
 
 
-### Bug report
+### Bug reports
 
 To report a bug please read the [guidelines](https://responsible-ai-toolbox-tracker.readthedocs.io/en/latest/) and then open a [Github issue](https://github.com/microsoft/responsible-ai-toolbox-tracker/issues/new). 
 
 
-### Feature request
+### Feature requests
 
-We also welcome suggestions for new features as they help make the project more useful for everyone. To request a feature please use the [feature request template](https://github.com/microsoft/responsible-ai-toolbox-tracker/labels/enhancement).
-
-
-## Development
+We welcome suggestions for new features as they help make the project more useful for everyone. To request a feature please use the [feature request template](https://github.com/microsoft/responsible-ai-toolbox-tracker/labels/enhancement).
 
 ### Contributing
 
-To contribute code or documentation to the Responsible AI Tracker, please read the [contributor documentation](https://responsible-ai-toolbox-tracker.readthedocs.io/en/latest/).
+To contribute code or documentation to the Responsible AI Tracker, please read the [contribution guidelines](https://github.com/microsoft/responsible-ai-toolbox-tracker/blob/main/CONTRIBUTING.md).
 
-### License
+---
 
-Responsible AI Tracker uses the Microsoft open source license. All code is licensed under the terms of [Microsoft license](https://github.com/microsoft/responsible-ai-toolbox-tracker/blob/main/LICENSE).
+## Microsoft Open Source Code of conduct
 
-### Microsoft Open Source Code of conduct
-
-Microsoft code of conduct outlines expectations for participation in Microsoft-managed open source communities [Microsoft  Code of conduct](https://github.com/microsoft/responsible-ai-toolbox-tracker/blob/main/CODE_OF_CONDUCT.md).
+The [Microsoft  Code of conduct](https://github.com/microsoft/responsible-ai-toolbox-tracker/blob/main/CODE_OF_CONDUCT.md) outlines expectations for participation in Microsoft-managed open source communities.
 
 
-### Microsoft security 
+## Trademarks
 
-Microsoft security standards [Microsoft security](https://github.com/microsoft/responsible-ai-toolbox-tracker/blob/main/SECURITY.md).
+This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft 
+trademarks or logos is subject to and must follow 
+[Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general).
+Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship.
+Any use of third-party trademarks or logos are subject to those third-party's policies.
+
+## Research and Acknowledgements
+
+**Current Maintainers:** [Dany Rouhana](https://github.com/danyrouh), [ThuVan Pham](https://www.microsoft.com/en-us/research/people/thuvanp/), [Matheus Mendonça](https://github.com/mrfmendonca), [Marah Abdin](https://github.com/marah-abdin), [Mark Encarnación](https://github.com/markenc)
+
+**Past Maintainers:** [Irina Spiridonova](https://github.com/irinasp)
+
+**Research Contributors:** [Besmira Nushi](https://github.com/nushib), [Jingya Chen](https://www.jingyachen.net/), [Rahee Ghosh Peshawaria](https://github.com/raghoshMSFT), [Ece Kamar](https://www.ecekamar.com/)
