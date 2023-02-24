@@ -100,7 +100,7 @@ export const ImportNotebook: React.FunctionComponent = () => {
     const uploadFileChange = (event) => {
         const current_event = event.currentTarget;
         if (current_event.files.length !== 0) {
-            let fileName = nbNameDisplay(event.target.files[0].name, NOTEBOOK_DISPLAY);
+            let fileName = nbNameDisplay(event.target.files[0]?.name, NOTEBOOK_DISPLAY);
             if (isValidNotebook(fileName)) {
                 if (PathExt.extname(event.target.files[0].name) !== '.ipynb') {
                     setUploadFileTypeHidden(false);

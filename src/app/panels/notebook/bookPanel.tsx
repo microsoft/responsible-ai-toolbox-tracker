@@ -55,7 +55,6 @@ export class BookPanel extends React.Component<Store> {
     /**
       * instantiate the util object.
      */
-    private _utils: any;
     constructor(props: Store) {
         super(props);
         const translator = new TranslationManager();
@@ -66,7 +65,6 @@ export class BookPanel extends React.Component<Store> {
 
         this.projectId = this.instanceState.projectId;
         this.projectName = this.instanceState.projectName;
-        this._utils = new Utils();
     }
     /**
      * Custom event listener for the context menu.
@@ -130,8 +128,9 @@ export class BookPanel extends React.Component<Store> {
                     }
                     const i = this.instanceState.projectSettings.notebooksRestorer.indexOf(w.context.path);
                     if (i !== -1) {
+                        const _utils = new Utils();
                         this.instanceState.projectSettings.notebooksRestorer.splice(i, 1);
-                        this._utils.UpdateBaseProjectSettings(this.instanceState.projectSettings);
+                        _utils.UpdateBaseProjectSettings(this.instanceState.projectSettings);
                     }
                 });
                 this.props.dispatch({ type: 'ACTIVE_WIDGET_LIST', payload: this.widgetList });
@@ -427,8 +426,9 @@ export class BookPanel extends React.Component<Store> {
                 let nWidget = await this.instanceState.openNotebook(notebookPath);
                 nWidget.context.save();
                 if (this.instanceState.projectSettings.notebooksRestorer.indexOf(notebookPath) === -1) {
+                    const _utils = new Utils();
                     this.instanceState.projectSettings.notebooksRestorer.push(notebookPath);
-                    this._utils.UpdateBaseProjectSettings(this.instanceState.projectSettings);
+                    _utils.UpdateBaseProjectSettings(this.instanceState.projectSettings);
                 }
             }
         });

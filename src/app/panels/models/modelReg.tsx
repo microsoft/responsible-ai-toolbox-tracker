@@ -148,7 +148,7 @@ export const ModelRegistration = () => {
     const uploadFileChange = (event: any) => {
         let files = event.target.files;
         if (files !== 0) {
-            setModelNameValue(files[0].name)
+            setModelNameValue(files[0]?.name)
             setRegisterModelValidated(true);
             setUploadModelErrorHidden(true)
             setRegisterModelError('');

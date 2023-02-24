@@ -139,9 +139,9 @@ export const buildDataMatrix = (cohort: IDatasetType, headers: boolean): any[][]
     for (let i = 0; i < record.values.length; i++) {
         for (let j in cohort.featuresValues) {
             if (notNumeric(cohort.featuresValues[j].values[i])) {
-                arr.push(cohort.featuresValues[j].values[i].trim());
+                arr.push(cohort.featuresValues[j].values[i]);
             } else {
-                arr.push(Number(cohort.featuresValues[j].values[i].trim()));
+                arr.push(Number(cohort.featuresValues[j].values[i]));
             }
         }
         dataMatrix[i + start] = arr;
