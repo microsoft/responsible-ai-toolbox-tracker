@@ -14,6 +14,6 @@ notebook from an existing one. During model registration, the registration proce
 which will then be used to score the model. All test datasets that have been used in at least one registered model can also be used to create 
 cohorts later on.  
 
-.. figure:: /imgs/model_registration.gif
-  :scale: 40%
+.. figure:: imgs/model_registration.gif
+  :scale: 45%
   :alt: Responsible AI Tracker

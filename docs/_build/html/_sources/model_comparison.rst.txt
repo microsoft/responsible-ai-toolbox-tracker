@@ -18,7 +18,7 @@ cell for the model and cohort A will show 0.87 (0.03 ↓) indicating a 0.03 decl
 across cohorts over several models. The shading in the comparative view is based on two colors: one for performance improvement and one for 
 performance decline.  
 
-.. figure:: /imgs/absolute_view.png
+.. figure:: imgs/absolute_view.png
   :scale: 40%
   :alt: Responsible AI Tracker
 

@@ -45,7 +45,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Basics of Disaggregated Analysis" href="basics_disaggregated.html" />
-    <link rel="prev" title="Responsible AI Tracker" href="overview.html" /> 
+    <link rel="prev" title="Getting Started" href="getting_started.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -90,11 +90,12 @@
               
             
             
-              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Stared</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installation Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#the-rai-tracker-prerequisites">The RAI Tracker prerequisites:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-responsible-ai-tracker-has-two-installation-options">The Responsible AI Tracker has two installation options:</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#running">Running:</a></li>
 </ul>
 </li>
@@ -112,8 +113,8 @@
 <li class="toctree-l1"><a class="reference internal" href="cohort_management.html">Cohort Management</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating_mitigations.html">Creating Mitigations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="model_comparison.html">Model Comparison</a></li>
-<li class="toctree-l1"><a class="reference internal" href="integration_mlflow.html">Integration With MLFlow</a></li>
-<li class="toctree-l1"><a class="reference internal" href="metric_support.html">Metric_Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integration_mlflow.html">Integration with MLFlow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metric_support.html">Metric Support</a></li>
 </ul>
 
             
@@ -227,19 +228,32 @@
 <p><strong>JupyterLab</strong></p>
 <blockquote>
 <div><ul class="simple">
-<li><p>The default installation only installs the essential packages.</p></li>
+<li><p>If you use pip:</p></li>
 </ul>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt; pip install raitracker-0.1.0-py3-none-any.whl</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt; pip install jupyterlab==3.6.1</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>The installation With the [all] flag installs the essential packages plus PyTorch, and Tensorflow.</p></li>
+<li><p>If you use conda:</p></li>
 </ul>
-<blockquote>
-<div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt; pip install raitracker-0.1.0-py3-none-any.whl[all]</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt; conda install -c conda-forge jupyterlab==3.6.1</span>
 </pre></div>
 </div>
 </div></blockquote>
+</section>
+<section id="the-responsible-ai-tracker-has-two-installation-options">
+<h2>The Responsible AI Tracker has two installation options:<a class="headerlink" href="#the-responsible-ai-tracker-has-two-installation-options" title="Permalink to this heading">¶</a></h2>
+<p>The default installation only installs the essential packages.</p>
+<blockquote>
+<div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt; pip install raitracker</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>The installation With the [all] flag installs the essential packages plus PyTorch, and Tensorflow.</p>
+<blockquote>
+<div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt; pip install raitracker[all]</span>
+</pre></div>
+</div>
 </div></blockquote>
 </section>
 <section id="running">
@@ -259,7 +273,7 @@
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
         <a href="basics_disaggregated.html" class="btn btn-neutral float-right" title="Basics of Disaggregated Analysis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="overview.html" class="btn btn-neutral float-left" title="Responsible AI Tracker" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="getting_started.html" class="btn btn-neutral float-left" title="Getting Started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

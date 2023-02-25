@@ -11,6 +11,6 @@ Upon cohort creation, all models that have been registered using the given test 
 This will result in creating a new row in the model comparison table for each affected model, displaying performance metrics of the model on 
 the new cohort. 
 
-.. figure:: /imgs/cohort_creation.gif
+.. figure:: imgs/cohort_creation.gif
   :scale: 50%
   :alt: Responsible AI Tracker

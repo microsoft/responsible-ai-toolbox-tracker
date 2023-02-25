@@ -10,6 +10,6 @@ regression metrics. It is also possible to optionally upload an initial notebook
 
 Project deletion will lead to deleting all related artifacts and the project folder from the workspace. 
 
-.. figure:: /imgs/new_project.gif
-  :scale: 50%
+.. figure:: imgs/new_project.gif
+  :scale: 45%
   :alt: Responsible AI Tracker

@@ -11,6 +11,6 @@ The lightbulb button in the notebook menu will give you some initial ideas to ex
 
 .. _Responsible AI Mitigations library: https://github.com/microsoft/responsible-ai-toolbox-mitigations
 
-.. figure:: /imgs/mitigation_ideas.gif
+.. figure:: imgs/mitigation_ideas.gif
   :scale: 50%
   :alt: Responsible AI Tracker

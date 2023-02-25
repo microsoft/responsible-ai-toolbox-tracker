@@ -11,7 +11,7 @@ fast model iteration.
 
 .. _Responsible AI Toolbox: https://responsibleaitoolbox.ai/
 
-.. figure:: /imgs/Responsible_AI_Tracker.png
+.. figure:: imgs/Responsible_AI_Tracker.png
   :scale: 18%
   :alt: Responsible AI Tracker
 
@@ -24,10 +24,9 @@ fast model iteration.
 
     * **Manage and link model improvement artifacts.** Responsible AI Tracker encourages clean and systematic data science practices by allowing you to associate the notebook used to create a model with the resulting model. These practices support careful model tracking and systematic experimentation. 
 
-    * **Perform disaggregated model evaluation and comparison.** The model comparison table in the extension provides an in-depth comparison between the different models registered in the extension. This comparison contrasts performance results across different data cohorts and metrics. This disaggregated approach goes beyond single-score performance metrics to help discover data cohorts for which an updated model may now underperform. Learn more about disaggregated evaluation approaches here. TODO 
+    * **Perform disaggregated model evaluation and comparison.** The model comparison table in the extension provides an in-depth comparison between the different models registered in the extension. This comparison contrasts performance results across different data cohorts and metrics. This disaggregated approach goes beyond single-score performance metrics to help discover data cohorts for which an updated model may now underperform. Learn more about disaggregated evaluation approaches here. 
 
     * **Explore model improvements with the integrated Responsible AI Mitigations library.** As you experiment and ideate different steps for model improvement, the Responsible AI Mitigations library helps you implement different mitigation techniques in Python,  that may improve model performance and can be targeted towards specified cohorts of interests. 
 
-    * **Integrate with mlflow.** All models registered in a project in the Responsible AI Tracker can be fully synchronized with a corresponding project in mlflow. This integration brings the best of both worlds and at the same time allows practitioners to continue their usual MLOps practices via commonly used tools such as mlflow. 
-
+  
 

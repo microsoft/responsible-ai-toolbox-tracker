@@ -22,7 +22,7 @@ are essential for understanding how models may fail and informing decisions abou
 You can do a 1:1 comparison for the same cohort across different models, tracking how different mitigation steps affect the given cohort. 
 You can also easily create, manage, and compare cohorts of interest all within Responsible AI Tracker’s interface. 
 
-.. figure:: /imgs/model_analysis.png
+.. figure:: imgs/model_analysis.png
   :scale: 100%
   :alt: Responsible AI Tracker
 
@@ -30,7 +30,7 @@ You can also easily create, manage, and compare cohorts of interest all within R
   transparent way, and enables them to identify & diagnose errors efficiently.
 
 
-.. figure:: /imgs/baseline.png
+.. figure:: imgs/baseline.png
   :scale: 60%
   :alt: Responsible AI Tracker
 
