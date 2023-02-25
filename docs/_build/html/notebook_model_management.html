@@ -90,16 +90,16 @@
               
             
             
-              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Stared</a></li>
-<li class="toctree-l1"><a class="reference internal" href="overview.html">Responsible AI Tracker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install_guide.html">Installation Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basics_disaggregated.html">Basics of Disaggregated Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="how.html">How This Extension Works With Responsible AI Toolbox</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tour.html">Tour</a></li>
 <li class="toctree-l1"><a class="reference internal" href="frequently_asked.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="known_issues.html">Known Issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="get_involved.html">Get Involved</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
 <ul class="current">
@@ -108,8 +108,8 @@
 <li class="toctree-l1"><a class="reference internal" href="cohort_management.html">Cohort Management</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating_mitigations.html">Creating Mitigations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="model_comparison.html">Model Comparison</a></li>
-<li class="toctree-l1"><a class="reference internal" href="integration_MLFlow.html">Integration With MLFlow</a></li>
-<li class="toctree-l1"><a class="reference internal" href="metric_support.html">Metric_Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integration_mlflow.html">Integration with MLFlow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metric_support.html">Metric Support</a></li>
 </ul>
 
             
@@ -205,8 +205,18 @@
 </style>
 <section id="notebook-and-model-management">
 <span id="notebook-model-management"></span><h1>Notebook and Model Management<a class="headerlink" href="#notebook-and-model-management" title="Permalink to this heading">¶</a></h1>
-<p>The current tracking model of the extension enables mapping models to notebooks. This happens through the process of model registration. Exactly one model can be registered to one notebook. This is to encourage clean code organization and model management practices so that if it becomes necessary to go back and understand the code that created a given model, practitioners can directly access the corresponding notebook. If there is a need to create code that is reused across different models and notebooks, we encourage practitioners to save these in separate python files and keep in the notebooks only code that is specific to the registered model.</p>
-<p>Notebooks can be either directly created or imported from notebooks outside of the project workspace. It is also possible to duplicate a notebook from an existing one. During model registration, the registration process will also ask for the corresponding test dataset, which will then be used to score the model. All test datasets that have been used in at least one registered model can also be used to create cohorts later on.</p>
+<p>The current tracking model of the extension enables mapping models to notebooks. This happens through the process of model registration.
+Exactly one model can be registered to one notebook. This is to encourage clean code organization and model management practices so that if it
+becomes necessary to go back and understand the code that created a given model, practitioners can directly access the corresponding notebook.
+If there is a need to create code that is reused across different models and notebooks, we encourage practitioners to save these in separate
+python files and keep in the notebooks only code that is specific to the registered model.</p>
+<p>Notebooks can be either directly created or imported from notebooks outside of the project workspace. It is also possible to duplicate a
+notebook from an existing one. During model registration, the registration process will also ask for the corresponding test dataset,
+which will then be used to score the model. All test datasets that have been used in at least one registered model can also be used to create
+cohorts later on.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/model_registration.gif"><img alt="Responsible AI Tracker" src="_images/model_registration.gif" style="width: 689.6px; height: 432.0px;" /></a>
+</figure>
 </section>
 
 

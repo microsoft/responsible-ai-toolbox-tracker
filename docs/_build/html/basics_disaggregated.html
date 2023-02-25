@@ -90,9 +90,9 @@
               
             
             
-              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Stared</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install_guide.html">Installation Guide</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Basics of Disaggregated Analysis</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#responsible-ai-tracker-for-disaggregated-model-analysis-and-comparison">Responsible AI Tracker for disaggregated model analysis and comparison</a></li>
@@ -102,6 +102,7 @@
 <li class="toctree-l1"><a class="reference internal" href="tour.html">Tour</a></li>
 <li class="toctree-l1"><a class="reference internal" href="frequently_asked.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="known_issues.html">Known Issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="get_involved.html">Get Involved</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
 <ul>
@@ -110,8 +111,8 @@
 <li class="toctree-l1"><a class="reference internal" href="cohort_management.html">Cohort Management</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating_mitigations.html">Creating Mitigations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="model_comparison.html">Model Comparison</a></li>
-<li class="toctree-l1"><a class="reference internal" href="integration_MLFlow.html">Integration With MLFlow</a></li>
-<li class="toctree-l1"><a class="reference internal" href="metric_support.html">Metric_Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integration_mlflow.html">Integration with MLFlow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metric_support.html">Metric Support</a></li>
 </ul>
 
             
@@ -218,7 +219,25 @@ and maintain user trust.</p>
 <p>Envisioning and testing for what-if scenarios, like “What happens to the accuracy of the recognition model in a self-driving car when
 it is dark and snowing outside?” or “Does the loan approval model perform equally across ally ethnicity, gender, age, and education cohorts?”
 are essential for understanding how models may fail and informing decisions about what mitigations work best.</p>
-</section>
+<p><strong>Responsible AI Tracker helps you compare models</strong> by showing performance metrics of your choosing for different data cohorts.
+You can do a 1:1 comparison for the same cohort across different models, tracking how different mitigation steps affect the given cohort.
+You can also easily create, manage, and compare cohorts of interest all within Responsible AI Tracker’s interface.</p>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="_images/model_analysis.png"><img alt="Responsible AI Tracker" src="_images/model_analysis.png" style="width: 624.0px; height: 201.0px;" /></a>
+<figcaption>
+<p><span class="caption-text">Figure - Disaggregated model analysis moves away from aggregate accuracy metrics, exposes the distribution of errors to developers in a
+transparent way, and enables them to identify &amp; diagnose errors efficiently.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id2">
+<a class="reference internal image-reference" href="_images/baseline.png"><img alt="Responsible AI Tracker" src="_images/baseline.png" style="width: 858.0px; height: 279.59999999999997px;" /></a>
+<figcaption>
+<p><span class="caption-text">Figure - Even during updates or mitigation actions, it is not guaranteed that the model improves on all examples. In fact,
+model accuracy may drop for some of the data cohorts leading to backward incompatibility issues. The phenomenon then requires careful model comparison
+for practitioners to be able to select the best model for deployment in an informed manner.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/NYXRrLzGiFk" frameborder="0" allowfullscreen></iframe></section>
 </section>
 
 

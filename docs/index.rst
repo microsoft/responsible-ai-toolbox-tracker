@@ -2,9 +2,20 @@ Responsible AI Tracker
 =======================
 
 
-Responsible AI Tracker, a part of the `Responsible AI Toolbox`_, is a JupyterLab extension for managing, tracking, and comparing results of experiments for improving machine learning (ML) models. The goal of responsible AI is to create trustworthy AI systems that benefit people while mitigating harms, which can occur when AI systems fail to perform with fair, reliable, or safe outputs for various stakeholders. The Responsible AI Tracker is an extension that enables AI practitioners to view models, code, and visualization artifacts all within the same interface, facilitating disaggregated model evaluation and comparison, as well as fast model iteration.  
+Responsible AI Tracker, a part of the `Responsible AI Toolbox`_, is a JupyterLab extension for managing, tracking, and comparing results of 
+experiments for improving machine learning (ML) models. The goal of responsible AI is to create trustworthy AI systems that benefit people 
+while mitigating harms, which can occur when AI systems fail to perform with fair, reliable, or safe outputs for various stakeholders. 
+The Responsible AI Tracker is an extension that enables AI practitioners to view models, code, and visualization artifacts all within the same interface, facilitating disaggregated model evaluation and comparison, as well as fast model iteration.  
 
 .. _Responsible AI Toolbox: https://responsibleaitoolbox.ai/
+
+.. figure:: /imgs/Responsible_AI_Tracker.png
+  :scale: 18%
+  :alt: Responsible AI Tracker
+
+  Figure - Responsible AI Tracker brings together several artifacts needed for data science and machine learning practice: code, models, and 
+  comparative visualizations. 
+
 
 TODO: Include a representative screenshot of the extension 
 
