@@ -17,7 +17,7 @@ The Responsible AI Tracker is an extension that enables AI practitioners to view
   comparative visualizations. 
 
 
-TODO: Include a representative screenshot of the extension 
+Include a representative screenshot of the extension 
 
 You can use Responsible AI Tracker to: 
 --------------------------------------
