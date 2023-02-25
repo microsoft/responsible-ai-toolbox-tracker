@@ -92,7 +92,7 @@
             
               <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Stared</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install_guide.html">Installation Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basics_disaggregated.html">Basics of Disaggregated Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="how.html">How This Extension Works With Responsible AI Toolbox</a></li>
@@ -108,8 +108,8 @@
 <li class="toctree-l1"><a class="reference internal" href="cohort_management.html">Cohort Management</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Creating Mitigations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="model_comparison.html">Model Comparison</a></li>
-<li class="toctree-l1"><a class="reference internal" href="integration_MLFlow.html">Integration With MLFlow</a></li>
-<li class="toctree-l1"><a class="reference internal" href="metric_support.html">Metric_Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integration_mlflow.html">Integration with MLFlow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metric_support.html">Metric Support</a></li>
 </ul>
 
             
@@ -208,7 +208,9 @@
 <p>Each new notebook created in the project should ideally correspond to a mitigation attempt or experiment that is different from previous experiments. Mitigation experiments may involve data improvements, changes in the model class or architecture, changes in the loss function, hyperparameter selection, or changes in the optimization process (e.g., regularization, choice of optimization algorithms and methods).</p>
 <p>Tracking notebooks and registering models to notebooks accordingly enables tracking (in code) which types of mitigations have been applied in different mitigation experiments.</p>
 <p>The lightbulb button in the notebook menu will give you some initial ideas to explore on mitigation techniques from the <a class="reference external" href="https://github.com/microsoft/responsible-ai-toolbox-mitigations">Responsible AI Mitigations library</a>. Some notable mitigation examples from raimitigation include data balancing and synthesis, feature engineering, missing value imputation. Most importantly, the library also simplifies the process of programmatically applying different data mitigation steps to different cohorts, in cases when the underlying issues for model errors are specific to those cohorts.</p>
-<p>TODO gif with creating a new notebook and using the lightbulb button and explore the different mitigations.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/mitigation_ideas.gif"><img alt="Responsible AI Tracker" src="_images/mitigation_ideas.gif" style="width: 862.0px; height: 540.0px;" /></a>
+</figure>
 </section>
 
 

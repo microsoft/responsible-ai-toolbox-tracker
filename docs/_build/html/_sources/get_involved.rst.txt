@@ -9,4 +9,4 @@ feel free to send us an email at `rai-toolbox@microsoft.com`_ using “Responsib
 .. _Github issue: https://github.com/microsoft/responsible-ai-toolbox-tracker/labels/enhancement
 .. _rai-toolbox@microsoft.com: 
 
-For any code contributions, please make sure you read our contributing guidelines. TODO Dany and ThuVan 
+For any code contributions, please make sure you read our contributing guidelines. 

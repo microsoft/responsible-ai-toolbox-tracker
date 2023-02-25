@@ -22,17 +22,33 @@ The RAI Tracker prerequisites:
 
 **JupyterLab**
 
-  * The default installation only installs the essential packages.
+  * If you use pip:
+
+  ..  code-block:: console
+
+      > pip install jupyterlab==3.6.1
+  
+  * If you use conda:
+ 
+  ..  code-block:: console
+
+      > conda install -c conda-forge jupyterlab==3.6.1
+
+
+The Responsible AI Tracker has two installation options:
+########################################################
+  
+The default installation only installs the essential packages.
 
   .. code-block:: console
 
-      > pip install raitracker-0.1.0-py3-none-any.whl
+      > pip install raitracker
 
-  * The installation With the [all] flag installs the essential packages plus PyTorch, and Tensorflow.
+The installation With the [all] flag installs the essential packages plus PyTorch, and Tensorflow.
 
    .. code-block:: console
 
-      > pip install raitracker-0.1.0-py3-none-any.whl[all]
+      > pip install raitracker[all]
 
 
 Running:

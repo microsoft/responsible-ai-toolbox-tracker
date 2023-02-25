@@ -90,15 +90,16 @@
               
             
             
-              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Stared</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install_guide.html">Installation Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basics_disaggregated.html">Basics of Disaggregated Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="how.html">How This Extension Works With Responsible AI Toolbox</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tour.html">Tour</a></li>
 <li class="toctree-l1"><a class="reference internal" href="frequently_asked.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="known_issues.html">Known Issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="get_involved.html">Get Involved</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
 <ul class="current">
@@ -107,8 +108,8 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Cohort Management</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating_mitigations.html">Creating Mitigations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="model_comparison.html">Model Comparison</a></li>
-<li class="toctree-l1"><a class="reference internal" href="integration_MLFlow.html">Integration With MLFlow</a></li>
-<li class="toctree-l1"><a class="reference internal" href="metric_support.html">Metric_Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integration_mlflow.html">Integration with MLFlow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metric_support.html">Metric Support</a></li>
 </ul>
 
             
@@ -204,8 +205,15 @@
 </style>
 <section id="cohort-management">
 <span id="id1"></span><h1>Cohort Management<a class="headerlink" href="#cohort-management" title="Permalink to this heading">¶</a></h1>
-<p>Cohorts can be directly created, managed, or deleted through the cohort management interface. A cohort can be created from any overall test dataset. Creating a cohort from a test dataset entails adding filters to the test dataset. All added filters are then combined together through conjunctions (AND operators). The interface does not currently support disjunctions of filters (OR operators).</p>
-<p>Upon cohort creation, all models that have been registered using the given test dataset will then also be scored on the newly created cohort. This will result in creating a new row in the model comparison table for each affected model, displaying performance metrics of the model on the new cohort.</p>
+<p>Cohorts can be directly created, managed, or deleted through the cohort management interface. A cohort can be created from any overall test
+dataset. Creating a cohort from a test dataset entails adding filters to the test dataset. All added filters are then combined together through
+conjunctions (AND operators). The interface does not currently support disjunctions of filters (OR operators).</p>
+<p>Upon cohort creation, all models that have been registered using the given test dataset will then also be scored on the newly created cohort.
+This will result in creating a new row in the model comparison table for each affected model, displaying performance metrics of the model on
+the new cohort.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/cohort_creation.gif"><img alt="Responsible AI Tracker" src="_images/cohort_creation.gif" style="width: 862.0px; height: 540.0px;" /></a>
+</figure>
 </section>
 
 

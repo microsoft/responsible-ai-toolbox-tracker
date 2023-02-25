@@ -1,6 +1,6 @@
 .. _metric_support:
 
-Metric_Support
+Metric Support
 ==============
 
 Responsible AI Tracker reports the following metrics depending on the prediction problem: 
@@ -24,6 +24,3 @@ Responsible AI Tracker reports the following metrics depending on the prediction
 .. _mean absolute error: https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_absolute_error.html#sklearn.metrics.mean_absolute_error
 .. _r-squared: https://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html#sklearn.metrics.r2_score
 
-TODO: add link above to the library we are using to compute these metrics specifically. In this case sklearn. 
-
-TODO: add note here to describe whether we are taking a macro vs micro approach on computing metrics.
