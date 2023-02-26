@@ -6,7 +6,7 @@ on:
     inputs:
       releaseType:
         type: choice
-        description: "Test or Prod PyPi"
+        description: "Test or Production PyPi"
         options:
           - Test
           - Production
@@ -29,9 +29,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check Parameters
-        if: ${{ (github.event.inputs.bumpType != 'none') && (github.event.inputs.releaseType == 'Prod') }}
+        if: ${{ (github.event.inputs.bumpType != 'none') && (github.event.inputs.releaseType == 'Production') }}
         run: |
-            echo "If releaseType == 'Prod', then bumpType must be 'none'. Bump the version and send it to test.pypi first. Only then send it to PyPi."
+            echo "If releaseType == 'Production', then bumpType must be 'none'. Bump the version and send it to test.pypi first. Only then send it to PyPi."
             exit 1
 
       # -------------------
@@ -127,7 +127,7 @@ jobs:
           repository_url: https://test.pypi.org/legacy/
       # ...an official pip package
       - name: Publish package to Pypi
-        if: ${{ github.event.inputs.releaseType == 'Prod'}}
+        if: ${{ github.event.inputs.releaseType == 'Production'}}
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           user: __token__
