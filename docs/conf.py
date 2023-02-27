@@ -31,9 +31,6 @@ extensions = [
                 "sphinx.ext.githubpages",
                 "sphinx_rtd_theme",
                 "nbsphinx",
-                "sphinx_gallery.load_style",
-                "sphinx.ext.graphviz",
-                "sphinx.ext.inheritance_diagram",
                 "sphinx.ext.mathjax"
             ]
 
