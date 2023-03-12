@@ -145,7 +145,7 @@ export const CreateCohort: React.FunctionComponent = () => {
     */
     const onCohortNameChange = (event: any) => {
         if (event.target.value !== '') {
-            setCohortName(event.target.value.trim());
+            setCohortName(event.target.value);
             setCohortNameError('');
         }
     }
@@ -212,7 +212,11 @@ export const CreateCohort: React.FunctionComponent = () => {
         setSelectedDatasetFilterError('');
 
         for (let key of Object.keys(selectedDataset.featuresValues)) {
-            let fValues = selectedDataset.featuresValues[key];
+            // let fValues = selectedDataset.featuresValues[key];
+            
+            // notebook.metrics.forEach(obj => notebookMetricsArr.push(Object.assign({}, obj)));
+            let fValues = JSON.parse(JSON.stringify( selectedDataset.featuresValues[key]));
+            
             if (option.text === fValues.name) {
                 let tmpList: IDropdownOption[] = [];
                 /**
@@ -365,7 +369,7 @@ export const CreateCohort: React.FunctionComponent = () => {
             //  
             cohortFilter.args = selectedCategoricalValues.map(function (item) {
                 if (notNumeric(item)) {
-                    return item.trim();
+                    return item;
                 } else {
                     return Number(item);
                 }
@@ -587,7 +591,7 @@ export const CreateCohort: React.FunctionComponent = () => {
         let ent = {} as IDatasetType;
         let dateTime = new Date();
         ent.key = UUID.UUID();
-        ent.name = cohortName.trim();
+        ent.name = cohortName;
         ent.isCohort = true;
         ent.masterKey = selectedDatasetOption?.key;
         ent.masterName = selectedDatasetOption?.text;

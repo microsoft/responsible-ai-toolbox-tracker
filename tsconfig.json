@@ -24,7 +24,7 @@
     "outDir": "dist",
     "rootDir": "src",
     "strictNullChecks": false,
-    "target": "es2018",
+    "target": "ES2017",
     "types": [
       "node"
     ],

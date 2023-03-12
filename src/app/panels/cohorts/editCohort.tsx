@@ -144,7 +144,7 @@ export const EditCohort: React.FunctionComponent = () => {
     */
     const onCohortNameChange = event => {
         if (event.target.value !== '') {
-            setCohortName(event.target.value.trim());
+            setCohortName(event.target.value);
             setBtnSaveCohortDisabled(false);
             setCohortNameError('');
         }
@@ -209,7 +209,11 @@ export const EditCohort: React.FunctionComponent = () => {
         setSelectedCategoricalValues([]);
         setSelectedDatasetFilterError('');
         for (let key of Object.keys(selectedDataset.featuresValues)) {
-            let fValues = selectedDataset.featuresValues[key];
+            
+            // let fValues = selectedDataset.featuresValues[key];
+            
+            // notebook.metrics.forEach(obj => notebookMetricsArr.push(Object.assign({}, obj)));
+            let fValues = JSON.parse(JSON.stringify( selectedDataset.featuresValues[key]));
             if (option.text === fValues.name) {
                 let tmpList: IDropdownOption[] = [];
                 /**
@@ -362,7 +366,7 @@ export const EditCohort: React.FunctionComponent = () => {
             //  
             cohortFilter.args = selectedCategoricalValues.map(function (item) {
                 if (notNumeric(item)) {
-                    return item.trim();
+                    return item;
                 } else {
                     return Number(item);
                 }
@@ -569,7 +573,7 @@ export const EditCohort: React.FunctionComponent = () => {
     /**
      * record count could still generates exceptions even if it is not zero. 
      * It depends on the backend ML algorithm that is processing the request.
-     * We opted to stop processing the request if the count is equals to zero,
+     * We opted to stop processing the request if the count is less than 6,
      *  and let the backend throw an error for the other cases.
      * @param count 
      */
@@ -641,7 +645,7 @@ export const EditCohort: React.FunctionComponent = () => {
         let ent = {} as IDatasetType;
         let dateTime = new Date();
         ent.key = selectedDataset.key;
-        ent.name = cohortName.trim();;
+        ent.name = cohortName;;
         ent.isCohort = true;
         ent.masterKey = selectedDatasetOption?.key;
         ent.masterName = selectedDatasetOption?.text;
@@ -651,11 +655,11 @@ export const EditCohort: React.FunctionComponent = () => {
         ent.mlPlatform = selectedDataset.mlPlatform;
         ent.mlFlowRunId = selectedDataset.mlFlowRunId;
         ent.features = selectedDataset.features;
-        ent.featuresValues = selectedDataset.featuresValues;
+        ent.featuresValues = inEditCohort?.featuresValues;
         ent.header = selectedDataset.header;
         ent.separator = selectedDataset.separator;
         ent.filterValuesList = filterValuesList;
-        ent.dataMatrix = selectedDataset.dataMatrix;
+        ent.dataMatrix = dataMatrix;
         ent.dateCreated = selectedDataset.dateCreated;
         ent.lastUpdated = dateTime.toLocaleDateString();
         let transformedCohort = applyFilters(ent, dataMatrix);
@@ -681,7 +685,6 @@ export const EditCohort: React.FunctionComponent = () => {
                         // dispatch({ type: 'COHORT_EDIT_PANEL_STATE', payload: false });
                         // throw error;
                     });
-
             } else {
                 // rollBackUpdateCohort(ent.key);
                 console.log('Update cohort model Registration failed');
@@ -753,8 +756,6 @@ export const EditCohort: React.FunctionComponent = () => {
                     */
                     try {
                         updateCohort(_utils);
-                        state['inEditCohort'] = undefined;
-                        inEditCohort = undefined;
                         dispatch({ type: 'FILTER_VALUES_LIST', payload: filterValuesList });
                     } catch (error) {
                         console.log("Failed to register a model for this: " + error);
@@ -786,6 +787,8 @@ export const EditCohort: React.FunctionComponent = () => {
         setBtnSaveCohortDisabled(true);
         setCohortRegistrationFailedHidden(true);
         setCohortRegistrationFailed('');
+        state['inEditCohort'] = undefined;
+        inEditCohort = undefined;
         dispatch({ type: 'COHORT_EDIT_PANEL_STATE', payload: false });
     }
 

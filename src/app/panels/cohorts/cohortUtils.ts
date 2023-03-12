@@ -129,7 +129,7 @@ export const buildDataMatrix = (cohort: IDatasetType, headers: boolean): any[][]
     let start = 0;
     if (headers) {
         for (let i in cohort.featuresValues) {
-            arr.push(cohort.featuresValues[i].name.trim())
+            arr.push(cohort.featuresValues[i].name)
         }
         dataMatrix[0] = arr;
         arr = [];
