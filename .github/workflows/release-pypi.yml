@@ -1,4 +1,4 @@
-name: Release raitracker to PyPi
+name: Publish raitracker to PyPi
 
 # trigger manually ("collaborator" or above permissions should be required)
 on:
@@ -49,6 +49,7 @@ jobs:
 
       # -------------------
       # Install basic packages (not associated with the repo)
+      
       - name: update and upgrade pip, semver
         run: |
           pip install --upgrade pip
@@ -98,7 +99,7 @@ jobs:
 
       # -------------------
       # Compile typescript code
-      - name: Compile tracker client
+      - name: Compile raitracker
         run: npm run build
 
       # -------------------

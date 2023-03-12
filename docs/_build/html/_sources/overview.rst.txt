@@ -1,5 +1,0 @@
-.. _overview:
-
-Responsible AI Tracker
-======================
-

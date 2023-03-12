@@ -214,7 +214,7 @@ export const ModelRegistration = () => {
                 datasetEntity.recordsCount = recordsCount;
                 setDatasetEntity(datasetEntity);
             }
-            fileReader.readAsText(dataset);
+            fileReader.readAsText(dataset, 'utf8');
         }
     }
     /**

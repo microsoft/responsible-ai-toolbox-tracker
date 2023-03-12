@@ -3,18 +3,17 @@
     "version": "0.1.1",
     "description": "Responsible AI Toolbox Tracker",
     "keywords": [
+        "responsible ai tracker",
         "responsible ai",
         "rai",
-        "responsible ai errors mitigation",
-        "jupyter",
         "jupyterlab",
         "jupyterlab-extension"
     ],
-    "homepage": "https://dev.azure.com/msresearch/MLMitigationWorkflows/_git/ErrorsMitigationClient",
+    "homepage": "https://github.com/microsoft/responsible-ai-toolbox-tracker",
     "bugs": {
-        "url": "https://dev.azure.com/msresearch/MLMitigationWorkflows/_git/ErrorsMitigationClient/issues"
+        "url": "https://github.com/microsoft/responsible-ai-toolbox-tracker/issues"
     },
-    "license": "BSD-3-Clause",
+    "license": "MIT license",
     "author": {
         "name": "Besmira Nushi, Rahee Ghosh Peshawaria, Jingya Chen, ThuVan Pham, Marah Abdin, Irina Spiridonova, Ece Kamar, Matheus Mendonca, Mark Encarnacion, Dany Rouhana",
         "email": "rai-toolbox@microsoft.com"
@@ -28,7 +27,7 @@
     "style": "style/index.css",
     "repository": {
         "type": "git",
-        "url": "https://github.com/microsoft/responsible-ai-toolbox-tracker"
+        "url": "https://github.com/microsoft/responsible-ai-toolbox-tracker.git"
     },
     "scripts": {
         "build": "tsc && jupyter lab build",
@@ -87,6 +86,7 @@
     "devDependencies": {
         "@babel/core": "^7.17.0",
         "@babel/preset-env": "^7.12.7",
+        "@jupyter/ydoc": "~0.2.2",
         "@types/lodash": "^4.14.180",
         "@types/react": "^17.0.53",
         "@types/react-dom": "^17.0.18",
