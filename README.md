@@ -128,7 +128,7 @@ Any use of third-party trademarks or logos are subject to those third-party's po
 
 ## Research and Acknowledgements
 
-**Current Maintainers:** [Dany Rouhana](https://github.com/danyrouh), [ThuVan Pham](https://www.microsoft.com/en-us/research/people/thuvanp/), [Matheus Mendonça](https://github.com/mrfmendonca), [Marah Abdin](https://github.com/marah-abdin), [Mark Encarnación](https://github.com/markenc)
+**Current Maintainers:** [Dany Rouhana](https://github.com/danyrouh), [ThuVan Pham](https://www.microsoft.com/en-us/research/people/thuvanp/), [Matheus Mendonça](https://github.com/mrfmendonca),[Besmira Nushi](https://github.com/nushib), [Rahee Ghosh Peshawaria](https://github.com/raghoshMSFT), [Marah Abdin](https://github.com/marah-abdin), [Mark Encarnación](https://github.com/markenc)
 
 **Past Maintainers:** [Irina Spiridonova](https://github.com/irinasp)
 
