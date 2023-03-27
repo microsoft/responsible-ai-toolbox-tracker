@@ -46,8 +46,11 @@ jobs:
           node-version: 18.12.x
           cache: npm
 
+      # -------------------
+      # Install the client packages
       - name: Install packages
         run: npm install
+
       # -------------------
       # Compile typescript code
       - name: Compile raitracker

@@ -117,6 +117,6 @@ export const MainMenu: React.FunctionComponent = () => {
             { key: 'trackerHelp', text: 'Help', disabled: disabledMenuItem, href: 'https://responsible-ai-toolbox-tracker.readthedocs.io/en/latest/', target: '_blank' },
         ],
     });
-    return <IconButton tabIndex={1} title='Responsible AI Tracker' name='mainMenuIcon' className='IconButtonStyle' menuIconProps={{ iconName: "GlobalNavButton" }} menuProps={menuProps} />
+    return <IconButton title='Responsible AI Tracker' name='mainMenuIcon' className='IconButtonStyle' menuIconProps={{ iconName: "GlobalNavButton" }} menuProps={menuProps} />
 };
 export const ContextualMenuMIF = () => <MainMenu />;

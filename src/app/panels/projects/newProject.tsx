@@ -31,13 +31,13 @@ export const NewProject: React.FunctionComponent = () => {
         <tbody>
           <tr>
             <td>
-              <PrimaryButton tabIndex={1} iconProps={newFolderIcon} onClick={openNewProject} className="btnNewProject" text="Create a New project" />
+              <PrimaryButton iconProps={newFolderIcon} onClick={openNewProject} className="btnNewProject" text="Create a New project" />
             </td>
           </tr>
           <tr>
             <td>
               <div hidden={projectsHidden}>
-                <PrimaryButton tabIndex={2} iconProps={fabricFolder} onClick={switchProject} className="btnNewProject" text="Open a project" />
+                <PrimaryButton iconProps={fabricFolder} onClick={switchProject} className="btnNewProject" text="Open a project" />
               </div>
             </td>
           </tr>

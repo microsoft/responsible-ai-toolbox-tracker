@@ -51,7 +51,7 @@ export const OpenProject: React.FunctionComponent = () => {
                 dialogContentProps={dialogContentProps}
                 modalProps={modalProps}
             >
-                <div tabIndex={0} className='scrollableList'>
+                <div className='scrollableList'>
                     <ProjectList />
                 </div>
                 <DialogFooter>

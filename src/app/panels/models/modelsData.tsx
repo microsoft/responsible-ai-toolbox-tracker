@@ -411,7 +411,6 @@ export const ModelsData: React.FunctionComponent = () => {
                   options={notebookOptions}
                   styles={dropdownStyles}
                   onChange={updateModels}
-                  tabIndex={10}
                 />
               </td>
               <td>
@@ -424,7 +423,6 @@ export const ModelsData: React.FunctionComponent = () => {
                   options={metricHeaders}
                   styles={dropdownStyles}
                   onChange={updateMetrics}
-                  tabIndex={11}
                 />
               </td>
               <td>
@@ -438,12 +436,11 @@ export const ModelsData: React.FunctionComponent = () => {
                   onRenderOption={onRenderCohortOptions}
                   styles={dropdownStyles}
                   onChange={updateCohorts}
-                  tabIndex={12}
                 />
               </td>
               <td>
                 <TooltipHost content='Cohorts settings' id='tooltipCohortsSettings' styles={hostStyles}>
-                  <a tabIndex={13} onClick={openCohortPanel} className="cohortsSettingsLink" >
+                  <a tabIndex={0} onKeyPress={openCohortPanel} onClick={openCohortPanel} className="cohortsSettingsLink" >
                     <FontIcon aria-label="Cohorts Settings" iconName="Settings" className="cohortsSettingsIcon" />
                   </a>
                 </TooltipHost>
@@ -460,11 +457,10 @@ export const ModelsData: React.FunctionComponent = () => {
                       inlineLabel
                       onChange={onToggleChange}
                       role="checkbox"
-                      tabIndex={14}
                     />
                   </Stack.Item>
-                  <Stack.Item align="baseline" >
-                    <ChoiceGroup tabIndex={15} styles={choiceGroupStyles} title="Select between absolute and comparative view" selectedKey={selectedKeyChoice} options={choiceOptions} onChange={onChoicesChange} />
+                  <Stack.Item align="baseline">
+                    <ChoiceGroup styles={choiceGroupStyles} title="Select between absolute and comparative view" selectedKey={selectedKeyChoice} options={choiceOptions} onChange={onChoicesChange} />
                   </Stack.Item>
                 </Stack>
               </td>
@@ -472,12 +468,12 @@ export const ModelsData: React.FunctionComponent = () => {
             </tr>
           </tbody>
         </table>
-        <div key='absoluteView' hidden={absoluteHidden}>
+        <div key='absoluteView' hidden={absoluteHidden} tabIndex={0}>
           <Absolute
             children={modelsStatsList}
           />
         </div>
-        <div key='comparativeView' hidden={comparativeHidden}>
+        <div key='comparativeView' hidden={comparativeHidden} tabIndex={0}>
           <Comparative
             children={modelsStatsList}
           />

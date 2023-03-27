@@ -13,7 +13,7 @@
     "bugs": {
         "url": "https://github.com/microsoft/responsible-ai-toolbox-tracker/issues"
     },
-    "license": "MIT license",
+    "license": "MIT",
     "author": {
         "name": "Besmira Nushi, Rahee Ghosh Peshawaria, Jingya Chen, ThuVan Pham, Marah Abdin, Irina Spiridonova, Ece Kamar, Matheus Mendonca, Mark Encarnacion, Dany Rouhana",
         "email": "rai-toolbox@microsoft.com"
