@@ -132,4 +132,4 @@ Any use of third-party trademarks or logos are subject to those third-party's po
 
 **Past Maintainers:** [Irina Spiridonova](https://github.com/irinasp)
 
-**Research Contributors:** [Besmira Nushi](https://github.com/nushib), [Dany Rouhana](https://github.com/danyrouh), [ThuVan Pham](https://www.microsoft.com/en-us/research/people/thuvanp/), [Jingya Chen](https://www.jingyachen.net/), [Rahee Ghosh Peshawaria](https://github.com/raghoshMSFT), [Ece Kamar](https://www.ecekamar.com/)
+**Research Contributors:** [Besmira Nushi](https://github.com/nushib), [Jingya Chen](https://www.jingyachen.net/), [Rahee Ghosh Peshawaria](https://github.com/raghoshMSFT), [ThuVan Pham](https://www.microsoft.com/en-us/research/people/thuvanp/), [Ece Kamar](https://www.ecekamar.com/), [Dany Rouhana](https://github.com/danyrouh)
