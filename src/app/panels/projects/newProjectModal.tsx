@@ -495,7 +495,6 @@ export const NewProjectModal: React.FunctionComponent = () => {
                         <div className='modalFluentHeader'>
                             <Label className='modalLabelHeader'>Create a New Project</Label>
                             <IconButton
-                                tabIndex={0}
                                 className='iconButtonStyles'
                                 iconProps={cancelIcon}
                                 label="Close popup modal"

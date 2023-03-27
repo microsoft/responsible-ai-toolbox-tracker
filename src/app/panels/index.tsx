@@ -18,6 +18,7 @@ import { NewProject, ActiveProject } from './projects';
 export const PanelContainer: React.FunctionComponent = () => {
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
+
   const compareModels = () => {
     state['openCompareModels']();
     let projectSettings = state["projectSettings"];
@@ -29,13 +30,14 @@ export const PanelContainer: React.FunctionComponent = () => {
     const _utils = new Utils();
     _utils.UpdateBaseProjectSettings(projectSettings);
   }
+  
   const hostStyles: Partial<ITooltipHostStyles> = {
     root: { display: 'inline-block', alignContent: 'left', verticalAlign: 'center' }
   };
   const tooltipCompareModelsBtn = 'tooltipCompareModelsBtn';
   return (
     <>
-      <Stack grow tabIndex={-1}>
+      <Stack grow >
         <Stack.Item
           verticalFill
           styles={{
@@ -46,7 +48,7 @@ export const PanelContainer: React.FunctionComponent = () => {
             },
           }}
         >
-          <div className="ScrollablePaneWrapper">
+          <div className="ScrollablePaneWrapper" >
             <ScrollablePane scrollbarVisibility={ScrollbarVisibility.auto}>
               <div>
                 <table className='raiPanel'>
@@ -82,7 +84,7 @@ export const PanelContainer: React.FunctionComponent = () => {
             <Stack.Item align="center" className="stickyFooter">
               {
                 state['projectSettings']['enableCompareModelBtn'] ? (
-                  <PrimaryButton tabIndex={9} onClick={compareModels} className="btnCompareModels" text="Compare models" />
+                  <PrimaryButton onClick={compareModels} className="btnCompareModels" text="Compare models" />
                 ) : (
 
                   <TooltipHost content='Register two or more models to enable the compare models feature.' id={tooltipCompareModelsBtn} styles={hostStyles}>
@@ -96,7 +98,7 @@ export const PanelContainer: React.FunctionComponent = () => {
             <></>
           )
         }
-      </Stack >
+      </Stack>
     </>
   );
 }

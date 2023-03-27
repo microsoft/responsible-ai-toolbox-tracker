@@ -116,33 +116,33 @@ export const ActiveProjectData: React.FunctionComponent = (props) => {
         // passive: true
     });
 
-    function _shouldEnterInnerZone(ev: React.KeyboardEvent<HTMLElement>): boolean {
-        // eslint-disable-next-line deprecation/deprecation
-        return ev.which === getRTLSafeKeyCode(KeyCodes.right);
-    }
+    // function _shouldEnterInnerZone(ev: React.KeyboardEvent<HTMLElement>): boolean {
+    //     // eslint-disable-next-line deprecation/deprecation
+    //     return ev.which === getRTLSafeKeyCode(KeyCodes.right);
+    // }
     return (
-        <div className="marginLeft">
+        <div className="marginLeft" >
             <table className="ActiveProjectTitle">
-                <thead>
+                <tbody>
                     <tr>
-                        <th id='propCol1'><folderIcon.react tag="div" className='projectIcon' /></th>
-                        <th id='propCol2'><Label className='labelSubTextHeader'>{projectName}</Label></th>
-                        <th id='propCol3'>
+                        <td id='propCol1'><folderIcon.react tag="div" className='projectIcon' /></td>
+                        <td id='propCol2'><Label className='labelSubTextHeader'>{projectName}</Label></td>
+                        <td id='propCol3'>
                             <TooltipHost content='Project Settings' id={tooltipProjectSettings} styles={hostStyles}>
-                                <a tabIndex={1} onClick={openProjectSettings} className="projectSettingsLinkStyle" id='projectSettingsLink' >
+                                <a tabIndex={0} onKeyPress={openProjectSettings} onClick={openProjectSettings} className="projectSettingsLinkStyle" id='projectSettingsLink' >
                                     <FontIcon aria-label="Project Settings" iconName="Settings" className="projectSettingsIcon" />
                                 </a>
                             </TooltipHost>
-                        </th>
+                        </td>
                     </tr>
-                </thead>
+                </tbody>
             </table>
-            <table tabIndex={-1} className='dataTable'>
-                <thead>
+            <table className='dataTable'>
+                <tbody>
                     <tr>
-                        <th colSpan={2} className="NotebookTableHeader">
+                        <td colSpan={2} className="NotebookTableHeader">
                             <Label className='dataTableHeader'>
-                                <span tabIndex={2} className='spanTableHeader' onClick={() => sortItems('notebook')}>
+                                <span className='spanTableHeader' onClick={() => sortItems('notebook')}>
                                     <TooltipHost content='Sort by notebook name' id={tooltipHeader1Id} styles={hostStyles}>
                                         Notebook
                                     </TooltipHost>
@@ -156,10 +156,10 @@ export const ActiveProjectData: React.FunctionComponent = (props) => {
                                     }
                                 </span>
                             </Label>
-                        </th>
-                        <th className="ModelTableColumn">
+                        </td>
+                        <td className="ModelTableColumn">
                             <Label className='dataTableHeader'>
-                                <span tabIndex={3} className='spanTableHeader'
+                                <span className='spanTableHeader'
                                     onClick={() => sortItems('model')}>
                                     <TooltipHost content='Sort by model registration' id={tooltipHeader2Id} styles={hostStyles}>
                                         &nbsp;Model
@@ -174,10 +174,10 @@ export const ActiveProjectData: React.FunctionComponent = (props) => {
                                     }
                                 </span>
                             </Label>
-                        </th>
-                        <th className="AccuracyTableColumn">
+                        </td>
+                        <td className="AccuracyTableColumn">
                             <Label className='dataTableHeader'>
-                                <span tabIndex={4} className='spanTableHeader'
+                                <span className='spanTableHeader'
                                     onClick={() => sortItems('accuracy')}>
                                     <TooltipHost content={`Sort by ` + majorMetric} id={tooltipHeader3Id} styles={hostStyles}>
                                         &nbsp;{majorMetric}
@@ -192,30 +192,30 @@ export const ActiveProjectData: React.FunctionComponent = (props) => {
                                     }
                                 </span>
                             </Label>
-                        </th>
+                        </td>
                     </tr>
-                </thead>
+                </tbody>
             </table>
-            <FocusZone direction={FocusZoneDirection.vertical}
+            {/* <FocusZone direction={FocusZoneDirection.vertical}
                 isCircularNavigation={true}
                 shouldEnterInnerZone={_shouldEnterInnerZone}
                 role="grid"
-            >
-                <table tabIndex={0} id='notebookTable' className='dataTableBody'>
-                    <tbody>
-                        {
-                            items.map((item) => (
-                                <tr tabIndex={0} key={item.id}>
-                                    <td className="notebookIcon"><notebookIcon.react tag="div" /></td>
-                                    <td tabIndex={0} className="NotebookTableColumn" >{item.notebook}</td>
-                                    <td tabIndex={0} className="ModelTableColumn">{item.model}</td>
-                                    <td className="AccuracyTableColumn">{item.accuracy}</td>
-                                </tr>
-                            ))
-                        }
-                    </tbody>
-                </table>
-            </FocusZone>
+            > */}
+            <table id='notebookTable' className='dataTableBody'>
+                <tbody>
+                    {
+                        items.map((item) => (
+                            <tr key={item.id}>
+                                <td className="notebookIcon"><notebookIcon.react tag="div" /></td>
+                                <td className="NotebookTableColumn" >{item.notebook}</td>
+                                <td className="ModelTableColumn">{item.model}</td>
+                                <td className="AccuracyTableColumn">{item.accuracy}</td>
+                            </tr>
+                        ))
+                    }
+                </tbody>
+            </table>
+            {/* </FocusZone> */}
         </div>
     );
 }

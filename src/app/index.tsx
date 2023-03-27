@@ -31,6 +31,7 @@ export class raiUI extends ReactWidget {
     this.title.icon = raiIcon;
     this.title.iconClass = 'RAI Tracker';
     this.title.caption = 'Responsible AI Tracker';
+    this.node.tabIndex = 0;
   }
   dispose() {
     if (this.isDisposed) {

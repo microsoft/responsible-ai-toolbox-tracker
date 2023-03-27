@@ -23,6 +23,7 @@ export class CompareModels extends ReactWidget {
         this.id = 'compare-models';
         this.title.label = 'Compare Models';
         this.title.closable = true;
+        this.node.tabIndex = 0;
     }
     dispose() {
         let projectSettings = this.store.getState().projectSettings;
