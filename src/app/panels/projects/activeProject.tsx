@@ -292,7 +292,7 @@ export const ActiveProject: React.FunctionComponent = () => {
                     for (let r in metrics[l].metrics) {
                         if (metrics[l].metrics[r].key.toLowerCase().includes(majorMetric.toLowerCase())) {
                             isValid = true;
-                            if (metrics[l].metrics[r].value > metricValue) {
+                            if(metrics[l].name === notebookList[i].testDataset){
                                 metricValue = metrics[l].metrics[r].value;
                             }
                         }
@@ -311,6 +311,9 @@ export const ActiveProject: React.FunctionComponent = () => {
                 notebookData.accuracy = _utils.trimDisplayMetric(metricValue, METRICS_ROUND_NUM).toString();
 
                 if (!isValid) {
+                    notebookData.accuracy = '-';
+                }
+                if(metricValue === -99){
                     notebookData.accuracy = '-';
                 }
             }
