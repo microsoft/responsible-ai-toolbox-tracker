@@ -290,7 +290,7 @@ export const ActiveProject: React.FunctionComponent = () => {
                 let metricValue = 0
                 for (let l in metrics) {
                     for (let r in metrics[l].metrics) {
-                        if (metrics[l].metrics[r].key.toLowerCase().includes(majorMetric.toLowerCase())) {
+                        if (metrics[l].metrics[r].key.toLowerCase()  === majorMetric.toLowerCase()) {
                             isValid = true;
                             if(metrics[l].name === notebookList[i].testDataset){
                                 metricValue = metrics[l].metrics[r].value;
