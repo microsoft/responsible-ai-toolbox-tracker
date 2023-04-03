@@ -267,32 +267,32 @@ export const CohortList: React.FunctionComponent = () => {
     */
     const _getAllCohorts = async (isList: boolean = true): Promise<any> => {
         let _utils = new Utils();
-        const response = await _utils.GetAllCohorts(datasets, projectName);
-        const allCohorts = await response;
+        const allCohorts = await _utils.GetAllCohorts(datasets, projectName);
 
         if (allCohorts) {
             cohortsList = [];
             for (let i in allCohorts) {
-                const ent = allCohorts[i];
+                const dataObj = allCohorts[i];
                 cohortsList.push({
-                    key: ent.key,
-                    name: ent.name,
-                    labelIndex: ent.labelIndex,
-                    label: ent.label,
-                    masterKey: ent.masterKey,
-                    masterName: ent.masterName,
-                    recordsCount: ent.recordsCount,
-                    filtersCount: ent.filterValuesList?.length,
-                    filterValuesList: ent.filterValuesList,
-                    featuresValues: ent.featuresValues,
-                    features: ent.features,
-                    separator: ent.separator,
-                    header: ent.header,
-                    registeredModel: ent.registeredModel,
-                    mlPlatform: ent.mlPlatform,
-                    mlFlowRunId: ent.mlFlowRunId,
-                    lastUpdated: ent.lastUpdated,
-                    iconName: 'https://static2.sharepointonline.com/files/fabric/assets/item-types/16/csv.svg'
+                    key: dataObj.key,
+                    name: dataObj.name,
+                    isCohort: dataObj.isCohort,
+                    masterKey: dataObj.masterKey,
+                    masterName: dataObj.masterName,
+                    labelIndex: dataObj.labelIndex,
+                    label: dataObj.label,
+                    registeredModel: dataObj.registeredModel,
+                    mlPlatform: dataObj.mlPlatform,
+                    mlFlowRunId: dataObj.mlFlowRunId,
+                    features: dataObj.features,
+                    featuresValues: dataObj.featuresValues,
+                    header: dataObj.header,
+                    separator: dataObj.separator,
+                    filterValuesList: dataObj.filterValuesList,
+                    dataMatrix: dataObj.dataMatrix,
+                    dateCreated: dataObj.dateCreated,
+                    lastUpdated: dataObj.lastUpdated,
+                    recordsCount: dataObj.recordsCount,
                 });
             }
         }

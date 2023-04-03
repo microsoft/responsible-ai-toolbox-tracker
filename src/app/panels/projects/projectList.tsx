@@ -151,7 +151,7 @@ export const ProjectList: React.FunctionComponent = (props) => {
                     <TooltipHost content='Select the project to delete'>
                         {
                             isProjectDelete === false ? (
-                                <Link tabIndex={0} onClick={openProject} id={item?.key} name={item?.name}>
+                                <Link onClick={openProject} id={item?.key} name={item?.name}>
                                     <Text variant={"medium"}>{item?.name}</Text>
                                 </Link>
                             ) : (

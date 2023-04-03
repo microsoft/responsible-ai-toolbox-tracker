@@ -48,11 +48,10 @@ export class Manager {
   private _serverUri: string;
   private resetColorsDefault: boolean;
   private heatmapColors: IColorValuesType;
-  public _initialState: ClientState;
+  public _initialState: ClientState;  
   private readonly closeNotebook: (
     paths: string[]
   ) => void;
-
   private readonly openNotebook: (
     path: string
   ) => NotebookPanel;

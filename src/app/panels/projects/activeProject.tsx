@@ -262,7 +262,7 @@ export const ActiveProject: React.FunctionComponent = () => {
             }
             notebookData.notebook =
                 <TooltipHost content={notebookList[i].name} id={tooltipId} calloutProps={calloutProps} styles={hostStyles}>
-                    <a tabIndex={1} onClick={openNotebook} className="openNotebookLink" id={notebookList[i].name}>
+                    <a tabIndex={0} onKeyPress={openNotebook} onClick={openNotebook} className="openNotebookLink" id={notebookList[i].name}>
                         {displayName}
                     </a>
                 </TooltipHost>
@@ -270,7 +270,7 @@ export const ActiveProject: React.FunctionComponent = () => {
                 notebookData.registeredModel = true;
                 notebookData.model =
                     <TooltipHost content='Edit your model registration' id={tooltip2Id} calloutProps={calloutProps} styles={hostStyles}>
-                        <a tabIndex={2} onClick={editModelRegistration} className="registerLink" id={`editModelRegistration_` + notebookList[i].key} >
+                        <a tabIndex={0}  onKeyPress={editModelRegistration} onClick={editModelRegistration} className="registerLink" id={`editModelRegistration_` + notebookList[i].key} >
                             <FontIcon aria-label="SkypeCircleCheck" iconName="SkypeCircleCheck" className="modelRegisteredIcon" />
                         </a>
                     </TooltipHost>
@@ -279,7 +279,7 @@ export const ActiveProject: React.FunctionComponent = () => {
                 notebookData.registeredModel = false;
                 notebookData.model =
                     <TooltipHost content='Register your model' id={tooltip2Id} calloutProps={calloutProps} styles={hostStyles}>
-                        <a tabIndex={3} onClick={registerModel} className="registerLink" id={`registerModel_` + notebookList[i].key}>
+                        <a tabIndex={0} onKeyPress={registerModel} onClick={registerModel} className="registerLink" id={`registerModel_` + notebookList[i].key}>
                             Register
                         </a>
                     </TooltipHost>
@@ -290,9 +290,9 @@ export const ActiveProject: React.FunctionComponent = () => {
                 let metricValue = 0
                 for (let l in metrics) {
                     for (let r in metrics[l].metrics) {
-                        if (metrics[l].metrics[r].key.toLowerCase().includes(majorMetric.toLowerCase())) {
+                        if (metrics[l].metrics[r].key.toLowerCase()  === majorMetric.toLowerCase()) {
                             isValid = true;
-                            if (metrics[l].metrics[r].value > metricValue) {
+                            if(metrics[l].name === notebookList[i].testDataset){
                                 metricValue = metrics[l].metrics[r].value;
                             }
                         }
@@ -313,6 +313,9 @@ export const ActiveProject: React.FunctionComponent = () => {
                 if (!isValid) {
                     notebookData.accuracy = '-';
                 }
+                if(metricValue === -99){
+                    notebookData.accuracy = '-';
+                }
             }
             else {
                 notebookData.accuracy = '-';
@@ -324,7 +327,7 @@ export const ActiveProject: React.FunctionComponent = () => {
     }
     let notebooks = notebooksData();
     return (
-        <>
+        <div>
             <ActiveProjectData children={notebooks} />
             <NewProjectModal />
             <ModelRegistration />
@@ -335,6 +338,6 @@ export const ActiveProject: React.FunctionComponent = () => {
             <DeleteNotebook children={notebookInfo} />
             <DeleteProject />
             <ConfirmDelete />
-        </>
+        </div>
     );
 }

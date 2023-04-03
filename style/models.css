@@ -38,6 +38,13 @@ table {
     background-color: white;
 }
 
+.text-wrap {
+    /* white-space: pre-wrap; */
+    display: block;
+    margin-bottom: -1em;
+    outline: red;
+}
+
 .lineSeparator {
     width: 100%;
     display: flex;

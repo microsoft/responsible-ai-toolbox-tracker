@@ -173,20 +173,20 @@ export class Utils {
             cohort.isCohort = dataObj.isCohort;
             cohort.masterKey = dataObj.masterKey;
             cohort.masterName = dataObj.masterName;
-            cohort.registeredModel = dataObj.registeredModel;
-            cohort.mlFlowRunId = dataObj.mlFlowRunId;
-            cohort.mlPlatform = dataObj.mlPlatform;
             cohort.labelIndex = dataObj.labelIndex;
             cohort.label = dataObj.label;
+            cohort.registeredModel = dataObj.registeredModel;
+            cohort.mlPlatform = dataObj.mlPlatform;
+            cohort.mlFlowRunId = dataObj.mlFlowRunId;
             cohort.features = dataObj.features;
-            cohort.separator = dataObj.separator;
-            cohort.header = dataObj.header;
             cohort.featuresValues = dataObj.featuresValues;
-            cohort.recordsCount = dataObj.recordsCount;
+            cohort.header = dataObj.header;
+            cohort.separator = dataObj.separator;
             cohort.filterValuesList = dataObj.filterValuesList;
             cohort.dataMatrix = dataObj.dataMatrix;
             cohort.dateCreated = dataObj.dateCreated;
             cohort.lastUpdated = dataObj.lastUpdated;
+            cohort.recordsCount = dataObj.recordsCount;
             cohorts.push(cohort);
             cohort = {} as IDatasetType;
         }
@@ -235,7 +235,7 @@ export class Utils {
             */
             const backupDir = PathExt.join(cohortsParentDir, 'backup');
             backupPath = PathExt.join(backupDir, datasetEntity.key) + '.json';
-            await this.docManager.services.contents.copy(cohortPath, backupDir);
+            await this.docManager.services.contents.copy(cohortPath, backupPath);
         }
         const cohortContentJson = JSON.stringify(datasetEntity, null, '\t');
         const type: Contents.ContentType = 'file';
@@ -268,7 +268,7 @@ export class Utils {
         const cohortPath = PathExt.join(cohortDir, cohortKey) + '.json';
         const backupPath = PathExt.join(cohortsParentDir, 'backup', cohortKey) + '.json';
         await this.deleteFile(cohortPath);
-        await this.docManager.services.contents.copy(backupPath, cohortDir);
+        await this.docManager.services.contents.copy(backupPath, cohortPath);
         await this.deleteBackupCohort(backupPath);
     }
     /**

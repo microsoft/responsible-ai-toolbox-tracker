@@ -1,4 +1,4 @@
-name: Release raitracker to PyPi
+name: Publish raitracker to PyPi
 
 # trigger manually ("collaborator" or above permissions should be required)
 on:
@@ -13,7 +13,7 @@ on:
         required: true
       bumpType:
         type: choice
-        description: "Part of version number to bump"
+        description: "Version options"
         options:
           - major
           - minor
@@ -49,6 +49,7 @@ jobs:
 
       # -------------------
       # Install basic packages (not associated with the repo)
+      
       - name: update and upgrade pip, semver
         run: |
           pip install --upgrade pip
@@ -93,12 +94,14 @@ jobs:
           node-version: 18.12.x
           cache: npm
 
-      - name: Install package software
+      # -------------------
+      # Install client packages
+      - name: Install client packages
         run: npm install
 
       # -------------------
       # Compile typescript code
-      - name: Compile tracker client
+      - name: Compile raitracker
         run: npm run build
 
       # -------------------
@@ -107,7 +110,7 @@ jobs:
         run: python -m build
 
       # -------------------
-      # Build wheel
+      # Cleanup artifacts
       - name: cleanup artifacts
         run: |
           cd dist/
@@ -125,6 +128,7 @@ jobs:
           user: __token__
           password: ${{ secrets.TEST_PYPI_API_TOKEN }}
           repository_url: https://test.pypi.org/legacy/
+
       # ...an official pip package
       - name: Publish package to Pypi
         if: ${{ github.event.inputs.releaseType == 'Production'}}

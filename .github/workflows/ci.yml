@@ -1,9 +1,9 @@
 name: CI
 on:
-  # push:
-  #   branches: [main]
-  # pull_request:
-  #   branches: [main]
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -20,7 +20,7 @@ jobs:
           fetch-depth: 0
         # otherwise fails to push refs to dest repo
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v3
         with:
           python-version: ${{ matrix.python-version }}
 
@@ -30,6 +30,15 @@ jobs:
           pip install .[dev]
 
       # -------------------
+      # Run tests for server code
+      - name: run tests
+        run: |
+          cd raitracker/training/src/
+          sh generate_models.sh
+          cd ../../..
+          pytest --cov=raitracker raitracker/test/.
+
+      # -------------------
       # Install node
       - name: Setup node
         uses: actions/setup-node@v3
@@ -37,13 +46,12 @@ jobs:
           node-version: 18.12.x
           cache: npm
 
-      - name: Install node packages
-        run: npm run build
+      # -------------------
+      # Install the client packages
+      - name: Install packages
+        run: npm install
 
       # -------------------
       # Compile typescript code
-      - name: Compile tracker client
+      - name: Compile raitracker
         run: npm run build
-
-      # - name: Run Tests
-      #   run: pytest

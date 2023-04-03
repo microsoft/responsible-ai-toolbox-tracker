@@ -76,7 +76,7 @@ export const DuplicateCohort: React.FunctionComponent = (props) => {
      */
     const onCohortNameChange = event => {
         if (event.target.value !== '') {
-            setDuplicatedCohortName(event.target.value.trim());
+            setDuplicatedCohortName(event.target.value);
             setCohortNameError('');
         }
     }

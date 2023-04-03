@@ -91,6 +91,7 @@ export class BookPanel extends React.Component<Store> {
     public initWidget(notebookPath: string = undefined, tracker: NotebookTracker = undefined) {
         this.nTracker = tracker;
         const panel = new SplitPanel();
+        panel.node.tabIndex = -1;
         if (!this.widgetList) {
             this.widgetList = this.instanceState.widgetList;
         }
