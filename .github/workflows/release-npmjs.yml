@@ -14,7 +14,7 @@ on:
           - prerelease
           - none
         required: true
-        default: 'none'
+        default: 'minor'
 jobs:
   release-npmjs:
     name: release to npmjs
@@ -109,6 +109,5 @@ jobs:
       # Publish package to npmjs      
       - name: Publish package to npmjs   
         run: npm publish
-        with:
-          user: __token__
-          password: ${{ secrets.NPMJS_API_TOKEN }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPMJS_API_TOKEN }}
