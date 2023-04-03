@@ -1,5 +1,4 @@
 name: Publish raitracker to npmjs
-
 on:
   workflow_dispatch:
     inputs:

@@ -120,7 +120,7 @@ export const buildDataMatrix = (cohort: IDatasetType, headers: boolean): any[][]
     if (cohort?.featuresValues.length === 0) { return null; }
 
     let dataMatrix: any[][] = [];
-    const record = cohort.featuresValues[0];
+    const record = cohort?.featuresValues[0];
     let arr = [];
 
     /**
@@ -136,7 +136,43 @@ export const buildDataMatrix = (cohort: IDatasetType, headers: boolean): any[][]
         start = 1;
     }
 
-    for (let i = 0; i < record.values.length; i++) {
+    for (let i = 0; i < record?.values.length; i++) {
+        for (let j in cohort.featuresValues) {
+            if (notNumeric(cohort.featuresValues[j].values[i])) {
+                arr.push(cohort.featuresValues[j].values[i]);
+            } else {
+                arr.push(Number(cohort.featuresValues[j].values[i]));
+            }
+        }
+        dataMatrix[i + start] = arr;
+        arr = [];
+    }
+    return dataMatrix;
+}
+/**
+ * Build the cohort data as a matrix.
+*/
+export const buildDataMatrix2 = (cohort: IDatasetType, headers: boolean): any[][] => {
+    if (cohort?.featuresValues.length === 0) { return null; }
+
+    let dataMatrix: any[][] = [];
+    const record = cohort?.featuresValues[0];
+    let arr = [];
+
+    /**
+     * include the headers in the returned result.
+    */
+    let start = 0;
+    if (headers) {
+        for (let i in cohort.featuresValues) {
+            arr.push(cohort.featuresValues[i].name)
+        }
+        dataMatrix[0] = arr;
+        arr = [];
+        start = 1;
+    }
+
+    for (let i = 0; i < record?.values.length; i++) {
         for (let j in cohort.featuresValues) {
             if (notNumeric(cohort.featuresValues[j].values[i])) {
                 arr.push(cohort.featuresValues[j].values[i]);

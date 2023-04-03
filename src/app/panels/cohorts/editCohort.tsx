@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { FilterOperations, IFilter } from "./cohortTypes";
 import { Spinner, SpinnerSize } from '@fluentui/react/lib/Spinner';
 import { TextField, ITextFieldStyles } from '@fluentui/react/lib/TextField';
+import { SpinButton, ISpinButtonStyles } from '@fluentui/react/lib/SpinButton';																			   
 import { ChoiceGroup, IChoiceGroupOption } from '@fluentui/react/lib/ChoiceGroup';
 import { DefaultButton, PrimaryButton, ActionButton } from '@fluentui/react/lib/Button';
 import {
@@ -19,7 +20,7 @@ import {
 import {
     Checkbox, ICheckboxStyles,
     IIconProps, Stack,
-    IStackStyles, ITextField,
+    IStackStyles, ITextField, Position,
 } from '@fluentui/react';
 import {
     getRandomNumber,
@@ -35,9 +36,10 @@ import { IDatasetType } from '../../../core/components';
 import { RegisterModel } from '../../../core/mlflowUtils';
 
 export const EditCohort: React.FunctionComponent = () => {
+																																				  
     const FILTER_ERROR = "Duplicate filters are not allowed.";
     const COHORT_NAME_INVALID = 'Name length should be between 1 and 100 characters, and not include “/“, “\”, "<", ">", "?", or “:”';
-    const RECORDS_COUNT_ERROR = "The cohort you're trying to create has less the minimum required records count of 5..  Your filters could be too restrictive.  Your filters have been reset. Try again!";
+    const RECORDS_COUNT_ERROR = "The cohort you're trying to create has less then the minimum required records count of 5..  Your filters could be too restrictive.  Your filters have been reset. Try again!";
 
     const WORKSPACE_DIR = 'workspace';
     const ARTIFACTS_DIR = 'artifacts';
@@ -52,12 +54,37 @@ export const EditCohort: React.FunctionComponent = () => {
     const projectName = projectSettings['name'];
     let cohortsList = projectSettings['cohortsList'];
     const problemType = projectSettings['problemType'];
+															  
     /**
      * In edit cohort values.
     */
     let [waitSpinner, setWaitSpinner] = useState(false);
     const [defaultCohortName, setDefaultCohortName] = useState('');
     const [defaultSelectedDatasetKey, setDefaultSelectedDatasetKey] = useState('');
+														
+									
+																					   
+	  
+	   
+									 
+	  
+													 
+								 
+											 
+																		  
+										 
+	  
+													   
+																								 
+									   
+			   
+					   
+							
+									   
+		 
+	  
+													  
+														
     /**
      * New cohort state settings.
     */
@@ -68,6 +95,9 @@ export const EditCohort: React.FunctionComponent = () => {
     const [btnSaveCohortDisabled, setBtnSaveCohortDisabled] = useState(true);
     const [isCategoricalDisabled, setIsCategoricalDisabled] = useState(true);
     const [operationMaxMinHidden, setOperationMaxMinHidden] = useState(true);
+																				 
+																							   
+
     /**
      * Cohort entries validation.
     */
@@ -155,7 +185,9 @@ export const EditCohort: React.FunctionComponent = () => {
     const getCohortData = async (cohortKey: string) => {
         let _utils = new Utils();
         return _utils.GetCohortData(projectSettings.name, cohortKey).then(response => {
+							   
             return response;
+			  
         }).catch((error: Error) => {
             return undefined;
         });
@@ -164,6 +196,7 @@ export const EditCohort: React.FunctionComponent = () => {
      * Select the dataset to build the cohort.
     */
     const onDatasetChoiceChange = React.useCallback((ev: React.SyntheticEvent<HTMLElement>, option: IChoiceGroupOption) => {
+        clearAllFilters();						  
         SetSelectedDatasetOption(option);
         /**
          * Get the selected dataset values.
@@ -174,7 +207,7 @@ export const EditCohort: React.FunctionComponent = () => {
                 /**
                  * Build a data matrix out of the features values.
                 */
-                setDataMatrix(buildDataMatrix(content, true))
+                setDataMatrix(buildDataMatrix(content, true));
                 /**
                  * Set the available filter options.
                 */
@@ -184,6 +217,8 @@ export const EditCohort: React.FunctionComponent = () => {
 
         setFilterHidden(false);
         setCohortOptionsHidden(false);
+        setOperationValueHidden(true);
+        setOperationMaxMinHidden(true);
         setSelectedDatasetOptionValidated(true);
         setSelectedDatasetOptionError('');
     }, []);
@@ -198,6 +233,8 @@ export const EditCohort: React.FunctionComponent = () => {
         }
         setFilterOptions(tmp);
     }
+    const [valueMin, setValueMin] = useState<number>();
+    const [valueMax, setValueMax] = useState<number>();
     /**
      * Identify the dataset filter.
     */
@@ -209,26 +246,34 @@ export const EditCohort: React.FunctionComponent = () => {
         setSelectedCategoricalValues([]);
         setSelectedDatasetFilterError('');
         for (let key of Object.keys(selectedDataset.featuresValues)) {
-            
-            // let fValues = selectedDataset.featuresValues[key];
-            
-            // notebook.metrics.forEach(obj => notebookMetricsArr.push(Object.assign({}, obj)));
-            let fValues = JSON.parse(JSON.stringify( selectedDataset.featuresValues[key]));
+            let min = Number.MAX_SAFE_INTEGER;
+            let max = Number.MIN_SAFE_INTEGER;
+            let fValues = JSON.parse(JSON.stringify(selectedDataset.featuresValues[key]));
             if (option.text === fValues.name) {
                 let tmpList: IDropdownOption[] = [];
                 /**
                  * Sort and convert to a IDropdownOption array.
                  */
                 fValues.values.sort();
-
-                fValues.values.map((v => {
-                    tmpList.push({ key: getRandomNumber(0, Number.MAX_SAFE_INTEGER), text: v });
+                let vIndex = 0;
+                fValues.values.map(((v: any) => {
+                    tmpList.push({ key: vIndex++, text: v });
+                    let _v = Number(v);
+                    if (_v < min) {
+                        min = _v;
+                    }
+                    if (_v > max) {
+                        max = _v;
+                    }
                 }));
                 /**
                 * Remove null, empty or duplicate entries.
                 */
                 const dValues = tmpList.filter((ent, i, arr) => arr.findIndex(t => t.text === ent.text && t.text !== '' && t.text !== null) === i);
                 setFieldValueOptions(dValues);
+                setValueMin(min);
+                setValueMax(max);
+                setOperationValue(min?.toString());
             }
         }
     }
@@ -262,7 +307,7 @@ export const EditCohort: React.FunctionComponent = () => {
         [],
     );
     /**
-     * Select the operation to use for building the cohort.
+     * Select the operation to use for building the cohort filter.
     */
     const selectOperation = (event, option, index): void => {
         setSelectedOperation(option);
@@ -271,41 +316,17 @@ export const EditCohort: React.FunctionComponent = () => {
         if (option.text === FilterOperations.InTheRangeOf) {
             setOperationValueHidden(true);
             setOperationMaxMinHidden(false);
+            setOperationMinValidated(true);
+            setOperationMaxValidated(true);            
+            setOperationMinValue(operationValue);            
+            setOperationMinValue(operationValue);
         }
         else {
             setOperationMaxMinHidden(true);
             setOperationValueHidden(false)
+            setOperationValueValidated(true);
+            setOperationMinValue(operationValue);
         }
-    }
-    /**
-     * Update the operation value.
-    */
-    const operationValueRef = React.createRef<IDropdown>();
-    const [operationValue, setOperationValue] = useState<IDropdownOption>();
-    const updateOperationValue = (event, option, index): void => {
-        setOperationValue(option);
-        setOperationValueError('');
-        setOperationValueValidated(true);
-    }
-    /**
-     * Update the operation min value.
-    */
-    const operationMinRef = React.createRef<IDropdown>();
-    const [operationMin, setOperationMin] = useState<IDropdownOption>();
-    const updateOperationMin = (event, option, index): void => {
-        setOperationMin(option);
-        setOperationMinError('');
-        setOperationMinValidated(true);
-    }
-    /**
-     * update teh operation max value.
-    */
-    const operationMaxRef = React.createRef<IDropdown>();
-    const [operationMax, setOperationMax] = useState<IDropdownOption>();
-    const updateOperationMax = (event, option, index): void => {
-        setOperationMax(option);
-        setOperationMaxError('');
-        setOperationMaxValidated(true);
     }
     /**
      * Update the selected values for the categorical filters.
@@ -356,14 +377,9 @@ export const EditCohort: React.FunctionComponent = () => {
         cohortFilter.dataset = selectedDatasetOption?.text;
         cohortFilter.column = selectedDatasetFilter?.text;
         cohortFilter.key = UUID.UUID();
-
         if (isCategoricalChecked) {
             cohortFilter.isCategorical = true;
             cohortFilter.operation = undefined;
-            /**
-             * Convert string array to number array, and add it to arg.
-            */
-            //  
             cohortFilter.args = selectedCategoricalValues.map(function (item) {
                 if (notNumeric(item)) {
                     return item;
@@ -371,7 +387,6 @@ export const EditCohort: React.FunctionComponent = () => {
                     return Number(item);
                 }
             });
-
             if (cohortFilter.args && cohortFilter.args.length > 0) {
                 cohortFilter.output = getFilterOutput(cohortFilter);
                 if (!validateFilter(cohortFilter, _filterValuesList)) {
@@ -387,7 +402,6 @@ export const EditCohort: React.FunctionComponent = () => {
             else {
                 setCategoricalFieldError('Please select a value');
             }
-
         }
         else {
             cohortFilter.isCategorical = false;
@@ -395,8 +409,16 @@ export const EditCohort: React.FunctionComponent = () => {
 
             if (selectedOperation?.text === FilterOperations.InTheRangeOf) {
                 if (operationMinValidated && operationMaxValidated) {
-                    cohortFilter.args.push(Number(operationMin?.text));
-                    cohortFilter.args.push(Number(operationMax?.text));
+                    if (operationMinValue) {
+                        cohortFilter.args.push(Number(operationMinValue));
+                    } else {
+                        cohortFilter.args.push(Number(operationValue));
+                    }
+                    if (operationMaxValue) {
+                        cohortFilter.args.push(Number(operationMaxValue));
+                    } else {
+                        cohortFilter.args.push(Number(operationValue));
+                    }
                     cohortFilter.output = getFilterOutput(cohortFilter);
                     if (!validateFilter(cohortFilter, _filterValuesList)) {
                         setValidateFilterHidden(false);
@@ -405,20 +427,13 @@ export const EditCohort: React.FunctionComponent = () => {
                         setValidateFilterHidden(true);
                     }
                     _filterValuesList.push(cohortFilter);
-
                     dispatch({ type: 'FILTER_VALUES_LIST', payload: _filterValuesList });
-                    setOperationMinError('');
-                    setOperationMaxError('');
                     setBtnSaveCohortDisabled(false);
-                }
-                else {
-                    if (!operationMinValidated) { setOperationMinError('Please select a minimum.'); }
-                    if (!operationMaxValidated) { setOperationMaxError('Please select a maximum.'); }
                 }
             }
             else {
                 if (operationValueValidated) {
-                    cohortFilter.args.push(Number(operationValue?.text));
+                    cohortFilter.args.push(Number(operationValue));
                     cohortFilter.output = getFilterOutput(cohortFilter);
                     if (!validateFilter(cohortFilter, _filterValuesList)) {
                         setValidateFilterHidden(false);
@@ -429,9 +444,6 @@ export const EditCohort: React.FunctionComponent = () => {
                     _filterValuesList.push(cohortFilter);
                     dispatch({ type: 'FILTER_VALUES_LIST', payload: _filterValuesList });
                     setBtnSaveCohortDisabled(false);
-                }
-                else {
-                    setOperationValueError('Please select a value.');
                 }
             }
         }
@@ -498,7 +510,6 @@ export const EditCohort: React.FunctionComponent = () => {
         db.mlPlatform = transformedCohort.mlPlatform;
         db.mlFlowRunId = transformedCohort.mlFlowRunId;
         db.lastUpdated = transformedCohort.lastUpdated;
-
         let _datasets = projectSettings['datasets'];
         let addItem = true;
         for (let i = 0; i < _datasets?.length; i++) {
@@ -525,9 +536,6 @@ export const EditCohort: React.FunctionComponent = () => {
                         return null;
                     });
             }
-            else {
-                //todo: log the error and inform the client.
-            }
         });
     }
     /**
@@ -550,8 +558,9 @@ export const EditCohort: React.FunctionComponent = () => {
             });
     }
     /**
-     * roll back the process if the model registration failed.
+     * 
      * @param cohortKey 
+     * @param _utils
     */
     const rollBackSaveCohort = (cohortKey: string, _utils: Utils) => {
         _utils.deleteCohort(projectName, cohortKey).then(res => {
@@ -574,7 +583,7 @@ export const EditCohort: React.FunctionComponent = () => {
      * record count could still generates exceptions even if it is not zero. 
      * It depends on the backend ML algorithm that is processing the request.
      * We opted to stop processing the request if the count is less than 6,
-     *  and let the backend throw an error for the other cases.
+     * and let the backend throws an error for the other cases.
      * @param count 
      */
     const validateRecordCount = (count: number) => {
@@ -762,8 +771,11 @@ export const EditCohort: React.FunctionComponent = () => {
                         setWaitSpinner(false);
                         dispatch({ type: 'COHORT_EDIT_PANEL_STATE', payload: false });
                         throw error;
+							   
+											   
                     }
                 }
+
             }
             else {
                 setCohortNameError(COHORT_NAME_INVALID);
@@ -771,10 +783,12 @@ export const EditCohort: React.FunctionComponent = () => {
             if (!selectedDatasetOptionValidated) {
                 setSelectedDatasetOptionError('Please select a dataset');
             }
+
         }
         else {
             console.log("Filters list is empty")
         }
+
         event.preventDefault();
         event.stopPropagation();
     }
@@ -790,7 +804,149 @@ export const EditCohort: React.FunctionComponent = () => {
         state['inEditCohort'] = undefined;
         inEditCohort = undefined;
         dispatch({ type: 'COHORT_EDIT_PANEL_STATE', payload: false });
-    }
+    }	
+    const styles: Partial<ISpinButtonStyles> = {
+        root: { paddingTop: 10 },
+        spinButtonWrapper: { width: 280 }
+    };
+    const [operationValue, setOperationValue] = React.useState(valueMin?.toString());
+    const [operationMinValue, setOperationMinValue] = React.useState(valueMin?.toString());
+    const [operationMaxValue, setOperationMaxValue] = React.useState(valueMax?.toString());
+
+    const onMinValueChange = React.useCallback((event: React.SyntheticEvent<HTMLElement>, v?: string) => {
+        if (v !== undefined) {
+            setOperationMinValue(v);
+            setOperationMinValidated(true);
+        } else {
+            setOperationMinValue(operationMinValue);
+        }
+    }, []);
+    const onMaxValueChange = React.useCallback((event: React.SyntheticEvent<HTMLElement>, v?: string) => {
+        if (v !== undefined) {
+            setOperationMaxValue(v);
+            setOperationMaxValidated(true);
+        } else {
+            setOperationMaxValue(operationMaxValue);
+        }
+    }, []);
+    const onValueChange = React.useCallback((event: React.SyntheticEvent<HTMLElement>, v?: string) => {
+        if (v !== undefined) {
+            setOperationValue(v);
+            setOperationValueValidated(true);
+        } else {
+            setOperationValue(operationValue);
+        }
+    }, []);
+    /** Increment the value (or return nothing to keep the previous value if invalid) */
+    const onIncrement = (value: string, event?: React.SyntheticEvent<HTMLElement>): string | void => {
+        const numericValue = Number(value);
+        if (numericValue !== undefined) {
+            let newValue: string;
+            if (numericValue + 1 < valueMin) {
+                newValue = String(valueMin);
+            } else {
+                newValue = String(Math.min(numericValue + 1, valueMax));
+            }
+            setOperationValue(newValue);
+            // setOperationValueError('');
+            setOperationValueValidated(true);
+            return newValue;
+        }
+    };
+    /** Decrement the value (or return nothing to keep the previous value if invalid) */
+    const onDecrement = (value: string, event?: React.SyntheticEvent<HTMLElement>): string | void => {
+        const numericValue = Number(value);
+        if (numericValue !== undefined) {
+            let newValue: string;
+            if (numericValue - 1 > valueMax) {
+                newValue = String(valueMax);
+            } else {
+                newValue = String(Math.max(numericValue - 1, valueMin));
+            }
+            setOperationValue(newValue);
+            // setOperationValueError('');
+            setOperationValueValidated(true);
+            return newValue;
+        }
+    };
+
+    /** Increment the value (or return nothing to keep the previous value if invalid) */
+    const onIncrementMin = (value: string, event?: React.SyntheticEvent<HTMLElement>): string | void => {
+        const numericValue = Number(value);
+        if (numericValue !== undefined) {
+            let newValue: string;
+            if (numericValue + 1 < valueMin) {
+                newValue = String(valueMin);
+            } else {
+                newValue = String(Math.min(numericValue + 1, valueMax));
+            }
+            setOperationMinValue(newValue);
+            setOperationMinValidated(true);
+            return newValue;
+        }
+    };
+    /** Decrement the value (or return nothing to keep the previous value if invalid) */
+    const onDecrementMin = (value: string, event?: React.SyntheticEvent<HTMLElement>): string | void => {
+        const numericValue = Number(value);
+        if (numericValue !== undefined) {
+            let newValue: string;
+            if (numericValue - 1 > valueMax) {
+                newValue = String(valueMax);
+            } else {
+                newValue = String(Math.max(numericValue - 1, valueMin));
+            }
+            setOperationMinValue(newValue);
+            setOperationMinValidated(true);
+            return newValue;
+        }
+    };
+    /** Increment the value (or return nothing to keep the previous value if invalid) */
+    const onIncrementMax = (value: string, event?: React.SyntheticEvent<HTMLElement>): string | void => {
+        const numericValue = Number(value);
+        if (numericValue !== undefined) {
+            let newValue: string;
+            if (numericValue + 1 < valueMin) {
+                newValue = String(valueMin);
+            } else {
+                newValue = String(Math.min(numericValue + 1, valueMax));
+            }
+            setOperationMaxValue(newValue);
+            setOperationMaxValidated(true);
+            return newValue;
+        }
+    };
+    /** Decrement the value (or return nothing to keep the previous value if invalid) */
+    const onDecrementMax = (value: string, event?: React.SyntheticEvent<HTMLElement>): string | void => {
+        const numericValue = Number(value);
+        if (numericValue !== undefined) {
+            let newValue: string;
+            if (numericValue - 1 > valueMax) {
+                newValue = String(valueMax);
+            } else {
+                newValue = String(Math.max(numericValue - 1, valueMin));
+            }
+            setOperationMaxValue(newValue);
+            setOperationMaxValidated(true);
+            return newValue;
+        }
+    };
+    /**
+     * Clamp the value within the valid range (or return nothing to keep the previous value
+     * if there's not valid numeric input)
+    */
+    const onValidate = (value: string, event?: React.SyntheticEvent<HTMLElement>): string | void => {
+        let numericValue = Number(value);
+        if (numericValue !== undefined) {
+            numericValue = Math.min(numericValue, valueMax);
+            numericValue = Math.max(numericValue, valueMin);
+            setOperationValue(String(numericValue));
+            return String(numericValue);
+        }
+    };
+    const roundRangeDisplay = (num: number, length: number) => {
+        return Number(num?.toFixed(length));
+    };
+    let rangeOutput = "Value range from: " + roundRangeDisplay(valueMin, 5) + " to: " + roundRangeDisplay(valueMax, 5);
 
     return (
         <>
@@ -831,7 +987,6 @@ export const EditCohort: React.FunctionComponent = () => {
                                         <tbody>
                                             <tr>
                                                 <td>
-
                                                     <div hidden={filterHidden}>
                                                         <Dropdown
                                                             required
@@ -870,8 +1025,8 @@ export const EditCohort: React.FunctionComponent = () => {
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>
-                                                    <div hidden={operationValueHidden}>
+                                                <td>								
+                                                    {/* <div hidden={operationValueHidden}>
                                                         <Dropdown
                                                             required
                                                             componentRef={operationValueRef}
@@ -879,16 +1034,40 @@ export const EditCohort: React.FunctionComponent = () => {
                                                             label='Value'
                                                             placeholder="Select an option"
                                                             options={fieldValueOptions}
-                                                            styles={dropdownStyle}
+                                                            styles={dropdownStyle}	 
                                                             onChange={updateOperationValue}
                                                             errorMessage={operationValueError}
-                                                        />
-                                                    </div>
+                                                        />																												  
+                                                    </div> */}
+													 {
+                                                        operationValue !== undefined ? (
+                                                            <div hidden={operationValueHidden}>
+                                                                <SpinButton
+																	
+																							
+																			   
+                                                                    label='Value'
+                                                                    labelPosition={Position.top}
+                                                                    defaultValue={operationValue}
+                                                                    value={operationValue}
+                                                                    min={valueMin}
+                                                                    max={valueMax}
+                                                                    onValidate={onValidate}
+                                                                    onIncrement={onIncrement}
+                                                                    onDecrement={onDecrement}
+                                                                    onChange={onValueChange}
+																							  
+                                                                    styles={styles} />
+                                                                <span className='rangeOutputStyle'>{rangeOutput}</span>
+                                                            </div>
+                                                        ) : (<></>)
+                                                    }			   
+													 
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <div hidden={operationMaxMinHidden}>
+                                                    {/* <div hidden={operationMaxMinHidden}>
                                                         <Dropdown
                                                             required
                                                             componentRef={operationMinRef}
@@ -896,16 +1075,36 @@ export const EditCohort: React.FunctionComponent = () => {
                                                             label='Minimum'
                                                             placeholder="Select an option"
                                                             options={fieldValueOptions}
-                                                            styles={dropdownStyle}
+                                                            styles={dropdownStyle}			
                                                             onChange={updateOperationMin}
                                                             errorMessage={operationMinError}
                                                         />
-                                                    </div>
+                                                        </div> */}
+														 {
+                                                            operationValue !== undefined ? (
+                                                                <div hidden={operationMaxMinHidden}>
+                                                                    <SpinButton
+                                                                        label='Minimum'
+                                                                        labelPosition={Position.top}
+                                                                        defaultValue={operationMinValue}
+                                                                        value={operationMinValue}
+                                                                        min={valueMin}
+                                                                        max={valueMax}
+                                                                        onValidate={onValidate}
+                                                                        onIncrement={onIncrementMin}
+                                                                        onDecrement={onDecrementMin}
+                                                                        onChange={onMinValueChange}
+																							
+                                                                        styles={styles} />
+                                                                    <span className='rangeOutputStyle'>{rangeOutput}</span>
+                                                                </div>
+                                                            ) : (<></>)
+                                                        }
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <div hidden={operationMaxMinHidden}>
+                                                    {/* <div hidden={operationMaxMinHidden}>
                                                         <Dropdown
                                                             required
                                                             componentRef={operationMaxRef}
@@ -913,11 +1112,31 @@ export const EditCohort: React.FunctionComponent = () => {
                                                             label='Maximum'
                                                             placeholder="Select an option"
                                                             options={fieldValueOptions}
-                                                            styles={dropdownStyle}
+                                                            styles={dropdownStyle}			
                                                             onChange={updateOperationMax}
                                                             errorMessage={operationMaxError}
                                                         />
-                                                    </div>
+                                                        </div> */}
+                                                        {
+                                                            operationValue !== undefined ? (
+                                                                <div hidden={operationMaxMinHidden}>
+                                                                    <SpinButton
+                                                                        label='Maximum'
+                                                                        labelPosition={Position.top}
+                                                                        defaultValue={operationMaxValue}
+                                                                        value={operationMaxValue}
+                                                                        min={valueMin}
+                                                                        max={valueMax}
+                                                                        onValidate={onValidate}
+                                                                        onIncrement={onIncrementMax}
+                                                                        onDecrement={onDecrementMax}
+                                                                        onChange={onMaxValueChange}
+																							
+                                                                        styles={styles} />
+                                                                    <span className='rangeOutputStyle'>{rangeOutput}</span>
+                                                                </div>
+                                                            ) : (<></>)
+                                                        }
                                                 </td>
                                             </tr>
                                             <tr>
