@@ -947,7 +947,7 @@ export const CreateCohort: React.FunctionComponent = () => {
     const roundRangeDisplay = (num: number, length: number) => {
         return Number(num?.toFixed(length));
     };
-    let rangeOutput = "Value range from: " + roundRangeDisplay(valueMin, 5) + " to: " + roundRangeDisplay(valueMax, 5);
+    let rangeOutput = "Value from: " + roundRangeDisplay(valueMin, 5) + " to: " + roundRangeDisplay(valueMax, 5);
 
     return (
         <>
