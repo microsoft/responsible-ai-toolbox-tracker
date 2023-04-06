@@ -96,13 +96,8 @@
         "typescript": "~4.3.5",
         "webpack": "^5.70.0"
     },
-    "browser": {
-        "fs": false,
-        "path": false,
-        "os": false
-    },
     "directories": {
-        "dist": "dist/"
+        "dist": "dist"
     },
     "jupyterlab": {
         "discovery": {
