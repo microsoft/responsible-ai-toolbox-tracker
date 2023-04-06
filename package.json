@@ -97,7 +97,7 @@
         "webpack": "^5.70.0"
     },
     "directories": {
-        "dist": "dist"
+        "dist": "dist/"
     },
     "jupyterlab": {
         "discovery": {
