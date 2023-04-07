@@ -48,7 +48,7 @@
         "watch:labextension": "jupyter labextension watch ."
     },
     "dependencies": {
-        "@fluentui/react": "8.105.3",
+        "@fluentui/react": "8.107.3",
         "@jupyterlab/application": "~3.6.1",
         "@jupyterlab/apputils": "^3.6.1",
         "@jupyterlab/builder": "^3.5.0",
@@ -77,8 +77,8 @@
         "angular2-uuid": "^1.1.1",
         "cat": "^0.2.0",
         "lodash": "^4.17.21",
-        "react": "^17.0.2",
-        "react-dom": "^17.0.2",
+        "react": "17.0.2",
+        "react-dom": "17.0.2",
         "react-redux": "^7.2.9",
         "redux": "^4.1.2",
         "yjs": "^13.5.17"
@@ -88,7 +88,7 @@
         "@babel/preset-env": "^7.12.7",
         "@jupyter/ydoc": "~0.2.2",
         "@types/lodash": "^4.14.180",
-        "@types/react": "^17.0.53",
+        "@types/react": "17.0.53",
         "@types/react-dom": "^17.0.18",
         "babel-loader": "^9.1.0",
         "cz-conventional-changelog": "3.3.0",
