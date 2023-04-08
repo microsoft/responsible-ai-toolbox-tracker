@@ -99,6 +99,9 @@
     "directories": {
         "dist": "dist/"
     },
+    "publishConfig": {
+      "access": "public"
+    },
     "jupyterlab": {
         "discovery": {
             "server": {
