@@ -48,7 +48,7 @@
         "watch:labextension": "jupyter labextension watch ."
     },
     "dependencies": {
-        "@fluentui/react": "8.105.3",
+        "@fluentui/react": "8.107.3",
         "@jupyterlab/application": "~3.6.1",
         "@jupyterlab/apputils": "^3.6.1",
         "@jupyterlab/builder": "^3.5.0",
