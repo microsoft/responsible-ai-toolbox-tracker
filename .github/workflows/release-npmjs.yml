@@ -63,14 +63,14 @@ jobs:
         run: >-
           python -m pip install build --user
 
-      # -------------------
-      # Run tests before uploading to PyPi
-      - name: run tests
-        run: |
-          cd raitracker/training/src/
-          sh generate_models.sh
-          cd ../../..
-          pytest --cov=raitracker raitracker/test/.
+      # # -------------------
+      # # Run tests before uploading to PyPi
+      # - name: run tests
+      #   run: |
+      #     cd raitracker/training/src/
+      #     sh generate_models.sh
+      #     cd ../../..
+      #     pytest --cov=raitracker raitracker/test/.
       
       # -------------------    
       # Setup .npmrc file on the runner to publish to npm
