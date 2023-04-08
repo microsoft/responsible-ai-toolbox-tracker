@@ -98,12 +98,12 @@ jobs:
 
       # -------------------
       # Cleanup artifacts
-      - name: cleanup artifacts
-        run: |
-          cd dist/
-          shopt -s extglob
-          rm -rv !(raitracker*)
-          cd ..
+      # - name: cleanup artifacts
+      #   run: |
+      #     cd dist/
+      #     shopt -s extglob
+      #     rm -rv !(raitracker*)
+      #     cd ..
 
       # -------------------
       # Publish package to npmjs      
