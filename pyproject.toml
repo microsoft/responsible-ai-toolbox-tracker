@@ -63,8 +63,8 @@ artifacts = ["raitracker/labextension"]
 [tool.hatch.build.targets.wheel.shared-data]
 "raitracker/labextension" = "share/jupyter/labextensions/raitracker"
 "install.json" = "share/jupyter/labextensions/raitracker/install.json"
-"jupyter-config/server-config/raitracker.json" = "etc/jupyter/jupyter_server_config.d/raitracker.json"
-"jupyter-config/nb-config/raitracker.json" = "etc/jupyter/jupyter_notebook_config.d/raitracker.json"
+"jupyter-config/server-config" = "etc/jupyter/jupyter_server_config.d"
+"jupyter-config/nb-config" = "etc/jupyter/jupyter_notebook_config.d"
 
 [tool.hatch.build.targets.sdist]
 exclude = [".github"]
@@ -92,3 +92,6 @@ build_dir = "raitracker/labextension"
 
 [tool.jupyter-releaser.options]
 version_cmd = "hatch version"
+
+[tool.check-wheel-contents]
+ignore = ["W002"]
