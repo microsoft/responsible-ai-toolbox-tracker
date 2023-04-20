@@ -28,7 +28,7 @@ classifiers = [
 
 dependencies = [
     "jupyterlab==3.6.1",
-    "mlflow==2.1.1",
+    "mlflow==2.2.1",
     "numpy",
     "pandas",
     "scikit-learn==1.2.1",
