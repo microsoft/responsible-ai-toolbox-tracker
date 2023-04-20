@@ -61,10 +61,10 @@ jobs:
       # install build
       - name: Install pypa/build
         run: >-
-          python -m pip install build --user
+          python -m pip install build
 
       # # -------------------
-      # # Run tests before uploading to PyPi
+      # # Run tests before uploading to NPMJS
       # - name: run tests
       #   run: |
       #     cd raitracker/training/src/
@@ -95,6 +95,12 @@ jobs:
       # Build wheel
       - name: build wheel
         run: python -m build
+
+
+      # -------------------
+      # Build NPM package
+      - name: Build NPM package
+        run: npm pack --pack-destination dist
 
       # -------------------
       # Cleanup artifacts
