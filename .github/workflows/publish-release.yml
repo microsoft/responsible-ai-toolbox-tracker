@@ -28,6 +28,13 @@ jobs:
           since_last_stable: ${{ github.event.inputs.since_last_stable }}
 
       # -------------------
+      # Checkout code
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      # -------------------
       # Install client packages
       - name: Install client packages
         run: npm install
