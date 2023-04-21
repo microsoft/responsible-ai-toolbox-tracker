@@ -2,19 +2,23 @@ name: 'Publish Release'
 on:
   workflow_dispatch:
     inputs:
-      release:
-        types: [published]
-      bumpType:
-        type: choice
-        description: 'version options'
-        options:
-          - major
-          - minor
-          - patch
-          - prerelease
-          - none
-        required: true
-        default: 'minor'
+      version_spec:
+        description: 'New Version Specifier'
+        default: 'next'
+        required: false
+      branch:
+        description: 'The branch to target'
+        required: false
+      post_version_spec:
+        description: 'Post Version Specifier'
+        required: false
+      since:
+        description: 'Use PRs with activity since this date or git reference'
+        required: false
+      since_last_stable:
+        description: 'Use PRs with activity since the last stable git tag'
+        required: false
+        type: boolean
 jobs:
   full_release:
     runs-on: ubuntu-latest
@@ -28,6 +32,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           version_spec: ${{ github.event.inputs.version_spec }}
           post_version_spec: ${{ github.event.inputs.post_version_spec }}
+          target: ${{ github.event.inputs.target }}
           branch: ${{ github.event.inputs.branch }}
           since: ${{ github.event.inputs.since }}
           since_last_stable: ${{ github.event.inputs.since_last_stable }}
