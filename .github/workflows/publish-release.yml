@@ -52,6 +52,11 @@ jobs:
         run: pip install jupyterlab==3.6.1
 
       # -------------------
+      # Install jupyter_releaser
+      - name: Install jupyter_releaser
+        run: pip install git+https://github.com/jupyter-server/jupyter-releaser
+
+      # -------------------
       # Install client packages
       - name: Install client packages
         run: npm install
