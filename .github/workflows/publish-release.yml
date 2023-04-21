@@ -9,16 +9,6 @@ on:
       branch:
         description: 'The branch to target'
         required: false
-      post_version_spec:
-        description: 'Post Version Specifier'
-        required: false
-      since:
-        description: 'Use PRs with activity since this date or git reference'
-        required: false
-      since_last_stable:
-        description: 'Use PRs with activity since the last stable git tag'
-        required: false
-        type: boolean
 jobs:
   full_release:
     runs-on: ubuntu-latest
@@ -38,60 +28,6 @@ jobs:
           since_last_stable: ${{ github.event.inputs.since_last_stable }}
 
       # -------------------
-      # Checkout code
-      - uses: actions/checkout@v3
-        with:
-          persist-credentials: false
-          fetch-depth: 0
-
-      # -------------------
-      # Setup python on the runner
-      - uses: actions/setup-python@v3
-        with:
-          python-version: 3.9
-
-      # -------------------
-      # Install basic packages (not associated with the repo)
-      - name: update and upgrade pip, semver
-        run: |
-          pip install --upgrade pip
-          pip install semver
-
-      # -------------------
-      # Install the package and all its dependencies
-      # Needs to do this after bumping the version, otherwise
-      # package.__version__ will point to the previous version
-      - name: Install current package
-        run: |
-          pip install --upgrade pip
-          pip install .[dev]
-          pip list
-
-      # -------------------
-      # install build
-      - name: Install pypa/build
-        run: >-
-          python -m pip install build
-
-      # # -------------------
-      # # Run tests before uploading to NPMJS
-      # - name: run tests
-      #   run: |
-      #     cd raitracker/training/src/
-      #     sh generate_models.sh
-      #     cd ../../..
-      #     pytest --cov=raitracker raitracker/test/.
-
-      # -------------------
-      # Setup .npmrc file on the runner to publish to npm
-      - name: Setup node
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18.x'
-          registry-url: 'https://registry.npmjs.org'
-          cache: npm
-
-      # -------------------
       # Install client packages
       - name: Install client packages
         run: npm install
@@ -100,16 +36,6 @@ jobs:
       # Compile typescript code
       - name: Compile raitracker
         run: npm run build
-
-      # -------------------
-      # Build wheel
-      - name: build wheel
-        run: python -m build
-
-      # -------------------
-      # Build NPM package
-      - name: Build NPM package
-        run: npm pack --pack-destination dist
 
       - name: Populate Release
         id: populate-release
