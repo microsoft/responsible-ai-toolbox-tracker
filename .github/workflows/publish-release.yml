@@ -20,6 +20,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: jupyterlab/maintainer-tools/.github/actions/base-setup@v1
+      # -------------------
+      # Update the package version by bumping the version to the next
+      - name: Bump version
+        run: |
+          python bump_version.py ${{github.event.inputs.bumpType}}
 
       - name: Prep Release
         id: prep-release
@@ -31,12 +36,6 @@ jobs:
           branch: ${{ github.event.inputs.branch }}
           since: ${{ github.event.inputs.since }}
           since_last_stable: ${{ github.event.inputs.since_last_stable }}
-
-      # -------------------
-      # Update the package version by bumping the version to the next
-      - name: Bump version
-        run: |
-          python bump_version.py ${{github.event.inputs.bumpType}}
 
       - name: Populate Release
         id: populate-release
