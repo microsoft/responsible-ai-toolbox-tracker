@@ -19,12 +19,33 @@ jobs:
   full_release:
     runs-on: ubuntu-latest
     steps:
-      - uses: jupyterlab/maintainer-tools/.github/actions/base-setup@v1
+      # -------------------
+      # Checkout code
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      # -------------------
+      # Setup python on the runner
+      - uses: actions/setup-python@v3
+        with:
+          python-version: 3.9
+
+      # -------------------
+      # Install basic packages (not associated with the repo)
+      - name: update and upgrade pip, semver
+        run: |
+          pip install --upgrade pip
+          pip install semver
+
       # -------------------
       # Update the package version by bumping the version to the next
       - name: Bump version
         run: |
           python bump_version.py ${{github.event.inputs.bumpType}}
+
+      - uses: jupyterlab/maintainer-tools/.github/actions/base-setup@v1
 
       - name: Prep Release
         id: prep-release
