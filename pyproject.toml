@@ -86,7 +86,6 @@ ensured-targets = [
     "raitracker/labextension/static/style.js",
     "raitracker/labextension/package.json",
 ]
-
 skip-if-exists = ["raitracker/labextension/static/style.js"]
 
 [tool.hatch.build.hooks.jupyter-builder.build-kwargs]
