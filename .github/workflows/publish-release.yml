@@ -2,15 +2,19 @@ name: 'Publish Release'
 on:
   workflow_dispatch:
     inputs:
-      branch:
-        description: 'The target branch'
-        required: false
-      release_url:
-        description: 'The URL of the draft GitHub release'
-        required: false
-      steps_to_skip:
-        description: 'Comma separated list of steps to skip'
-        required: false
+      release:
+        types: [published]
+      bumpType:
+        type: choice
+        description: 'version options'
+        options:
+          - major
+          - minor
+          - patch
+          - prerelease
+          - none
+        required: true
+        default: 'minor'
 jobs:
   full_release:
     runs-on: ubuntu-latest
@@ -54,7 +58,7 @@ jobs:
         run: |
           echo "Verify the final release"
           echo ${{ steps.finalize-release.outputs.release_url }}
-      - name: "** Failure Message **"
+      - name: '** Failure Message **'
         if: ${{ failure() }}
         run: |
           echo "Failed to Publish the Draft Release Url:"
