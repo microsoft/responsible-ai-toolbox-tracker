@@ -2,15 +2,22 @@ name: 'Publish Release'
 on:
   workflow_dispatch:
     inputs:
-      version_spec:
-        description: 'New Version Specifier'
-        default: 'next'
-        required: false
-      branch:
-        description: 'The branch to target'
-        required: false
+      release:
+        types: [published]
+      bumpType:
+        type: choice
+        description: 'version options'
+        options:
+          - major
+          - minor
+          - patch
+          - prerelease
+          - none
+        required: true
+        default: 'none'
+
 jobs:
-  full_release:
+  release-npmjs:
     runs-on: ubuntu-latest
     steps:
       - uses: jupyterlab/maintainer-tools/.github/actions/base-setup@v1
@@ -47,6 +54,12 @@ jobs:
           pip install --upgrade pip
 
       # -------------------
+      # install build
+      - name: Install pypa/build
+        run: >-
+          python -m pip install build
+
+      # -------------------
       # Install Jupyterlab
       - name: Install Jupyterlab
         run: pip install jupyterlab==3.6.1
@@ -65,6 +78,11 @@ jobs:
       # Compile typescript code
       - name: Compile raitracker
         run: npm run build
+
+      # -------------------
+      # Build wheel
+      - name: build wheel
+        run: python -m build
 
       - name: Populate Release
         id: populate-release
