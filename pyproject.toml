@@ -76,13 +76,6 @@ exclude = [".github"]
 "jupyter-config/server-config" = "etc/jupyter/jupyter_server_config.d"
 "jupyter-config/nb-config" = "etc/jupyter/jupyter_notebook_config.d"
 
-# [tool.hatch.build.targets.sdist.shared-data]
-# "raitracker/labextension" = "share/jupyter/labextensions/raitracker"
-# "install.json" = "share/jupyter/labextensions/raitracker/install.json"
-# "jupyter-config/server-config" = "etc/jupyter/jupyter_server_config.d"
-# "jupyter-config/nb-config" = "etc/jupyter/jupyter_notebook_config.d"
-
-
 [tool.hatch.build.hooks.version]
 path = "raitracker/_version.py"
 
@@ -112,7 +105,7 @@ version_cmd = "hatch version"
 before-check-npm = [
     "python -m pip install jupyterlab==3.6.1",
     "npm i rimraf",
-    "npm run build:prod"
+    "npm run build:prod",
 ]
 
 [tool.check-wheel-contents]
