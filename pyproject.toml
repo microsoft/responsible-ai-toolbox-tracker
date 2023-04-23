@@ -107,7 +107,7 @@ source_dir = "src"
 build_dir = "raitracker/labextension"
 
 [tool.jupyter-releaser.options]
-# version_cmd = "hatch version"
+version_cmd = "hatch version"
 post-version-spec = "dev"
 
 [tool.jupyter-releaser.hooks]
