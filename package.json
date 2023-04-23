@@ -48,6 +48,7 @@
         "watch:labextension": "jupyter labextension watch ."
     },
     "dependencies": {
+        "@blueprintjs/core": "^4.18.0",
         "@fluentui/react": "8.107.3",
         "@jupyterlab/application": "~3.6.1",
         "@jupyterlab/apputils": "^3.6.1",
@@ -77,8 +78,8 @@
         "angular2-uuid": "^1.1.1",
         "cat": "^0.2.0",
         "lodash": "^4.17.21",
-        "react": "17.0.2",
-        "react-dom": "17.0.2",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
         "react-redux": "^7.2.9",
         "redux": "^4.1.2",
         "yjs": "^13.5.17"
