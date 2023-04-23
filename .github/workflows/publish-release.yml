@@ -12,7 +12,7 @@ on:
           - prerelease
           - none
         required: true
-        default: 'none'
+        default: 'dev'
       release_url:
         description: 'The URL of the draft GitHub release'
         required: false
