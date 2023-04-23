@@ -102,7 +102,7 @@ build_dir = "raitracker/labextension"
 version_cmd = "hatch version"
 
 [tool.jupyter-releaser.hooks]
-before-build-npm = ["python -m pip install jupyterlab==3.6.1",  "npm run build:prod"]
+before-check-npm = ["python -m pip install jupyterlab==3.6.1",  "npm run build:prod"]
 
 [tool.check-wheel-contents]
 ignore = ["W002"]
