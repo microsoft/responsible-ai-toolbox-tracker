@@ -10,7 +10,7 @@ on:
           - minor
           - patch
           - prerelease
-          - none
+          - dev
         required: true
         default: 'dev'
       release_url:
