@@ -15,6 +15,12 @@ on:
           - none
         required: true
         default: 'none'
+      release_url:
+        description: 'The URL of the draft GitHub release'
+        required: false
+      steps_to_skip:
+        description: 'Comma separated list of steps to skip'
+        required: false
 
 jobs:
   release-npmjs:
