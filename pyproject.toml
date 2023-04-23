@@ -106,8 +106,8 @@ before-check-npm = [
     "python -m pip install jupyterlab==3.6.1",
     "npm i rimraf",
     "npm run build:prod",
+    "npm pack --pack-destination dist",
 ]
-before-build-python = ["npm run clean:all"]
 
 [tool.check-wheel-contents]
 ignore = ["W002"]

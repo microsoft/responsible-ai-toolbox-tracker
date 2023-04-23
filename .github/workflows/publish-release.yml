@@ -2,9 +2,7 @@ name: 'Publish Release'
 on:
   workflow_dispatch:
     inputs:
-      release:
-        types: [published]
-      bumpType:
+      version_spec:
         type: choice
         description: 'version options'
         options:
@@ -39,23 +37,6 @@ jobs:
           branch: ${{ github.event.inputs.branch }}
           since: ${{ github.event.inputs.since }}
           since_last_stable: ${{ github.event.inputs.since_last_stable }}
-
-      # -------------------
-      # Setup python on the runner
-      - uses: actions/setup-python@v3
-        with:
-          python-version: 3.9
-
-      # -------------------
-      # Install basic packages (not associated with the repo)
-      - name: update and upgrade pip
-        run: |
-          pip install --upgrade pip
-
-      # -------------------
-      # Install jupyter_releaser
-      - name: Install jupyter_releaser
-        run: pip install git+https://github.com/jupyter-server/jupyter-releaser
 
       - name: Populate Release
         id: populate-release
