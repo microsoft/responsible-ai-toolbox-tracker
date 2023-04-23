@@ -10,9 +10,9 @@ on:
           - minor
           - patch
           - prerelease
-          - dev
+          - none
         required: true
-        default: 'dev'
+        default: 'none'
       release_url:
         description: 'The URL of the draft GitHub release'
         required: false
