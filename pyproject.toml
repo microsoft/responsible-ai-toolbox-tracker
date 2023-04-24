@@ -4,7 +4,10 @@ build-backend = "jupyter_packaging.build_api"
 
 [tool.jupyter-packaging.options]
 skip-if-exists = ["raitracker/labextension/static/style.js"]
-ensured-targets = ["raitracker/labextension/static/style.js", "raitracker/labextension/package.json"]
+ensured-targets = [
+    "raitracker/labextension/static/style.js",
+    "raitracker/labextension/package.json",
+]
 
 [tool.jupyter-packaging.builder]
 factory = "jupyter_packaging.npm_builder"
@@ -12,6 +15,9 @@ factory = "jupyter_packaging.npm_builder"
 [tool.jupyter-packaging.build-args]
 build_cmd = "build:prod"
 npm = ["jlpm"]
+
+[tool.jupyter-releaser.hooks]
+before-check-npm = ["python -m pip install jupyterlab==3.6.1"]
 
 [tool.check-manifest]
 ignore = ["raitracker/labextension/**", "yarn.lock", ".*", "package-lock.json"]
