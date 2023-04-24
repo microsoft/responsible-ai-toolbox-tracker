@@ -1,4 +1,4 @@
-name: Publish raitracker to npmjs
+name: Publish raitracker
 on:
   workflow_dispatch:
     inputs:
@@ -85,6 +85,11 @@ jobs:
       # Install client packages
       - name: Install client packages
         run: npm install
+
+      # -------------------
+      # Install jupyterlab
+      - name: Install jupyterlab
+        run: python -m pip install jupyterlab==3.6.1
 
       # -------------------
       # Compile typescript code
