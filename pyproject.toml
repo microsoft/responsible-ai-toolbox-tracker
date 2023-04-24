@@ -16,8 +16,5 @@ factory = "jupyter_packaging.npm_builder"
 build_cmd = "build:prod"
 npm = ["jlpm"]
 
-[tool.jupyter-releaser.hooks]
-before-check-npm = ["python -m pip install jupyterlab==3.6.1"]
-
 [tool.check-manifest]
 ignore = ["raitracker/labextension/**", "yarn.lock", ".*", "package-lock.json"]
