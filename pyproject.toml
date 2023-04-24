@@ -1,20 +1,112 @@
 [build-system]
-requires = ["jupyter_packaging~=0.10,<2", "jupyterlab~=3.1"]
-build-backend = "jupyter_packaging.build_api"
+requires = [
+    "hatchling>=1.4.0",
+    "jupyterlab>=3.4.7,<4.0.0",
+    "hatch-nodejs-version",
+]
+build-backend = "hatchling.build"
 
-[tool.jupyter-packaging.options]
-skip-if-exists = ["raitracker/labextension/static/style.js"]
+[project]
+name = "raitracker"
+readme = "README.md"
+license = { file = "LICENSE.md" }
+requires-python = ">=3.7"
+classifiers = [
+    "Framework :: Jupyter",
+    "Framework :: Jupyter :: JupyterLab",
+    "Framework :: Jupyter :: JupyterLab :: 3",
+    "Framework :: Jupyter :: JupyterLab :: Extensions",
+    "Framework :: Jupyter :: JupyterLab :: Extensions :: Prebuilt",
+    "License :: OSI Approved :: BSD License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+]
+
+dependencies = [
+    "jupyterlab==3.6.1",
+    "mlflow==2.1.1",
+    "numpy",
+    "pandas",
+    "scikit-learn==1.2.1",
+]
+dynamic = ["version", "description", "authors", "urls", "keywords"]
+
+[project.optional-dependencies]
+all = [
+    "torch",
+    "torchmetrics==0.7",
+    "tensorflow",
+    "torch",
+    "pytorch-lightning==1.7",
+]
+
+dev = [
+    "lightgbm",
+    "matplotlib",
+    "torch",
+    "torchmetrics==0.7",
+    "pytest",
+    "pytest-cov",
+    "tensorflow",
+    "torch",
+    "pytorch-lightning==1.7",
+    "xgboost",
+    "sphinx",
+    "sphinx_rtd_theme>=1.1.1",
+    "nbsphinx",
+]
+
+[tool.hatch.version]
+source = "nodejs"
+
+[tool.hatch.metadata.hooks.nodejs]
+fields = ["description", "authors", "urls"]
+
+[tool.hatch.build.targets.sdist]
+artifacts = ["raitracker/labextension"]
+exclude = [".github"]
+
+[tool.hatch.build.targets.wheel.shared-data]
+"raitracker/labextension" = "share/jupyter/labextensions/raitracker"
+"install.json" = "share/jupyter/labextensions/raitracker/install.json"
+"jupyter-config/server-config" = "etc/jupyter/jupyter_server_config.d"
+"jupyter-config/nb-config" = "etc/jupyter/jupyter_notebook_config.d"
+
+[tool.hatch.build.hooks.version]
+path = "raitracker/_version.py"
+
+[tool.hatch.build.hooks.jupyter-builder]
+dependencies = ["hatch-jupyter-builder>=0.5"]
+build-function = "hatch_jupyter_builder.npm_builder"
 ensured-targets = [
     "raitracker/labextension/static/style.js",
     "raitracker/labextension/package.json",
 ]
+skip-if-exists = ["raitracker/labextension/static/style.js"]
 
-[tool.jupyter-packaging.builder]
-factory = "jupyter_packaging.npm_builder"
-
-[tool.jupyter-packaging.build-args]
+[tool.hatch.build.hooks.jupyter-builder.build-kwargs]
 build_cmd = "build:prod"
 npm = ["jlpm"]
 
-[tool.check-manifest]
-ignore = ["raitracker/labextension/**", "yarn.lock", ".*", "package-lock.json"]
+[tool.hatch.build.hooks.jupyter-builder.editable-build-kwargs]
+build_cmd = "install:extension"
+npm = ["jlpm"]
+source_dir = "src"
+build_dir = "raitracker/labextension"
+
+[tool.jupyter-releaser.options]
+version_cmd = "hatch version"
+
+[tool.jupyter-releaser.hooks]
+before-check-npm = [
+    "python -m pip install jupyterlab==3.6.1",
+    "npm i rimraf",
+    "npm run build:prod",
+]
+
+[tool.check-wheel-contents]
+ignore = ["W002"]

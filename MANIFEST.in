@@ -8,7 +8,7 @@ include jupyter-config/nb-config/raitracker.json
 include package.json
 include ts*.json
 
-graft raitracker/labextension
+include raitracker/labextension
 
 # Javascript files
 graft src
