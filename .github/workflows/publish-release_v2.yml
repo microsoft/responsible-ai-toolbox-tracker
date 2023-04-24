@@ -1,0 +1,75 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_spec:
+        type: choice
+        description: 'version options'
+        options:
+          - major
+          - minor
+          - patch
+          - prerelease
+          - none
+        required: true
+        default: 'none'
+      release_url:
+        description: 'The URL of the draft GitHub release'
+        required: false
+      steps_to_skip:
+        description: 'Comma separated list of steps to skip'
+        required: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      # -------------------
+      # Setup .npmrc file on the runner to publish to npm
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+          registry-url: 'https://registry.npmjs.org'
+          cache: npm
+
+      
+      # -------------------
+      # Install client packages
+      - name: Install client packages
+        run: npm install
+
+      # -------------------
+      # Compile typescript code
+      - name: Compile raitracker
+        run: npm run build
+
+      # -------------------
+      # Build wheel
+      - name: build wheel
+        run: python -m build
+
+
+      # -------------------
+      # Build NPM package
+      - name: Build NPM package
+        run: |
+            python -m pip install jupyterlab==3.6.1
+            npm i rimraf
+            npm run build:prod
+            npm pack --pack-destination dist   
+
+      - name: Publish to npm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPMJS_API_TOKEN }}
+        run: |
+          npm publish --access public
