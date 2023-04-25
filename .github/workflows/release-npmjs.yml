@@ -6,7 +6,7 @@ on:
         types: [published]
       bumpType:
         type: choice
-        description: "version options"
+        description: 'version options'
         options:
           - major
           - minor
@@ -20,14 +20,14 @@ jobs:
     name: release to npmjs
     runs-on: ubuntu-latest
 
-    steps:       
+    steps:
       # -------------------
       # Checkout code
       - uses: actions/checkout@v3
         with:
           persist-credentials: false
           fetch-depth: 0
-      
+
       # -------------------
       # Setup python on the runner
       - uses: actions/setup-python@v3
@@ -35,17 +35,11 @@ jobs:
           python-version: 3.9
 
       # -------------------
-      # Install basic packages (not associated with the repo)      
+      # Install basic packages (not associated with the repo)
       - name: update and upgrade pip, semver
         run: |
           pip install --upgrade pip
           pip install semver
-
-      # -------------------
-      # Update the package version by bumping the version to the next
-      - name: Bump version
-        run: |
-          python bump_version.py ${{github.event.inputs.bumpType}}
 
       # -------------------
       # Install the package and all its dependencies
@@ -58,21 +52,27 @@ jobs:
           pip list
 
       # -------------------
+      # Update the package version by bumping the version to the next
+      - name: Bump version
+        run: |
+          python bump_version.py ${{github.event.inputs.bumpType}}
+
+      # -------------------
       # install build
       - name: Install pypa/build
         run: >-
           python -m pip install build
 
-      # # -------------------
-      # # Run tests before uploading to NPMJS
-      # - name: run tests
-      #   run: |
-      #     cd raitracker/training/src/
-      #     sh generate_models.sh
-      #     cd ../../..
-      #     pytest --cov=raitracker raitracker/test/.
-      
-      # -------------------    
+      # -------------------
+      # Run tests before uploading to NPMJS
+      - name: run tests
+        run: |
+          cd raitracker/training/src/
+          sh generate_models.sh
+          cd ../../..
+          pytest --cov=raitracker raitracker/test/.
+
+      # -------------------
       # Setup .npmrc file on the runner to publish to npm
       - name: Setup node
         uses: actions/setup-node@v3
@@ -96,15 +96,14 @@ jobs:
       - name: build wheel
         run: python -m build
 
-
       # -------------------
       # Build NPM package
       - name: Build NPM package
         run: |
-            python -m pip install jupyterlab==3.6.1
-            npm i rimraf
-            npm run build:prod
-            npm pack --pack-destination dist
+          python -m pip install jupyterlab==3.6.1
+          npm i rimraf
+          npm run build:prod
+          npm pack --pack-destination dist
 
       # -------------------
       # Cleanup artifacts
@@ -116,8 +115,8 @@ jobs:
       #     cd ..
 
       # -------------------
-      # Publish package to npmjs      
-      - name: Publish package to npmjs   
+      # Publish package to npmjs
+      - name: Publish package to npmjs
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPMJS_API_TOKEN }}

@@ -45,6 +45,7 @@ all = [
 ]
 
 dev = [
+    "build",
     "lightgbm",
     "matplotlib",
     "torch",
@@ -58,6 +59,7 @@ dev = [
     "sphinx",
     "sphinx_rtd_theme>=1.1.1",
     "nbsphinx",
+    "jupyterlab==3.6.1",
 ]
 
 [tool.hatch.version]
@@ -68,7 +70,18 @@ fields = ["description", "authors", "urls"]
 
 [tool.hatch.build.targets.sdist]
 artifacts = ["raitracker/labextension"]
+include = [
+    "/*.md",
+    "raitracker/labextension",
+    "/jupyter-config",
+    "/raitracker",
+    "/package.json",
+]
 exclude = [".github"]
+
+# [tool.hatch.build.targets.wheel]
+# include = ["/raitracker"]
+# exclude = ["node_modules"]
 
 [tool.hatch.build.targets.wheel.shared-data]
 "raitracker/labextension" = "share/jupyter/labextensions/raitracker"
@@ -100,13 +113,20 @@ build_dir = "raitracker/labextension"
 
 [tool.jupyter-releaser.options]
 version_cmd = "hatch version"
+npm-cmd = "npm publish --tag next"
+release-message = "[ci skip] Publish {version}"
+tag-message = "[ci skip] Release {tag_name}"
 
 [tool.jupyter-releaser.hooks]
-before-check-npm = [
-    "python -m pip install jupyterlab==3.6.1",
-    "npm i rimraf",
-    "npm run build:prod",
+before-bump-version = [
+    "pip install -e .[dev]",
+    "git checkout .",
+    "jlpm build:prod",
 ]
+
+before-build-npm = ["jlpm", "jlpm build"]
+
+before-build-python = ["jlpm clean:all", "jlpm", "jlpm build"]
 
 [tool.check-wheel-contents]
 ignore = ["W002"]

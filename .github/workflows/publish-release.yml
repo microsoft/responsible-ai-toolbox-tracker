@@ -1,4 +1,4 @@
-name: 'Publish Release'
+name: 'Publish Release using jupyter-releaser'
 on:
   workflow_dispatch:
     inputs:
@@ -13,6 +13,9 @@ on:
           - none
         required: true
         default: 'none'
+      branch:
+        description: 'The target branch'
+        required: false
       release_url:
         description: 'The URL of the draft GitHub release'
         required: false
@@ -43,6 +46,7 @@ jobs:
         uses: jupyter-server/jupyter_releaser/.github/actions/populate-release@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          target: ${{ github.event.inputs.target }}
           branch: ${{ github.event.inputs.branch }}
           release_url: ${{ steps.prep-release.outputs.release_url }}
           steps_to_skip: ${{ github.event.inputs.steps_to_skip }}
@@ -57,6 +61,7 @@ jobs:
         uses: jupyter-server/jupyter-releaser/.github/actions/finalize-release@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          target: ${{ github.event.inputs.target }}
           release_url: ${{ steps.populate-release.outputs.release_url }}
 
       - name: '** Next Step **'
