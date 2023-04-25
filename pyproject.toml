@@ -114,8 +114,8 @@ build_dir = "raitracker/labextension"
 [tool.jupyter-releaser.options]
 version_cmd = "hatch version"
 npm-cmd = "npm publish --tag next"
-release-message = "[ci skip] Publish {version}"
-tag-message = "[ci skip] Release {tag_name}"
+# release-message = "[ci skip] Publish {version}"
+# tag-message = "[ci skip] Release {tag_name}"
 
 [tool.jupyter-releaser.hooks]
 before-bump-version = [
