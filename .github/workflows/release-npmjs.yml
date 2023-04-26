@@ -105,8 +105,12 @@ jobs:
           npm run build:prod
           npm pack --pack-destination dist
 
-      # \share\jupyter\lab\extensions
-      
+      - name: Upload Distributions
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist-${{ github.run_number }}
+          path: .jupyter_releaser_checkout/dist
+
       # -------------------
       # Cleanup artifacts
       # - name: cleanup artifacts
@@ -122,3 +126,26 @@ jobs:
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPMJS_API_TOKEN }}
+
+      # -------------------
+      # Commit the changes performed by the bump
+      # Also, tag the current commit with the version number
+      - name: commit new setup file
+        if: ${{ github.event.inputs.bumpType != 'none' }}
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+          git add package.json raitracker/_version.py
+          git commit -m "update version number"
+          VERSION=$(python bump_version.py 'none')
+          git tag -a $VERSION -m "Release $VERSION"
+
+      # -------------------
+      # Push the changes performed by bump2version to the current branch
+      - name: Push changes
+        if: ${{ github.event.inputs.bumpType != 'none' }}
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+          tags: true

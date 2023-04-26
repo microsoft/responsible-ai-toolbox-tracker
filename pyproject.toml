@@ -62,8 +62,8 @@ dev = [
     "jupyterlab==3.6.1",
 ]
 
-[tool.hatch.version]
-path = "raitracker/_version.py"
+# [tool.hatch.version]
+# path = "raitracker/_version.py"
 
 [tool.hatch.metadata.hooks.nodejs]
 fields = ["description", "authors", "urls"]
@@ -136,9 +136,9 @@ before-tag-release = [
     "git tag -a $VERSION -m 'Release $VERSION'",
 ]
 
-# before-build-npm = ["jlpm", "jlpm build"]
+before-build-npm = ["jlpm", "jlpm build"]
 
-# before-build-python = ["jlpm clean:all", "jlpm", "jlpm build"]
+before-build-python = ["jlpm clean:all", "jlpm", "jlpm build"]
 
 [tool.check-wheel-contents]
 ignore = ["W002"]
