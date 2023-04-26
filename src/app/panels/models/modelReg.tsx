@@ -1,6 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import { UUID } from 'angular2-uuid';
+import {v4 as UUID} from 'uuid';
 import React, { useState } from 'react';
 import { PathExt } from '@jupyterlab/coreutils';
 import { Contents } from '@jupyterlab/services';
@@ -202,7 +202,7 @@ export const ModelRegistration = () => {
                     if (fields[f] === datasetEntity.label) {
                         continue;
                     }
-                    _fValues.key = UUID.UUID();
+                    _fValues.key = UUID();
                     _fValues.name = fields[f];
                     _fValues.values = rawValues.map(row => row[f]);
                     fValuesList.push(_fValues);
@@ -496,7 +496,7 @@ export const ModelRegistration = () => {
             * update the dataset entity
            */
             if (addDataset) {
-                datasetEntity.key = UUID.UUID();
+                datasetEntity.key = UUID();
                 datasetEntity.masterKey = datasetEntity.key;
                 datasetEntity.masterName = datasetEntity.name;
             }

@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 import React from 'react';
 import { useState } from 'react';
-import { UUID } from 'angular2-uuid';
+import {v4 as UUID} from 'uuid';
 import { Label } from '@fluentui/react/lib/Label';
 import { useSelector, useDispatch } from 'react-redux';
 import { PrimaryButton, DefaultButton } from '@fluentui/react/lib/Button';
@@ -153,7 +153,7 @@ export const DuplicateCohort: React.FunctionComponent = (props) => {
             if (content) {
                 prevCohort = Object.assign({}, content);
                 dupCohort = Object.assign({}, content);
-                dupCohort.key = UUID.UUID();
+                dupCohort.key = UUID();
                 dupCohort.name = duplicatedCohortName;
                 const dateTime = new Date();
                 dupCohort.dateCreated = dateTime.toLocaleDateString();

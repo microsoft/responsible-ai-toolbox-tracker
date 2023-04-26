@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 import * as React from 'react';
-import { UUID } from 'angular2-uuid';
+import {v4 as UUID} from 'uuid';
 import { useState, useMemo } from 'react';
 import { PathExt } from '@jupyterlab/coreutils';
 import { Label } from '@fluentui/react/lib/Label';
@@ -179,7 +179,7 @@ export const ImportNotebook: React.FunctionComponent = () => {
         notebookMetrics.metrics = metricsArr
         notebookMetricsArr.push(notebookMetrics);
         newNotebook.name = notebookName;
-        newNotebook.key = UUID.UUID();
+        newNotebook.key = UUID();
         newNotebook.notebookVisible = false;
         /**
          * Create mlflow run if

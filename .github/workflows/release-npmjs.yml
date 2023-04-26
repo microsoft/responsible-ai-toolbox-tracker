@@ -105,6 +105,8 @@ jobs:
           npm run build:prod
           npm pack --pack-destination dist
 
+      # \share\jupyter\lab\extensions
+      
       # -------------------
       # Cleanup artifacts
       # - name: cleanup artifacts

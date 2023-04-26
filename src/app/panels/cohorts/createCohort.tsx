@@ -1,6 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import { UUID } from 'angular2-uuid';
+import {v4 as UUID} from 'uuid';
 import React, { useState } from 'react';
 import { PathExt } from '@jupyterlab/coreutils';
 import { useBoolean } from '@fluentui/react-hooks';
@@ -358,8 +358,8 @@ export const CreateCohort: React.FunctionComponent = () => {
         cohortFilter.args = [];
         cohortFilter.dataset = selectedDatasetOption?.text;
         cohortFilter.column = selectedDatasetFilter?.text;
-        cohortFilter.key = UUID.UUID();
-
+        cohortFilter.key = UUID();
+        
         if (isCategoricalChecked) {
             cohortFilter.isCategorical = true;
             cohortFilter.operation = undefined;

@@ -63,7 +63,7 @@ dev = [
 ]
 
 [tool.hatch.version]
-source = "nodejs"
+path = "raitracker/_version.py"
 
 [tool.hatch.metadata.hooks.nodejs]
 fields = ["description", "authors", "urls"]
@@ -79,9 +79,9 @@ include = [
 ]
 exclude = [".github"]
 
-# [tool.hatch.build.targets.wheel]
-# include = ["/raitracker"]
-# exclude = ["node_modules"]
+[tool.hatch.build.targets.wheel]
+include = ["raitracker"]
+exclude = ["node_modules"]
 
 [tool.hatch.build.targets.wheel.shared-data]
 "raitracker/labextension" = "share/jupyter/labextensions/raitracker"
@@ -89,8 +89,8 @@ exclude = [".github"]
 "jupyter-config/server-config" = "etc/jupyter/jupyter_server_config.d"
 "jupyter-config/nb-config" = "etc/jupyter/jupyter_notebook_config.d"
 
-[tool.hatch.build.hooks.version]
-path = "raitracker/_version.py"
+# [tool.hatch.build.hooks.version]
+# path = "raitracker/_version.py"
 
 [tool.hatch.build.hooks.jupyter-builder]
 dependencies = ["hatch-jupyter-builder>=0.5"]
@@ -118,11 +118,18 @@ version_cmd = "hatch version"
 # tag-message = "[ci skip] Release {tag_name}"
 
 [tool.jupyter-releaser.hooks]
-before-bump-version = [
+after-bump-version = [
     "pip install -e .[dev]",
     "git checkout .",
     "jlpm build:prod",
 ]
+
+
+# before-tag-release = [
+#     "pip install -e .[dev]",
+#     "git checkout .",
+#     "jlpm build:prod",
+# ]
 
 # before-build-npm = ["jlpm", "jlpm build"]
 

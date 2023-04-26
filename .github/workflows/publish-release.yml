@@ -51,6 +51,19 @@ jobs:
           name: dist-${{ github.run_number }}
           path: .jupyter_releaser_checkout/dist
 
+      # -------------------
+      # Commit the changes performed by the bump
+      # Also, tag the current commit with the version number
+      - name: commit new setup file
+        if: ${{ github.event.inputs.bumpType != 'none' }}
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+          git add package.json raitracker/_version.py
+          git commit -m "update version number"
+          VERSION=$(python bump_version.py 'none')
+          git tag -a $VERSION -m "Release $VERSION"
+
       - name: Populate Release
         id: populate-release
         uses: jupyter-server/jupyter_releaser/.github/actions/populate-release@v2
@@ -61,12 +74,22 @@ jobs:
           release_url: ${{ steps.prep-release.outputs.release_url }}
           steps_to_skip: ${{ github.event.inputs.steps_to_skip }}
 
+      # -------------------
+      # Push the changes performed by bump2version to the current branch
+      - name: Push changes
+        if: ${{ github.event.inputs.bumpType != 'none' }}
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+          tags: true
+
       - name: Finalize Release
         id: finalize-release
         env:
           # PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
           # PYPI_TOKEN_MAP: ${{ secrets.PYPI_TOKEN_MAP }}
-          TWINE_USERNAME: __token__
+          # TWINE_USERNAME: __token__
           NPM_TOKEN: ${{ secrets.NPMJS_API_TOKEN }}
         uses: jupyter-server/jupyter-releaser/.github/actions/finalize-release@v2
         with:

@@ -1,6 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import { UUID } from 'angular2-uuid';
+import {v4 as UUID} from 'uuid';
 import { DocumentManager } from '@jupyterlab/docmanager';
 import { DocumentRegistry } from '@jupyterlab/docregistry';
 import {
@@ -484,7 +484,7 @@ export class Utils {
             workspaceContent.dateCreated = state['workspaceSettings']['dateCreated'];
         }
         else {
-            workspaceContent.key = UUID.UUID();
+            workspaceContent.key = UUID();
             workspaceContent.projectList = [];
             workspaceContent.dateCreated = dateTime.toLocaleDateString();
         }
