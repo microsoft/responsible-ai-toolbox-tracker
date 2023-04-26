@@ -62,13 +62,11 @@ dev = [
     "jupyterlab==3.6.1",
 ]
 
-
-[tool.hatch.version]
-path = "raitracker/_version.py"
-validate-bump = false
-
 [tool.hatch.metadata.hooks.nodejs]
 fields = ["description", "authors", "urls"]
+
+[tool.hatch.build]
+artifacts = ["raitracker/labextension"]
 
 [tool.hatch.build.targets.sdist]
 artifacts = ["raitracker/labextension"]
