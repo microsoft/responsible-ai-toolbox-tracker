@@ -45,7 +45,8 @@
         "install:extension": "jlpm build",
         "watch": "run-p watch:src watch:labextension",
         "watch:src": "tsc -w",
-        "watch:labextension": "jupyter labextension watch ."
+        "watch:labextension": "jupyter labextension watch .",
+        "release:bump": "node release-bump.js"
     },
     "dependencies": {
         "@fluentui/react": "8.107.3",
@@ -84,6 +85,7 @@
         "yjs": "^13.5.17"
     },
     "devDependencies": {
+        "@jupyterlab/buildutils": "^3.5.0",
         "@babel/core": "^7.17.0",
         "@babel/preset-env": "^7.12.7",
         "@jupyter/ydoc": "~0.2.2",
