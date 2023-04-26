@@ -125,9 +125,6 @@ after-bump-version = [
 ]
 
 before-tag-release = [
-    "pip install -e .[dev]",
-    "git checkout .",
-    "jlpm build:prod",
     "git config user.name 'GitHub Actions Bot'",
     "git config user.email '<>'",
     "git add package.json raitracker/_version.py",
