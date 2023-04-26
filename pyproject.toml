@@ -62,11 +62,11 @@ dev = [
     "jupyterlab==3.6.1",
 ]
 
+[tool.hatch.version]
+source = "nodejs"
+
 [tool.hatch.metadata.hooks.nodejs]
 fields = ["description", "authors", "urls"]
-
-[tool.hatch.build]
-artifacts = ["raitracker/labextension"]
 
 [tool.hatch.build.targets.sdist]
 artifacts = ["raitracker/labextension"]
@@ -124,9 +124,9 @@ before-bump-version = [
     "jlpm build:prod",
 ]
 
-before-build-npm = ["jlpm", "jlpm build"]
+# before-build-npm = ["jlpm", "jlpm build"]
 
-before-build-python = ["jlpm clean:all", "jlpm", "jlpm build"]
+# before-build-python = ["jlpm clean:all", "jlpm", "jlpm build"]
 
 [tool.check-wheel-contents]
 ignore = ["W002"]
