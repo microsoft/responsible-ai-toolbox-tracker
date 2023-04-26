@@ -123,7 +123,7 @@ build_dir = "raitracker/labextension"
 
 [tool.jupyter-releaser.hooks]
 before-bump-version = [
-    "pip install -ve .[dev]",
+    "pip install -v .[dev]",
     "git checkout .",
     "jlpm build:prod",
 ]
