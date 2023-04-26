@@ -126,10 +126,10 @@ after-bump-version = [
 
 before-tag-release = [
       "cd dist",
-      "shopt -s extglob",
-      "rm -r -f !(app)",
-      "rm -r -f !(configs)",
-      "rm -r -f !(core)",
+    #   "shopt -s extglob",
+      "rm -r -f app",
+      "rm -r -f configs",
+      "rm -r -f core",
       "cd .."
 
     # "git config user.name 'GitHub Actions Bot'",
