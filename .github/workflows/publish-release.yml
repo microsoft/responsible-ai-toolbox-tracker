@@ -41,9 +41,15 @@ jobs:
           since: ${{ github.event.inputs.since }}
           since_last_stable: ${{ github.event.inputs.since_last_stable }}
 
-      - name: "** Next Step **"
+      - name: '** Next Step **'
         run: |
           echo "Optional): Review Draft Release: ${{ steps.prep-release.outputs.release_url }}"
+
+      - name: Upload Distributions
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist-${{ github.run_number }}
+          path: .jupyter_releaser_checkout/dist
 
       - name: Populate Release
         id: populate-release
