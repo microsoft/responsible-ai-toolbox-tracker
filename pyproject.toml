@@ -62,8 +62,8 @@ dev = [
     "jupyterlab==3.6.1",
 ]
 
-# [tool.hatch.version]
-# path = "raitracker/_version.py"
+[tool.hatch.version]
+source = "nodejs"
 
 [tool.hatch.metadata.hooks.nodejs]
 fields = ["description", "authors", "urls"]
@@ -89,8 +89,8 @@ exclude = ["node_modules"]
 "jupyter-config/server-config" = "etc/jupyter/jupyter_server_config.d"
 "jupyter-config/nb-config" = "etc/jupyter/jupyter_notebook_config.d"
 
-# [tool.hatch.build.hooks.version]
-# path = "raitracker/_version.py"
+[tool.hatch.build.hooks.version]
+path = "raitracker/_version.py"
 
 [tool.hatch.build.hooks.jupyter-builder]
 dependencies = ["hatch-jupyter-builder>=0.5"]
