@@ -129,7 +129,7 @@ before-bump-version = [
 ]
 
 [tool.jupyter-releaser.options]
-version-cmd = "jlpm run release:bump --force --skip-commit"
+version_cmd = "hatch version"
 
 before-build-npm = ["jlpm", "jlpm build"]
 
