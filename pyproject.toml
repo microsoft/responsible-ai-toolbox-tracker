@@ -65,8 +65,8 @@ dev = [
 [tool.hatch.version]
 source = "nodejs"
 path = "raitracker/_version.py"
-
 validate-bump = false
+
 [tool.hatch.metadata.hooks.nodejs]
 fields = ["description", "authors", "urls"]
 
@@ -113,6 +113,8 @@ npm = ["jlpm"]
 source_dir = "src"
 build_dir = "raitracker/labextension"
 
+[tool.jupyter-releaser.options]
+version_cmd = "hatch version"
 # npm-cmd = "npm publish --tag next"
 
 # [tool.jupyter-releaser.options]
@@ -123,13 +125,10 @@ build_dir = "raitracker/labextension"
 
 [tool.jupyter-releaser.hooks]
 before-bump-version = [
-    "pip install -v .[dev]",
+    "pip install -e .[dev]",
     "git checkout .",
     "jlpm build:prod",
 ]
-
-[tool.jupyter-releaser.options]
-version_cmd = "hatch version"
 
 before-build-npm = ["jlpm", "jlpm build"]
 
