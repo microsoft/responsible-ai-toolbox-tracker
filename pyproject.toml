@@ -124,12 +124,17 @@ after-bump-version = [
     "jlpm build:prod",
 ]
 
-
-# before-tag-release = [
-#     "pip install -e .[dev]",
-#     "git checkout .",
-#     "jlpm build:prod",
-# ]
+before-tag-release = [
+    "pip install -e .[dev]",
+    "git checkout .",
+    "jlpm build:prod",
+    "git config user.name 'GitHub Actions Bot'",
+    "git config user.email '<>'",
+    "git add package.json raitracker/_version.py",
+    "git commit -m 'update version number'",
+    "VERSION=$(python bump_version.py 'none')",
+    "git tag -a $VERSION -m 'Release $VERSION'",
+]
 
 # before-build-npm = ["jlpm", "jlpm build"]
 
