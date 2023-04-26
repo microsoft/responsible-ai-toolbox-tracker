@@ -60,6 +60,7 @@ dev = [
     "sphinx_rtd_theme>=1.1.1",
     "nbsphinx",
     "jupyterlab==3.6.1",
+    "poetry",
 ]
 
 [tool.hatch.version]
@@ -123,15 +124,13 @@ after-bump-version = [
     "git checkout .",
     "jlpm build:prod",
 ]
+# [tool.poetry.scripts]
+# pre-tag-release = "python -c \"import shutil; shutil.rmtree('/path/to/directory')\""
 
 before-tag-release = [
-      "cd dist",
-    #   "shopt -s extglob",
-      "rm -r -f app",
-      "rm -r -f configs",
-      "rm -r -f core",
-      "cd .."
-
+    "python -c \"import shutil; shutil.rmtree('/dist/app')\"",
+    "python -c \"import shutil; shutil.rmtree('/dist/configs')\"",
+    "python -c \"import shutil; shutil.rmtree('/dist/core')\"",
     # "git config user.name 'GitHub Actions Bot'",
     # "git config user.email '<>'",
     # "git add package.json raitracker/_version.py",
