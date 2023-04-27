@@ -128,9 +128,9 @@ after-bump-version = [
 # pre-tag-release = "python -c \"import shutil; shutil.rmtree('/path/to/directory')\""
 
 before-tag-release = [
-    "python -c \"import shutil; shutil.rmtree('/dist/app', ignore_errors=True)\"",
-    "python -c \"import shutil; shutil.rmtree('/dist/configs', ignore_errors=True)\"",
-    "python -c \"import shutil; shutil.rmtree('/dist/core', ignore_errors=True)\"",
+    "python -c \"import shutil; shutil.rmtree('dist/app', ignore_errors=True)\"",
+    "python -c \"import shutil; shutil.rmtree('dist/configs', ignore_errors=True)\"",
+    "python -c \"import shutil; shutil.rmtree('dist/core', ignore_errors=True)\"",
     # "git config user.name 'GitHub Actions Bot'",
     # "git config user.email '<>'",
     # "git add package.json raitracker/_version.py",
