@@ -124,11 +124,10 @@ after-bump-version = [
 
 before-tag-release = [
     "git checkout .",
-    "python -c \"import shutil; shutil.rmtree('app', ignore_errors=True)\"",
-    "python -c \"import shutil; shutil.rmtree('configs', ignore_errors=True)\"",
-    "python -c \"import shutil; shutil.rmtree('core', ignore_errors=True)\"",
-    "python -c \"import shutil; shutil.rmtree('index.d.ts', ignore_errors=True)\"",
-    "python -c \"import shutil; shutil.rmtree('index.js.map', ignore_errors=True)\"",
+    "python -c \"import shutil; shutil.rmtree('dist/app', ignore_errors=True)\"",
+    "python -c \"import shutil; shutil.rmtree('dist/configs', ignore_errors=True)\"",
+    "python -c \"import shutil; shutil.rmtree('dist/core', ignore_errors=True)\"",
+    "python -c \"import os; os.remove('index.*')\"",
 ]
 
 # before-build-npm = ["jlpm", "jlpm build"]
