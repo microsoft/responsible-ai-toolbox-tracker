@@ -112,11 +112,11 @@ npm = ["jlpm"]
 source_dir = "src"
 build_dir = "raitracker/labextension"
 
+[tool.jupyter-releaser]
+npm = { dist-tag = "latest", registry = "https://registry.npmjs.org/" }
+
 [tool.jupyter-releaser.options]
 version_cmd = "hatch version"
-# npm-cmd = "npm publish --tag next"
-# release-message = "[ci skip] Publish {version}"
-# tag-message = "[ci skip] Release {tag_name}"
 
 [tool.jupyter-releaser.hooks]
 after-bump-version = [
@@ -124,8 +124,6 @@ after-bump-version = [
     "git checkout .",
     "jlpm build:prod",
 ]
-# [tool.poetry.scripts]
-# pre-tag-release = "python -c \"import shutil; shutil.rmtree('/path/to/directory')\""
 
 before-tag-release = [
     "python -c \"import shutil; shutil.rmtree('dist/app', ignore_errors=True)\"",
