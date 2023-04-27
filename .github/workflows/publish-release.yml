@@ -67,7 +67,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           target: ${{ github.event.inputs.target }}
           release_url: ${{ steps.populate-release.outputs.release_url }}
-          npm_cmd: "npm publish --tag next"
+          npm_cmd: 'npm publish --tag next'
 
       - name: '** Next Step **'
         if: ${{ success() }}

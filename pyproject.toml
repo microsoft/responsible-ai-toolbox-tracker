@@ -126,6 +126,8 @@ before-tag-release = [
     "python -c \"import shutil; shutil.rmtree('dist/app', ignore_errors=True)\"",
     "python -c \"import shutil; shutil.rmtree('dist/configs', ignore_errors=True)\"",
     "python -c \"import shutil; shutil.rmtree('dist/core', ignore_errors=True)\"",
+    "python -c \"import shutil; shutil.rmtree('dist/index.d.ts', ignore_errors=True)\"",
+    "python -c \"import shutil; shutil.rmtree('dist/index.js.map', ignore_errors=True)\"",
 ]
 
 before-build-npm = ["jlpm", "jlpm build"]
