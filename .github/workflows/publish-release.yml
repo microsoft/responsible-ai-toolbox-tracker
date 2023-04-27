@@ -41,9 +41,6 @@ jobs:
           since: ${{ github.event.inputs.since }}
           since_last_stable: ${{ github.event.inputs.since_last_stable }}
 
-      - name: Populate Release
-        id: populate-release
-        uses: jupyter-server/jupyter_releaser/.github/actions/populate-release@v2
       # - uses: actions/checkout@v3
       # - name: remove directories
       #   shell: bash
@@ -51,13 +48,22 @@ jobs:
       #     rm -rv !(dist/app*)
       #     rm -rv !(dist/configs*)
       #     rm -rv !(dist/core*)
+      - name: Populate Release
+        id: populate-release
+        uses: jupyter-server/jupyter_releaser/.github/actions/populate-release@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           target: ${{ github.event.inputs.target }}
           branch: ${{ github.event.inputs.branch }}
           release_url: ${{ steps.prep-release.outputs.release_url }}
           steps_to_skip: ${{ github.event.inputs.steps_to_skip }}
-
+          # Check if there are changes to commit before creating a release commit
+          check_changes_before_commit: True
+          # Check if the working tree is clean before creating a release commit
+          check_clean_working_tree_before_commit: True
+          # Check if the release commit message already exists before creating a release commit
+          check_duplicate_commit_message: True
+          
       - name: Finalize Release
         id: finalize-release
         env:
@@ -71,7 +77,7 @@ jobs:
           target: ${{ github.event.inputs.target }}
           release_url: ${{ steps.populate-release.outputs.release_url }}
           # npm_cmd: 'npm publish --dry-run'
-          npm_cmd: "npm publish --tag next"
+          npm_cmd: 'npm publish --tag next'
 
       - name: '** Next Step **'
         if: ${{ success() }}

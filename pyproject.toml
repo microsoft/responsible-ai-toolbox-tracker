@@ -124,6 +124,8 @@ after-bump-version = [
 
 before-tag-release = [
     "git checkout .",
+    "jlpm", 
+    "jlpm build",
     "python -c \"import shutil; shutil.rmtree('dist/app', ignore_errors=True)\"",
     "python -c \"import shutil; shutil.rmtree('dist/configs', ignore_errors=True)\"",
     "python -c \"import shutil; shutil.rmtree('dist/core', ignore_errors=True)\"",
