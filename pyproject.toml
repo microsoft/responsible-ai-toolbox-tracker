@@ -112,9 +112,6 @@ npm = ["jlpm"]
 source_dir = "src"
 build_dir = "raitracker/labextension"
 
-[tool.jupyter-releaser]
-npm = { dist-tag = "latest", registry = "https://registry.npmjs.org/" }
-
 [tool.jupyter-releaser.options]
 version_cmd = "hatch version"
 
@@ -129,13 +126,6 @@ before-tag-release = [
     "python -c \"import shutil; shutil.rmtree('dist/app', ignore_errors=True)\"",
     "python -c \"import shutil; shutil.rmtree('dist/configs', ignore_errors=True)\"",
     "python -c \"import shutil; shutil.rmtree('dist/core', ignore_errors=True)\"",
-    # "git config user.name 'GitHub Actions Bot'",
-    # "git config user.email '<>'",
-    # "git add package.json raitracker/_version.py",
-    # "git commit -m 'update version number'",
-    # "VERSION=$(python bump_version.py 'none')",
-    # "git tag -a $VERSION -m 'Release $VERSION'",
-    # "git push origin $VERSION"
 ]
 
 before-build-npm = ["jlpm", "jlpm build"]
