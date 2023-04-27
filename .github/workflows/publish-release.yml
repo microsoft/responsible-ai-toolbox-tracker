@@ -41,9 +41,19 @@ jobs:
           since: ${{ github.event.inputs.since }}
           since_last_stable: ${{ github.event.inputs.since_last_stable }}
 
-      - name: '** Next Step **'
+      - uses: actions/checkout@v3
+      - name: Install Dependencies
+        shell: bash
         run: |
-          echo "Optional): Review Draft Release: ${{ steps.prep-release.outputs.release_url }}"
+          pip install -e .
+
+      - uses: actions/checkout@v3
+      - name: Remove directories
+        shell: bash
+        run: |
+          rm -rv !(dist*)
+          rm -rv !(configs*)
+          rm -rv !(core*)
 
       - name: Populate Release
         id: populate-release
@@ -60,14 +70,14 @@ jobs:
         env:
           # PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
           # PYPI_TOKEN_MAP: ${{ secrets.PYPI_TOKEN_MAP }}
-          # TWINE_USERNAME: __token__
+          TWINE_USERNAME: __token__
           NPM_TOKEN: ${{ secrets.NPMJS_API_TOKEN }}
         uses: jupyter-server/jupyter-releaser/.github/actions/finalize-release@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           target: ${{ github.event.inputs.target }}
           release_url: ${{ steps.populate-release.outputs.release_url }}
-          npm_cmd: 'npm publish --tag next'
+          npm_cmd: 'npm publish --dry-run'
 
       - name: '** Next Step **'
         if: ${{ success() }}
