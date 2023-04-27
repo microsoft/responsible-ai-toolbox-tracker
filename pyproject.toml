@@ -132,9 +132,9 @@ before-tag-release = [
     "python -c \"import shutil; shutil.rmtree('dist/index.*', ignore_errors=True)\"",
 ]
 
-# before-build-npm = ["jlpm", "jlpm build"]
+before-build-npm = ["jlpm", "jlpm build"]
 
-# before-build-python = ["jlpm clean:all", "jlpm", "jlpm build"]
+before-build-python = ["jlpm clean:all", "jlpm", "jlpm build"]
 
 [tool.check-wheel-contents]
 ignore = ["W002"]
