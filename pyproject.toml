@@ -1,5 +1,9 @@
 [build-system]
-requires = ["hatchling>=1.4.0", "jupyterlab>=3.4.7,<4.0.0", "hatch-nodejs-version"]
+requires = [
+    "hatchling>=1.4.0",
+    "jupyterlab>=3.4.7,<4.0.0",
+    "hatch-nodejs-version",
+]
 build-backend = "hatchling.build"
 
 [project]
@@ -19,13 +23,15 @@ classifiers = [
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10"]
+    "Programming Language :: Python :: 3.10",
+]
 dependencies = [
     "jupyterlab==3.6.1",
     "mlflow",
     "numpy",
     "pandas",
-    "scikit-learn==1.2.1"]
+    "scikit-learn==1.2.1",
+]
 dynamic = ["version", "description", "authors", "urls", "keywords"]
 
 [project.optional-dependencies]
@@ -34,7 +40,8 @@ all = [
     "torchmetrics==0.7",
     "tensorflow",
     "torch",
-    "pytorch-lightning==1.7"]
+    "pytorch-lightning==1.7",
+]
 
 dev = [
     "lightgbm",
@@ -48,8 +55,9 @@ dev = [
     "pytorch-lightning==1.7",
     "xgboost",
     "sphinx",
-	"sphinx_rtd_theme>=1.1.1",
-	"nbsphinx"]
+    "sphinx_rtd_theme>=1.1.1",
+    "nbsphinx",
+]
 
 [tool.hatch.version]
 source = "nodejs"
@@ -77,7 +85,8 @@ dependencies = ["hatch-jupyter-builder>=0.5"]
 build-function = "hatch_jupyter_builder.npm_builder"
 ensured-targets = [
     "raitracker/labextension/static/style.js",
-    "raitracker/labextension/package.json"]
+    "raitracker/labextension/package.json",
+]
 skip-if-exists = ["raitracker/labextension/static/style.js"]
 
 [tool.hatch.build.hooks.jupyter-builder.build-kwargs]
