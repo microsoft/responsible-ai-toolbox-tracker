@@ -4,7 +4,6 @@
     "description": "Responsible AI Toolbox Tracker",
     "keywords": [
         "responsible ai tracker",
-        "responsible ai tracker",
         "responsible ai",
         "rai",
         "jupyterlab",
@@ -78,8 +77,8 @@
         "@types/react-redux": "^7.1.5",
         "cat": "^0.2.0",
         "lodash": "^4.17.21",
-        "react": "17.0.2",
-        "react-dom": "17.0.2",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
         "react-redux": "^7.2.9",
         "redux": "^4.1.2",
         "uuid": "^9.0.0",

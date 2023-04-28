@@ -70,7 +70,6 @@ source = "nodejs"
 fields = ["description", "authors", "urls"]
 
 [tool.hatch.build.targets.sdist]
-[tool.hatch.build.targets.sdist]
 artifacts = ["raitracker/labextension"]
 include = [
     "/*.md",
@@ -126,7 +125,7 @@ after-bump-version = [
 
 before-tag-release = [
     "git checkout .",
-    "jlpm", 
+    "jlpm",
     "jlpm build",
     "python -c \"import shutil; shutil.rmtree('dist/app', ignore_errors=True)\"",
     "python -c \"import shutil; shutil.rmtree('dist/configs', ignore_errors=True)\"",
