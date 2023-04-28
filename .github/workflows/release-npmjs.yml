@@ -134,8 +134,7 @@ jobs:
       - name: Publish package to npmjs
         run: npm publish
         env:
-          NODE_AUTH_TOKEN:
-            ${{ secrets.NPMJS_API_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPMJS_API_TOKEN }}
 
       # -------------------
       # Commit the changes performed by the bump

@@ -41,12 +41,6 @@ jobs:
           since: ${{ github.event.inputs.since }}
           since_last_stable: ${{ github.event.inputs.since_last_stable }}
 
-      - name: Upload Distributions
-        uses: actions/upload-artifact@v2
-        with:
-          name: dist-${{ github.run_number }}
-          path: .jupyter_releaser_checkout/dist
-
       - name: Populate Release
         id: populate-release
         uses: jupyter-server/jupyter_releaser/.github/actions/populate-release@v2
