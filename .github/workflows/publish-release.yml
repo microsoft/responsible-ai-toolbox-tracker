@@ -57,12 +57,6 @@ jobs:
           branch: ${{ github.event.inputs.branch }}
           release_url: ${{ steps.prep-release.outputs.release_url }}
           steps_to_skip: ${{ github.event.inputs.steps_to_skip }}
-          # Check if there are changes to commit before creating a release commit
-          check_changes_before_commit: True
-          # Check if the working tree is clean before creating a release commit
-          check_clean_working_tree_before_commit: True
-          # Check if the release commit message already exists before creating a release commit
-          check_duplicate_commit_message: True
           
       - name: Finalize Release
         id: finalize-release

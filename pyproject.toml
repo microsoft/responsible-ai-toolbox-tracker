@@ -83,6 +83,7 @@ exclude = [".github"]
 [tool.hatch.build.targets.wheel]
 include = ["raitracker"]
 exclude = ["node_modules"]
+# raitracker.server = ["raitracker"]
 
 [tool.hatch.build.targets.wheel.shared-data]
 "raitracker/labextension" = "share/jupyter/labextensions/raitracker"
