@@ -23,4 +23,5 @@ saved_models/
 labextension/
 npm-debug.log
 datasets/
-docs
+docs/
+docs/_build
