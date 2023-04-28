@@ -1,9 +1,5 @@
 [build-system]
-requires = [
-    "hatchling>=1.4.0",
-    "jupyterlab>=3.4.7,<4.0.0",
-    "hatch-nodejs-version",
-]
+requires = ["hatchling>=1.4.0", "jupyterlab>=3.4.7,<4.0.0", "hatch-nodejs-version"]
 build-backend = "hatchling.build"
 
 [project]
@@ -23,16 +19,13 @@ classifiers = [
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
-]
-
+    "Programming Language :: Python :: 3.10"]
 dependencies = [
     "jupyterlab==3.6.1",
     "mlflow",
     "numpy",
     "pandas",
-    "scikit-learn==1.2.1",
-]
+    "scikit-learn==1.2.1"]
 dynamic = ["version", "description", "authors", "urls", "keywords"]
 
 [project.optional-dependencies]
@@ -41,11 +34,9 @@ all = [
     "torchmetrics==0.7",
     "tensorflow",
     "torch",
-    "pytorch-lightning==1.7",
-]
+    "pytorch-lightning==1.7"]
 
 dev = [
-    "build",
     "lightgbm",
     "matplotlib",
     "torch",
@@ -57,11 +48,8 @@ dev = [
     "pytorch-lightning==1.7",
     "xgboost",
     "sphinx",
-    "sphinx_rtd_theme>=1.1.1",
-    "nbsphinx",
-    "jupyterlab==3.6.1",
-    "poetry",
-]
+	"sphinx_rtd_theme>=1.1.1",
+	"nbsphinx"]
 
 [tool.hatch.version]
 source = "nodejs"
@@ -69,27 +57,17 @@ source = "nodejs"
 [tool.hatch.metadata.hooks.nodejs]
 fields = ["description", "authors", "urls"]
 
-[tool.hatch.build.targets.sdist]
+[tool.hatch.build]
 artifacts = ["raitracker/labextension"]
-include = [
-    "/*.md",
-    "raitracker/labextension",
-    "/jupyter-config",
-    "/raitracker",
-    "/package.json",
-]
-exclude = [".github"]
-
-[tool.hatch.build.targets.wheel]
-include = ["raitracker"]
-exclude = ["node_modules"]
-# raitracker.server = ["raitracker"]
 
 [tool.hatch.build.targets.wheel.shared-data]
 "raitracker/labextension" = "share/jupyter/labextensions/raitracker"
 "install.json" = "share/jupyter/labextensions/raitracker/install.json"
-"jupyter-config/server-config" = "etc/jupyter/jupyter_server_config.d"
-"jupyter-config/nb-config" = "etc/jupyter/jupyter_notebook_config.d"
+"jupyter-config/server-config/raitracker.json" = "etc/jupyter/jupyter_server_config.d/raitracker.json"
+"jupyter-config/nb-config/raitracker.json" = "etc/jupyter/jupyter_notebook_config.d/raitracker.json"
+
+[tool.hatch.build.targets.sdist]
+exclude = [".github"]
 
 [tool.hatch.build.hooks.version]
 path = "raitracker/_version.py"
@@ -99,8 +77,7 @@ dependencies = ["hatch-jupyter-builder>=0.5"]
 build-function = "hatch_jupyter_builder.npm_builder"
 ensured-targets = [
     "raitracker/labextension/static/style.js",
-    "raitracker/labextension/package.json",
-]
+    "raitracker/labextension/package.json"]
 skip-if-exists = ["raitracker/labextension/static/style.js"]
 
 [tool.hatch.build.hooks.jupyter-builder.build-kwargs]
@@ -115,27 +92,3 @@ build_dir = "raitracker/labextension"
 
 [tool.jupyter-releaser.options]
 version_cmd = "hatch version"
-
-[tool.jupyter-releaser.hooks]
-after-bump-version = [
-    "pip install -e .[dev]",
-    "git checkout .",
-    "jlpm build:prod",
-]
-
-before-tag-release = [
-    "git checkout .",
-    "jlpm",
-    "jlpm build",
-    "python -c \"import shutil; shutil.rmtree('dist/app', ignore_errors=True)\"",
-    "python -c \"import shutil; shutil.rmtree('dist/configs', ignore_errors=True)\"",
-    "python -c \"import shutil; shutil.rmtree('dist/core', ignore_errors=True)\"",
-    "python -c \"import shutil; shutil.rmtree('dist/index.*', ignore_errors=True)\"",
-]
-
-before-build-npm = ["jlpm", "jlpm build"]
-
-before-build-python = ["jlpm clean:all", "jlpm", "jlpm build"]
-
-[tool.check-wheel-contents]
-ignore = ["W002"]

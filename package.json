@@ -75,6 +75,7 @@
         "@lumino/widgets": "^1.37.1",
         "@types/codemirror": "^5.60.5",
         "@types/react-redux": "^7.1.5",
+								  
         "cat": "^0.2.0",
         "lodash": "^4.17.21",
         "react": "^17.0.2",
@@ -90,13 +91,18 @@
         "@jupyter/ydoc": "~0.2.2",
         "@jupyterlab/buildutils": "^3.5.0",
         "@types/lodash": "^4.14.180",
-        "@types/react": "17.0.53",
+        "@types/react": "^17.0.53",
         "@types/react-dom": "^17.0.18",
         "babel-loader": "^9.1.0",
         "cz-conventional-changelog": "3.3.0",
         "rimraf": "^3.0.2",
         "typescript": "~4.3.5",
         "webpack": "^5.70.0"
+    },
+    "browser": {
+        "fs": false,
+        "path": false,
+        "os": false
     },
     "directories": {
         "dist": "dist/"
