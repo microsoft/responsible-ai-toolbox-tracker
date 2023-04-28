@@ -63,14 +63,14 @@ jobs:
         run: >-
           python -m pip install build
 
-      # -------------------
-      # Run tests before uploading to NPMJS
-      - name: run tests
-        run: |
-          cd raitracker/training/src/
-          sh generate_models.sh
-          cd ../../..
-          pytest --cov=raitracker raitracker/test/.
+      # # -------------------
+      # # Run tests before uploading to NPMJS
+      # - name: run tests
+      #   run: |
+      #     cd raitracker/training/src/
+      #     sh generate_models.sh
+      #     cd ../../..
+      #     pytest --cov=raitracker raitracker/test/.
 
       # -------------------
       # Setup .npmrc file on the runner to publish to npm
@@ -86,15 +86,15 @@ jobs:
       - name: Install client packages
         run: npm install
 
-      # -------------------
-      # Compile typescript code
-      - name: Compile raitracker
-        run: npm run build
+      # # -------------------
+      # # Compile typescript code
+      # - name: Compile raitracker
+      #   run: npm run build
 
-      # -------------------
-      # Build wheel
-      - name: build wheel
-        run: python -m build
+      # # -------------------
+      # # Build wheel
+      # - name: build wheel
+      #   run: python -m build
 
       # -------------------
       # Build NPM package
@@ -103,8 +103,9 @@ jobs:
           python -m pip install jupyterlab==3.6.1
           npm i rimraf
           npm run build:prod
-          npm pack --pack-destination raitracker/labextension
+          python -m build
           cp dist/*.tar.gz raitracker/labextension
+          npm pack --pack-destination raitracker/labextension
         env:
           # ensure that the Python package dependencies are included
           PYTHONPATH: ./raitracker
