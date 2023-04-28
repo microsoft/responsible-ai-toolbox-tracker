@@ -26,3 +26,4 @@ datasets/
 docs/_build/
 .jupyter_releaser_checkout/
 .github/workflows/check-release-yml
+docs/

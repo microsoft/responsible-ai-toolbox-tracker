@@ -40,6 +40,14 @@
     display: flex;
 }
 
+.rangeOutputStyle {
+    text-align: left;
+    align-content: left;
+    font-size: 13px;
+    font-weight: 400;
+    width: 100%;
+}
+
 .cohortLabel {
     align-items: left;
     width: 200px;

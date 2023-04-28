@@ -9,8 +9,6 @@ import { FontIcon } from '@fluentui/react/lib/Icon';
 import { NotebookPanel } from '@jupyterlab/notebook';
 import { useDispatch, useSelector } from 'react-redux';
 import { notebookIcon, folderIcon } from '@jupyterlab/ui-components';
-import { FocusZone, FocusZoneDirection } from '@fluentui/react-focus';
-import { KeyCodes, getRTLSafeKeyCode } from '@fluentui/react/lib/Utilities';
 import { TooltipHost, ITooltipHostStyles } from '@fluentui/react/lib/Tooltip';
 import { Utils } from '../../../core/utils';
 import { WorkModeData } from './projectUtils';

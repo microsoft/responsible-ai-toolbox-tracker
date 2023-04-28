@@ -70,6 +70,7 @@ source = "nodejs"
 fields = ["description", "authors", "urls"]
 
 [tool.hatch.build.targets.sdist]
+[tool.hatch.build.targets.sdist]
 artifacts = ["raitracker/labextension"]
 include = [
     "/*.md",
