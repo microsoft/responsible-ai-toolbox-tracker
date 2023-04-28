@@ -1,6 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import { UUID } from 'angular2-uuid';
+import {v4 as UUID} from 'uuid';
 import { CreateRun } from './mlflowUtils';
 import { Widget } from '@lumino/widgets';
 import { ArrayExt } from '@lumino/algorithm';
@@ -119,7 +119,7 @@ export class NotebookUtils {
         notebookMetrics.mapTo = '';
         notebookMetrics.metrics = metricsArr
         notebookMetricsArr.push(notebookMetrics);
-        newNotebook.key = UUID.UUID();
+        newNotebook.key = UUID();
         newNotebook.name = newFile.name;
         newNotebook.notebookVisible = false;
         newNotebook.mlFlowRunId = mlFlowRunId;
@@ -271,7 +271,7 @@ export class NotebookUtils {
         notebookMetrics.mapTo = ''; //todo: add the map to functionality
         notebookMetrics.metrics = metricsArr
         notebookMetricsArr.push(notebookMetrics);
-        newNotebook.key = UUID.UUID();
+        newNotebook.key = UUID();
         newNotebook.name = newFile.name;
         newNotebook.notebookVisible = false;
         newNotebook.mlFlowRunId = mlFlowRunId;

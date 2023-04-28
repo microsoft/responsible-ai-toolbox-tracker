@@ -1,6 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import { UUID } from 'angular2-uuid';
+import {v4 as UUID} from 'uuid';
 import React, { useState } from 'react';
 import { PathExt } from '@jupyterlab/coreutils';
 import { FontIcon } from '@fluentui/react/lib/Icon';
@@ -376,7 +376,7 @@ export const CreateCohort: React.FunctionComponent = () => {
         cohortFilter.args = [];
         cohortFilter.dataset = selectedDatasetOption?.text;
         cohortFilter.column = selectedDatasetFilter?.text;
-        cohortFilter.key = UUID.UUID();
+        cohortFilter.key = UUID();
         if (isCategoricalChecked) {
             cohortFilter.isCategorical = true;
             cohortFilter.operation = undefined;
@@ -603,7 +603,7 @@ export const CreateCohort: React.FunctionComponent = () => {
     const saveCohort = (_utils: Utils) => {
         let ent = {} as IDatasetType;
         let dateTime = new Date();
-        ent.key = UUID.UUID();
+        ent.key = UUID();
         ent.name = cohortName;
         ent.isCohort = true;
         ent.masterKey = selectedDatasetOption?.key;
@@ -843,6 +843,7 @@ export const CreateCohort: React.FunctionComponent = () => {
         const numericValue = Number(value);
         if (numericValue !== undefined) {
             let newValue: string;
+          
             if (numericValue + 1 < valueMin) {
                 newValue = String(valueMin);
             } else {

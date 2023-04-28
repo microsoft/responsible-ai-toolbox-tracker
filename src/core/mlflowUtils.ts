@@ -1,6 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-import { UUID } from 'angular2-uuid';
+import {v4 as UUID} from 'uuid';
 import { requestAPI } from './handler';
 import { PathExt } from '@jupyterlab/coreutils';
 
@@ -209,7 +209,7 @@ export const RegisterModel = async (projectSettings: any, mlFlowRunId: string, m
                 }
             }
             if (addDataset) {
-                dbKey = UUID.UUID();
+                dbKey = UUID();
                 masterKey = dbKey;
                 masterName = _datasetName;
             }

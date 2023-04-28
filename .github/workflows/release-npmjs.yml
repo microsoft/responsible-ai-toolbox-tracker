@@ -6,7 +6,7 @@ on:
         types: [published]
       bumpType:
         type: choice
-        description: "version options"
+        description: 'version options'
         options:
           - major
           - minor
@@ -20,14 +20,14 @@ jobs:
     name: release to npmjs
     runs-on: ubuntu-latest
 
-    steps:       
+    steps:
       # -------------------
       # Checkout code
       - uses: actions/checkout@v3
         with:
           persist-credentials: false
           fetch-depth: 0
-      
+
       # -------------------
       # Setup python on the runner
       - uses: actions/setup-python@v3
@@ -35,7 +35,7 @@ jobs:
           python-version: 3.9
 
       # -------------------
-      # Install basic packages (not associated with the repo)      
+      # Install basic packages (not associated with the repo)
       - name: update and upgrade pip, semver
         run: |
           pip install --upgrade pip
@@ -64,15 +64,15 @@ jobs:
           python -m pip install build --user
 
       # -------------------
-      # Run tests before uploading to PyPi
+      # Run tests before uploading to npmjs
       - name: run tests
         run: |
           cd raitracker/training/src/
           sh generate_models.sh
           cd ../../..
           pytest --cov=raitracker raitracker/test/.
-      
-      # -------------------    
+
+      # -------------------
       # Setup .npmrc file on the runner to publish to npm
       - name: Setup node
         uses: actions/setup-node@v3
@@ -91,23 +91,71 @@ jobs:
       - name: Compile raitracker
         run: npm run build
 
-      # -------------------
-      # Build wheel
-      - name: build wheel
-        run: python -m build
+      # # -------------------
+      # # Build wheel
+      # - name: build wheel
+      #   run: python -m build
 
-      # -------------------
-      # Cleanup artifacts
-      - name: cleanup artifacts
+      # Build NPM package
+      - name: Build NPM package
         run: |
-          cd dist/
-          shopt -s extglob
-          rm -rv !(raitracker*)
-          cd ..
+          python -m pip install jupyterlab==3.6.1
+          npm i rimraf
+          npm run build:prod
+          python -m build
+          # build the Python distribution package
+          # python setup.py sdist bdist_wheel --universal
+          # copy the built package to the NPM package directory
+          cp dist/*.tar.gz raitracker/labextension
+          npm pack --pack-destination dist
+          cp dist/*.tgz raitracker/labextension 
+          cp -r raitracker/labextension  dist
+        env:
+          # ensure that the Python package dependencies are included
+          PYTHONPATH: ./raitracker
+
+      - name: Upload Distributions
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist-${{ github.run_number }}
+          path: .jupyter_releaser_checkout/dist
+
+      # # -------------------
+      # # Cleanup artifacts
+      # - name: cleanup artifacts
+      #   run: |
+      #     cd dist/
+      #     shopt -s extglob
+      #     rm -rv !(raitracker*)
+      #     cd ..
 
       # -------------------
-      # Publish package to npmjs      
-      - name: Publish package to npmjs   
+      # Publish package to npmjs
+      - name: Publish package to npmjs
         run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPMJS_API_TOKEN }}
+          NODE_AUTH_TOKEN:
+            ${{ secrets.NPMJS_API_TOKEN }}
+
+      # -------------------
+      # Commit the changes performed by the bump
+      # Also, tag the current commit with the version number
+      - name: commit new setup file
+        if: ${{ github.event.inputs.bumpType != 'none' }}
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+          git add package.json raitracker/_version.py
+          git commit -m "update version number"
+          VERSION=$(python bump_version.py 'none')
+          git tag -a $VERSION -m "Release $VERSION"
+
+      # -------------------
+      # Push the changes performed by bump2version to the current branch
+      - name: Push changes
+        if: ${{ github.event.inputs.bumpType != 'none' }}
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+          tags: true

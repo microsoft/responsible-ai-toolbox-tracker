@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 import React from 'react';
 import { useState } from 'react';
-import { UUID } from 'angular2-uuid';
+import {v4 as UUID} from 'uuid';
 import { PathExt } from '@jupyterlab/coreutils'
 import { Label } from '@fluentui/react/lib/Label';
 import { useSelector, useDispatch } from 'react-redux';
@@ -235,7 +235,7 @@ export const NewProjectModal: React.FunctionComponent = () => {
 
             notebook.name = notebookName;
             notebook.notebookVisible = false;
-            notebook.key = UUID.UUID();
+            notebook.key = UUID();
             notebook.mlFlowRunId = mlflowRunId;
             notebook.testDataset = '';
             notebook.testDatasetKey = '';
@@ -402,7 +402,7 @@ export const NewProjectModal: React.FunctionComponent = () => {
         }
         else {
             let project = {} as IProjectType;
-            project.key = UUID.UUID();
+            project.key = UUID();
             project.name = currentEvent.project_name.value.trim();
             /**
              * Create the project folder.  Use a GUID for identification.  
