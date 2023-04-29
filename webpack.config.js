@@ -1,6 +1,6 @@
 
 import { resolve } from "path";
-export const mode = "development";
+export const mode = "production";
 export const entry = resolve(__dirname, "dist/index.js");
 export const output = {
   path: resolve(__dirname, "dist"),
