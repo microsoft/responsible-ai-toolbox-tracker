@@ -27,9 +27,9 @@ classifiers = [
 ]
 dependencies = [
     "jupyterlab==3.6.1",
-    "mlflow",
-    "numpy",
-    "pandas",
+    "mlflow== 2.3.1",
+    "numpy==1.24.3",
+    "pandas==2.0.1",
     "scikit-learn==1.2.1",
 ]
 dynamic = ["version", "description", "authors", "urls", "keywords"]

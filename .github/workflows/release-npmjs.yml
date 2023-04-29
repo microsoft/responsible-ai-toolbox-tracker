@@ -91,11 +91,6 @@ jobs:
       - name: Compile raitracker
         run: npm run build
 
-      # # -------------------
-      # # Build wheel
-      # - name: build wheel
-      #   run: python -m build
-
       # Build NPM package
       - name: Build NPM package
         run: |
