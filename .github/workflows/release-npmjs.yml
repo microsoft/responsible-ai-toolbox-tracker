@@ -103,6 +103,7 @@ jobs:
           npm i rimraf
           npm run build:prod
           python -m build
+          pip install -e .
           # build the Python distribution package
           # python setup.py sdist bdist_wheel --universal
           # copy the built package to the NPM package directory

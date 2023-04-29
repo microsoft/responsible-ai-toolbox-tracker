@@ -30,26 +30,26 @@
         "url": "https://github.com/microsoft/responsible-ai-toolbox-tracker.git"
     },
     "scripts": {
-        "build": "tsc && jlpm build:labextension:dev",
+        "build": "tsc && jupyter lab build",
         "cleanbuild": "npm run clean:all && tsc && jupyter lab build",
-        "build:prod": "jlpm clean && jlpm build:dist && jlpm build:labextension",
+        "build:prod": "npm run clean && npm run build:dist && npm run build:labextension",
         "build:labextension": "jupyter labextension build .",
         "build:labextension:dev": "jupyter labextension build --development True .",
         "build:dist": "tsc",
-        "clean": "jlpm clean:dist",
+        "clean": "npm run clean:dist",
         "clean:dist": "rimraf dist tsconfig.tsbuildinfo",
         "clean:labextension": "rimraf raitracker/labextension",
-        "clean:all": "jlpm clean:dist && jlpm clean:labextension",
+        "clean:all": "npm run clean:dist && npm run clean:labextension",
         "eslint": "eslint . --ext .ts,.tsx --fix",
         "eslint:check": "eslint . --ext .ts,.tsx",
-        "install:extension": "jlpm build",
+        "install:extension": "npm run build",
         "watch": "run-p watch:src watch:labextension",
         "watch:src": "tsc -w",
         "watch:labextension": "jupyter labextension watch .",
         "release:bump": "node release-bump.js"
     },
     "dependencies": {
-        "@fluentui/react": "8.107.3",
+        "@fluentui/react": "8.108.2",
         "@jupyterlab/application": "~3.6.1",
         "@jupyterlab/apputils": "^3.6.1",
         "@jupyterlab/builder": "^3.5.0",
@@ -74,8 +74,7 @@
         "@lumino/signaling": "^1.10.0",
         "@lumino/widgets": "^1.37.1",
         "@types/codemirror": "^5.60.5",
-        "@types/react-redux": "^7.1.5",
-		  
+        "@types/react-redux": "^7.1.5",		  
         "cat": "^0.2.0",
         "lodash": "^4.17.21",
         "react": "^17.0.2",
@@ -91,13 +90,18 @@
         "@jupyter/ydoc": "~0.2.2",
         "@jupyterlab/buildutils": "^3.5.0",
         "@types/lodash": "^4.14.180",
-        "@types/react": "17.0.53",
+        "@types/react": "^17.0.53",
         "@types/react-dom": "^17.0.18",
         "babel-loader": "^9.1.0",
         "cz-conventional-changelog": "3.3.0",
         "rimraf": "^3.0.2",
         "typescript": "~4.3.5",
         "webpack": "^5.70.0"
+    },
+    "browser": {
+        "fs": false,
+        "path": false,
+        "os": false
     },
     "directories": {
         "dist": "dist/"
