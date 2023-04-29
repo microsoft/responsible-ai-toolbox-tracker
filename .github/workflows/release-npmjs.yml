@@ -116,14 +116,14 @@ jobs:
           name: dist-${{ github.run_number }}
           path: .jupyter_releaser_checkout/dist
 
-      # # -------------------
-      # # Cleanup artifacts
-      # - name: cleanup artifacts
-      #   run: |
-      #     cd dist/
-      #     shopt -s extglob
-      #     rm -rv !(raitracker*)
-      #     cd ..
+      # -------------------
+      # Cleanup artifacts
+      - name: cleanup artifacts
+        run: |
+          cd dist/
+          shopt -s extglob
+          rm -rv !(raitracker*)
+          cd ..
 
       # -------------------
       # Publish package to npmjs

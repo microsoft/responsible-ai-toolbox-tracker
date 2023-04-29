@@ -75,10 +75,10 @@ jobs:
       - name: '** Next Step **'
         if: ${{ success() }}
         run: |
-          echo "Verify the final release"
-          echo ${{ steps.finalize-release.outputs.release_url }}
+          echo "Verify the final release" >> $GITHUB_OUTPUT
+          echo ${{ steps.finalize-release.outputs.release_url }} >> $GITHUB_OUTPUT
       - name: '** Failure Message **'
         if: ${{ failure() }}
         run: |
-          echo "Failed to Publish the Draft Release Url:"
-          echo ${{ steps.populate-release.outputs.release_url }}
+          echo "Failed to Publish the Draft Release Url:" >> $GITHUB_OUTPUT
+          echo ${{ steps.populate-release.outputs.release_url }} >> $GITHUB_OUTPUT
