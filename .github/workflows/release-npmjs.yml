@@ -94,7 +94,7 @@ jobs:
       # Build NPM package
       - name: Build NPM package
         run: |
-          python -m pip install jupyterlab==3.6.1
+          python -m pip install jupyterlab==3.6.3
           npm i rimraf
           npm run build:prod
           python -m build
