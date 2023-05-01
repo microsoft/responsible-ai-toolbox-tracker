@@ -118,9 +118,9 @@ runs = """
         cd ..
     """
 
-[tool.jupyter-releaser.actions.before-tag-release]
-steps = ["cleanup artifacts"]
-
+before-tag-release = [
+     {step = "cleanup artifacts", args = []}
+]
 
 # -------------------
 # Cleanup artifacts
