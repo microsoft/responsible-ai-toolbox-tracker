@@ -99,16 +99,16 @@ npm = ["jlpm"]
 source_dir = "src"
 build_dir = "raitracker/labextension"
 
-[tool.jupyter-releaser.hooks]
-before-ensure-sha = [
-    "git checkout .",
-    "npm install",
-    "npm run build",
-    "python -c \"import shutil; shutil.rmtree('dist/app', ignore_errors=True)\"",
-    "python -c \"import shutil; shutil.rmtree('dist/configs', ignore_errors=True)\"",
-    "python -c \"import shutil; shutil.rmtree('dist/core', ignore_errors=True)\"",
-    "python -c \"import shutil; shutil.rmtree('dist/index.*', ignore_errors=True)\"",
-]
+# [tool.jupyter-releaser.hooks]
+# before-ensure-sha = [
+#     "git checkout .",
+#     "npm install",
+#     "npm run build",
+#     "python -c \"import shutil; shutil.rmtree('dist/app', ignore_errors=True)\"",
+#     "python -c \"import shutil; shutil.rmtree('dist/configs', ignore_errors=True)\"",
+#     "python -c \"import shutil; shutil.rmtree('dist/core', ignore_errors=True)\"",
+#     "python -c \"import shutil; shutil.rmtree('dist/index.*', ignore_errors=True)\"",
+# ]
 
 [tool.jupyter-releaser.options]
 version_cmd = "hatch version"
