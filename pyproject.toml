@@ -99,6 +99,9 @@ npm = ["jlpm"]
 source_dir = "src"
 build_dir = "raitracker/labextension"
 
+[tool.jupyter-releaser.options]
+version_cmd = "hatch version"
+
 # [tool.jupyter-releaser.hooks]
 # before-tag-release = [
 #     "git checkout .",
@@ -110,27 +113,23 @@ build_dir = "raitracker/labextension"
 #     "python -c \"import shutil; shutil.rmtree('dist/index.*', ignore_errors=True)\"",
 # ]
 
-[tool.jupyter-releaser.steps."cleanup artifacts"]
-run = """
-        cd dist/
-        shopt -s extglob
-        rm -rv !(raitracker*)
-        cd ..
-    """
-
-[tool.jupyter-releaser.hooks.before-tag-release]
-script = [
+[tool.jupyter-releaser.hooks]
+before-bump-version = [
+    "pip install -e .[dev]",
     "git checkout .",
-    "npm install",
-    "npm run build",
-    "python -c \"import shutil; shutil.rmtree('dist/app', ignore_errors=True)\"",
-    "python -c \"import shutil; shutil.rmtree('dist/configs', ignore_errors=True)\"",
-    "python -c \"import shutil; shutil.rmtree('dist/core', ignore_errors=True)\"",
-    "python -c \"import shutil; shutil.rmtree('dist/index.*', ignore_errors=True)\"",
-    {step = "cleanup artifacts", args = []}
+    "jlpm build:prod",
 ]
+"before-tag-release" = ["cleanup artifacts"]
+# before-build-npm = ["jlpm", "jlpm build"]
+# before-build-python = ["jlpm clean:all", "jlpm", "jlpm build"]
 
-# -------------------
-# Cleanup artifacts
-[tool.jupyter-releaser.options]
-version_cmd = "hatch version"
+[tool.jupyter-releaser.actions."cleanup artifacts"]
+runs = '''
+    cd dist/
+    shopt -s extglob
+    rm -rv !(raitracker*)
+    cd ..
+'''
+
+[tool.check-wheel-contents]
+ignore = ["W002"]
