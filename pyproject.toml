@@ -110,16 +110,24 @@ build_dir = "raitracker/labextension"
 #     "python -c \"import shutil; shutil.rmtree('dist/index.*', ignore_errors=True)\"",
 # ]
 
-[tool.jupyter-releaser.actions."cleanup artifacts"]
-runs = """
+[tool.jupyter-releaser.steps."cleanup artifacts"]
+run = """
         cd dist/
         shopt -s extglob
         rm -rv !(raitracker*)
         cd ..
     """
 
-before-tag-release = [
-     {step = "cleanup artifacts", args = []}
+[tool.jupyter-releaser.hooks.before-tag-release]
+script = [
+    "git checkout .",
+    "npm install",
+    "npm run build",
+    "python -c \"import shutil; shutil.rmtree('dist/app', ignore_errors=True)\"",
+    "python -c \"import shutil; shutil.rmtree('dist/configs', ignore_errors=True)\"",
+    "python -c \"import shutil; shutil.rmtree('dist/core', ignore_errors=True)\"",
+    "python -c \"import shutil; shutil.rmtree('dist/index.*', ignore_errors=True)\"",
+    {step = "cleanup artifacts", args = []}
 ]
 
 # -------------------
