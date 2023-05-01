@@ -100,7 +100,7 @@ source_dir = "src"
 build_dir = "raitracker/labextension"
 
 # [tool.jupyter-releaser.hooks]
-# before-ensure-sha = [
+# before-tag-release = [
 #     "git checkout .",
 #     "npm install",
 #     "npm run build",
@@ -110,5 +110,19 @@ build_dir = "raitracker/labextension"
 #     "python -c \"import shutil; shutil.rmtree('dist/index.*', ignore_errors=True)\"",
 # ]
 
+[tool.jupyter-releaser.actions."cleanup artifacts"]
+runs = """
+        cd dist/
+        shopt -s extglob
+        rm -rv !(raitracker*)
+        cd ..
+    """
+
+[tool.jupyter-releaser.actions.before-tag-release]
+steps = ["cleanup artifacts"]
+
+
+# -------------------
+# Cleanup artifacts
 [tool.jupyter-releaser.options]
 version_cmd = "hatch version"
