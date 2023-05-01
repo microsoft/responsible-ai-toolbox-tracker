@@ -100,7 +100,7 @@ source_dir = "src"
 build_dir = "raitracker/labextension"
 
 [tool.jupyter-releaser.hooks]
-before-populate-release = [
+before-ensure-sha = [
     "git checkout .",
     "jlpm",
     "jlpm build",
