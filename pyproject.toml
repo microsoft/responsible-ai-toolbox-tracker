@@ -115,7 +115,9 @@ after-bump-version = [
 
 "before-tag-release" = [
     "git checkout .",
-    "jlpm build:prod",
+    "jlpm build:prod"
+]
+"after-tag-release" = [
     "python cleanup.py"
 ]
 
