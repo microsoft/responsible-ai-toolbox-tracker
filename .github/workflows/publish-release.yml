@@ -65,7 +65,6 @@ jobs:
           target: ${{ github.event.inputs.target }}
           release_url: ${{ steps.populate-release.outputs.release_url }}
           steps_to_skip: ${{ github.event.inputs.steps_to_skip }}
-          steps_to_skip: 'twine upload --skip-existing --verbose dist/*'
           disabled: ${{ github.event.inputs.disabled }}
           twine-cmd: 'twine upload --skip-existing --verbose dist/*'
 
