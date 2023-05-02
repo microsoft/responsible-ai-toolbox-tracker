@@ -109,16 +109,10 @@ after-bump-version = [
     "jlpm build:prod",
 ]
 
-# before-build-npm = ["jlpm", "jlpm build"]
-
-# before-build-python = ["jlpm clean:all", "jlpm", "jlpm build"]
-
 "before-tag-release" = [
     "git checkout .",
-    "jlpm build:prod"
-]
-"after-tag-release" = [
-    "python cleanup.py"
+    "jlpm build:prod",
+    "python cleanup.py",
 ]
 
 [tool.check-wheel-contents]
