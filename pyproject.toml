@@ -108,14 +108,16 @@ after-bump-version = [
     "git checkout .",
     "jlpm build:prod",
 ]
+
+# before-build-npm = ["jlpm", "jlpm build"]
+
+# before-build-python = ["jlpm clean:all", "jlpm", "jlpm build"]
+
 "before-tag-release" = [
     "git checkout .",
     "jlpm build:prod",
     "python cleanup.py"
 ]
-# before-build-npm = ["jlpm", "jlpm build"]
-# before-build-python = ["jlpm clean:all", "jlpm", "jlpm build"]
-
 
 [tool.check-wheel-contents]
 ignore = ["W002"]
