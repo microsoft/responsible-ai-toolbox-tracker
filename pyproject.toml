@@ -114,7 +114,7 @@ version_cmd = "hatch version"
 # ]
 
 [tool.jupyter-releaser.hooks]
-before-bump-version = [
+after-bump-version = [
     "pip install -e .[dev]",
     "git checkout .",
     "jlpm build:prod",

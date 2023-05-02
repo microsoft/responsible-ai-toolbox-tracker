@@ -57,20 +57,30 @@ jobs:
           release_url: ${{ steps.prep-release.outputs.release_url }}
           steps_to_skip: ${{ github.event.inputs.steps_to_skip }}
 
+      # - name: Finalize Release
+      #   id: finalize-release
+      #   env:
+      #     PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+      #     PYPI_TOKEN_MAP: ${{ secrets.PYPI_TOKEN_MAP }}
+      #     TWINE_USERNAME: __token__
+      #     NPM_TOKEN: ${{ secrets.NPMJS_API_TOKEN }}
+      #   uses: jupyter-server/jupyter-releaser/.github/actions/finalize-release@v2
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     target: ${{ github.event.inputs.target }}
+      #     release_url: ${{ steps.populate-release.outputs.release_url }}
+      #     # npm_cmd: 'npm publish --dry-run'
+      #     npm_cmd: 'npm publish --access public'
+
       - name: Finalize Release
         id: finalize-release
         env:
-          # PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
-          # PYPI_TOKEN_MAP: ${{ secrets.PYPI_TOKEN_MAP }}
-          TWINE_USERNAME: __token__
           NPM_TOKEN: ${{ secrets.NPMJS_API_TOKEN }}
         uses: jupyter-server/jupyter-releaser/.github/actions/finalize-release@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           target: ${{ github.event.inputs.target }}
           release_url: ${{ steps.populate-release.outputs.release_url }}
-          # npm_cmd: 'npm publish --dry-run'
-          npm_cmd: 'npm publish'
 
       - name: '** Next Step **'
         if: ${{ success() }}
