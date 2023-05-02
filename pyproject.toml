@@ -119,17 +119,12 @@ before-bump-version = [
     "git checkout .",
     "jlpm build:prod",
 ]
-"before-tag-release" = ["cleanup artifacts"]
+"before-tag-release" = [
+    "python cleanup.py"
+]
 # before-build-npm = ["jlpm", "jlpm build"]
 # before-build-python = ["jlpm clean:all", "jlpm", "jlpm build"]
 
-[tool.jupyter-releaser.actions."cleanup artifacts"]
-runs = '''
-    cd dist/
-    shopt -s extglob
-    rm -rv !(raitracker*)
-    cd ..
-'''
 
 [tool.check-wheel-contents]
 ignore = ["W002"]
