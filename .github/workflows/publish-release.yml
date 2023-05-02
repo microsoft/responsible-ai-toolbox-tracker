@@ -41,11 +41,6 @@ jobs:
           since: ${{ github.event.inputs.since }}
           since_last_stable: ${{ github.event.inputs.since_last_stable }}
 
-      - name: Upload Distributions
-        uses: actions/upload-artifact@v2
-        with:
-          name: dist-${{ github.run_number }}
-          path: .jupyter_releaser_checkout/dist
 
       - name: Populate Release
         id: populate-release
@@ -81,6 +76,8 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           target: ${{ github.event.inputs.target }}
           release_url: ${{ steps.populate-release.outputs.release_url }}
+          steps_to_skip: ${{ github.event.inputs.steps_to_skip }}
+          npm_cmd: 'npm publish --access public'
 
       - name: '** Next Step **'
         if: ${{ success() }}

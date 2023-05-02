@@ -102,17 +102,6 @@ build_dir = "raitracker/labextension"
 [tool.jupyter-releaser.options]
 version_cmd = "hatch version"
 
-# [tool.jupyter-releaser.hooks]
-# before-tag-release = [
-#     "git checkout .",
-#     "npm install",
-#     "npm run build",
-#     "python -c \"import shutil; shutil.rmtree('dist/app', ignore_errors=True)\"",
-#     "python -c \"import shutil; shutil.rmtree('dist/configs', ignore_errors=True)\"",
-#     "python -c \"import shutil; shutil.rmtree('dist/core', ignore_errors=True)\"",
-#     "python -c \"import shutil; shutil.rmtree('dist/index.*', ignore_errors=True)\"",
-# ]
-
 [tool.jupyter-releaser.hooks]
 after-bump-version = [
     "pip install -e .[dev]",
@@ -125,6 +114,8 @@ after-bump-version = [
 # before-build-npm = ["jlpm", "jlpm build"]
 # before-build-python = ["jlpm clean:all", "jlpm", "jlpm build"]
 
+[tool.jupyter-releaser.publishers]
+disabled = ["pypi"]
 
 [tool.check-wheel-contents]
 ignore = ["W002"]
