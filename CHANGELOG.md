@@ -2,8 +2,12 @@
 
 <!-- <START NEW CHANGELOG ENTRY> -->
 
-## 0.2.1
+## 0.2.0
 
 No merged PRs
 
 <!-- <END NEW CHANGELOG ENTRY> -->
+
+## 0.2.1
+
+No merged PRs
