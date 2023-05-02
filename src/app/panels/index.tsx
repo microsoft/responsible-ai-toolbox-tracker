@@ -6,11 +6,11 @@ import { Label } from '@fluentui/react/lib/Label';
 import { useSelector, useDispatch } from 'react-redux';
 import { PrimaryButton } from '@fluentui/react/lib/Button';
 import { ScrollablePane } from '@fluentui/react/lib/ScrollablePane';
+import { ScrollbarVisibility } from '@fluentui/react/lib/ScrollablePane';
 import {
   TooltipHost,
   ITooltipHostStyles,
-  ScrollbarVisibility
-} from '@fluentui/react';
+} from '@fluentui/react/lib/Tooltip';
 import { Utils } from '../../core/utils';
 import { ContextualMenuMIF } from '../menus/mainMenu';
 import { NewProject, ActiveProject } from './projects';

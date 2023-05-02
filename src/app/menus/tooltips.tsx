@@ -3,8 +3,8 @@
 import React from 'react';
 import { useId } from '@fluentui/react-hooks';
 import { FontIcon } from '@fluentui/react/lib/Icon';
-import { ITooltipProps, Link } from '@fluentui/react';
-import { TooltipHost, ITooltipHostStyles } from '@fluentui/react/lib/Tooltip';
+import { Link } from '@fluentui/react/lib/Link';
+import { ITooltipProps, TooltipHost, ITooltipHostStyles } from '@fluentui/react/lib/Tooltip';
 
 const hostStyles: Partial<ITooltipHostStyles> = { root: { display: 'inline-block', marginRight: '0.2rem' } };
 

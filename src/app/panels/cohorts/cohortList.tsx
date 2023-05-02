@@ -3,7 +3,10 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Stack, IconButton, Text, TooltipHost } from '@fluentui/react';
+import { TooltipHost } from '@fluentui/react/lib/Tooltip';
+import { Stack } from '@fluentui/react/lib/Stack';
+import { IconButton } from '@fluentui/react/lib/Button';
+import { Text } from '@fluentui/react/lib/Text';
 import {
     DetailsList,
     DetailsListLayoutMode,

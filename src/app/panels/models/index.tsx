@@ -6,7 +6,7 @@
 import { Store } from "redux";
 import * as React from "react";
 import { Provider } from 'react-redux';
-import { Stack } from '@fluentui/react/lib/Stack';
+import { Stack } from '@fluentui/react';
 import { ReactWidget } from '@jupyterlab/apputils';
 import { ScrollbarVisibility } from '@fluentui/react';
 import { ScrollablePane } from '@fluentui/react/lib/ScrollablePane';

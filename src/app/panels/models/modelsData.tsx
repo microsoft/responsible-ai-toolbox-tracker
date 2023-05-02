@@ -3,8 +3,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { ColorSelector } from './colorSelector';
-import { Stack } from '@fluentui/react/lib/Stack';
-import { Toggle } from '@fluentui/react/lib/Toggle';
+import { Stack } from '@fluentui/react';
+import { Toggle } from '@fluentui/react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FontIcon, Icon } from '@fluentui/react/lib/Icon';
 import { TooltipHost, ITooltipHostStyles, Link } from '@fluentui/react';
