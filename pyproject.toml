@@ -114,8 +114,6 @@ after-bump-version = [
 # before-build-npm = ["jlpm", "jlpm build"]
 # before-build-python = ["jlpm clean:all", "jlpm", "jlpm build"]
 
-[tool.jupyter-releaser.publishers]
-disabled = ["pypi"]
 
 [tool.check-wheel-contents]
 ignore = ["W002"]

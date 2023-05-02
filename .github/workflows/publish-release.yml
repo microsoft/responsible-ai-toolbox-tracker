@@ -77,7 +77,7 @@ jobs:
           target: ${{ github.event.inputs.target }}
           release_url: ${{ steps.populate-release.outputs.release_url }}
           steps_to_skip: ${{ github.event.inputs.steps_to_skip }}
-          npm_cmd: 'npm publish --access public'
+          TWINE_COMMAND: 'twine upload --skip-existing --verbose dist/*'
 
       - name: '** Next Step **'
         if: ${{ success() }}
