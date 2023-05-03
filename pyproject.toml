@@ -109,6 +109,11 @@ version_cmd = "hatch version"
     "python cleanup.py",
 ]
 
+"before-check-npm" = [
+    "git checkout .",
+    "jlpm build:prod"
+]
+
 "before-populate-release" = ["python cleanup.py"]
 
 [tool.check-wheel-contents]
