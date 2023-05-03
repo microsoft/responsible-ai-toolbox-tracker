@@ -22,9 +22,6 @@ on:
       steps_to_skip:
         description: 'Comma separated list of steps to skip'
         required: false
-      # disabled:
-      #   description: 'Comma separated list of publishers to disable'
-      #   required: false
 
 jobs:
   release-npmjs:
@@ -64,10 +61,9 @@ jobs:
           target: ${{ github.event.inputs.target }}
           release_url: ${{ steps.populate-release.outputs.release_url }}
           steps_to_skip: ${{ github.event.inputs.steps_to_skip }}
-          # disabled: ${{ github.event.inputs.disabled }}
-          twine-cmd: 'twine upload --skip-existing --verbose dist/*'
+          # twine-cmd: 'twine upload --skip-existing --verbose dist/*'
           # npm_cmd: 'npm publish --dry-run'
-          npm_cmd: 'npm publish --tag next'
+          # npm_cmd: 'npm publish --tag next'
 
       - name: '** Next Step **'
         if: ${{ success() }}
