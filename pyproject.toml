@@ -110,8 +110,7 @@ version_cmd = "hatch version"
 ]
 
 "before-check-npm" = [
-    "git checkout .",
-    "jlpm build:prod"
+    "npm run build"
 ]
 
 "before-populate-release" = ["python cleanup.py"]
