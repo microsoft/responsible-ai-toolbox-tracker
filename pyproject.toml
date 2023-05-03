@@ -103,12 +103,6 @@ build_dir = "raitracker/labextension"
 version_cmd = "hatch version"
 
 [tool.jupyter-releaser.hooks]
-after-bump-version = [
-    "pip install -e .[dev]",
-    "git checkout .",
-    "jlpm build:prod",
-]
-
 "before-tag-release" = [
     "git checkout .",
     "jlpm build:prod",

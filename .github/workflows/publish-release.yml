@@ -12,7 +12,7 @@ on:
           - prerelease
           - none
         required: true
-        default: 'none'
+        default: 'patch'
       branch:
         description: 'The target branch'
         required: false
@@ -71,6 +71,16 @@ jobs:
           pip install --upgrade pip
           pip install semver
 
+      # -------------------
+      # Install the package and all its dependencies
+      # Needs to do this after bumping the version, otherwise
+      # package.__version__ will point to the previous version
+      - name: Install current package
+        run: |
+          pip install --upgrade pip
+          pip install .[dev]
+          pip list
+          
       # -------------------
       # Update the package version by bumping the version to the next
       - name: Bump version

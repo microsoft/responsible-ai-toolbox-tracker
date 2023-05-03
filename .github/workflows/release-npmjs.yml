@@ -14,7 +14,7 @@ on:
           - prerelease
           - none
         required: true
-        default: 'minor'
+        default: 'patch'
 jobs:
   release-npmjs:
     name: release to npmjs
