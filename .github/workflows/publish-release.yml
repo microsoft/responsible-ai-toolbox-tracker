@@ -72,6 +72,12 @@ jobs:
           pip install semver
 
       # -------------------
+      # Update the package version by bumping the version to the next
+      - name: Bump version
+        run: |
+          python bump_version.py ${{github.event.inputs.bumpType}}
+
+      # -------------------
       # Install the package and all its dependencies
       # Needs to do this after bumping the version, otherwise
       # package.__version__ will point to the previous version
@@ -80,12 +86,6 @@ jobs:
           pip install --upgrade pip
           pip install .[dev]
           pip list
-          
-      # -------------------
-      # Update the package version by bumping the version to the next
-      - name: Bump version
-        run: |
-          python bump_version.py ${{github.event.inputs.bumpType}}
 
       - name: Finalize Release
         id: finalize-release
