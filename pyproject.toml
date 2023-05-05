@@ -99,6 +99,9 @@ npm = ["jlpm"]
 source_dir = "src"
 build_dir = "raitracker/labextension"
 
+[tool.jupyter-releaser]
+skip = ["build-python"]
+
 [tool.jupyter-releaser.options]
 version_cmd = "hatch version"
 
@@ -107,10 +110,6 @@ version_cmd = "hatch version"
     "git checkout .",
     "jlpm build:prod",
     "python cleanup.py",
-]
-
-"before-check-npm" = [
-    "npm run build"
 ]
 
 "before-populate-release" = ["python cleanup.py"]
