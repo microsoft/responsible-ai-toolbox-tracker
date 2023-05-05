@@ -105,12 +105,14 @@ skip = ["build-python"]
 [tool.jupyter-releaser.options]
 version_cmd = "hatch version"
 
-[tool.jupyter-releaser.hooks]
-"before-tag-release" = [
-    "git checkout .",
-    "jlpm build:prod",
-    "python cleanup.py",
-]
+before-build-npm = ["jlpm", "jlpm build"]
+
+# [tool.jupyter-releaser.hooks]
+# "before-tag-release" = [
+#     "git checkout .",
+#     "jlpm build:prod",
+#     "python cleanup.py",
+# ]
 
 # "before-populate-release" = ["python cleanup.py"]
 
