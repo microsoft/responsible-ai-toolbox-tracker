@@ -101,8 +101,6 @@ build_dir = "raitracker/labextension"
 
 [tool.jupyter-releaser]
 skip = ["build-python"]
-build_cmd = "build:prod"
-npm = ["jlpm"]
 
 [tool.jupyter-releaser.options]
 version_cmd = "hatch version"
