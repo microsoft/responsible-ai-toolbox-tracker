@@ -112,7 +112,7 @@ version_cmd = "hatch version"
     "python cleanup.py",
 ]
 
-"before-populate-release" = ["python cleanup.py"]
+# "before-populate-release" = ["python cleanup.py"]
 
 [tool.check-wheel-contents]
 ignore = ["W002"]
