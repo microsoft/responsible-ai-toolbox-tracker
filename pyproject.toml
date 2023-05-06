@@ -105,7 +105,7 @@ skip = ["build-python"]
 [tool.jupyter-releaser.options]
 version_cmd = "hatch version"
 
-before-check-npm = ["jlpm", "jlpm build"]
+before-check-npm = ["jlpm", "jlpm build", "python -m build"]
 
 # [tool.jupyter-releaser.hooks]
 # "before-tag-release" = [
