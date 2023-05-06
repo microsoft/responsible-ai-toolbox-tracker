@@ -105,10 +105,8 @@ skip = ["build-python"]
 [tool.jupyter-releaser.options]
 version_cmd = "hatch version"
 
-
-
 [tool.jupyter-releaser.hooks]
-before-build-npm = ["jlpm", "jlpm build"]
+before-build-npm = [ "npm install", "npm run build"]
 # after-bump-version = [
 #     "pip install -e .[dev]",
 #     "git checkout .",
