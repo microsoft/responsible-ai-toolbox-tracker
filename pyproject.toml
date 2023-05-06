@@ -105,16 +105,23 @@ skip = ["build-python"]
 [tool.jupyter-releaser.options]
 version_cmd = "hatch version"
 
-before-build-npm = ["jlpm", "jlpm build"]
 
-# [tool.jupyter-releaser.hooks]
+
+[tool.jupyter-releaser.hooks]
+before-build-npm = ["jlpm", "jlpm build"]
+# after-bump-version = [
+#     "pip install -e .[dev]",
+#     "git checkout .",
+#     "jlpm build:prod",
+# ]
+
 # "before-tag-release" = [
 #     "git checkout .",
 #     "jlpm build:prod",
 #     "python cleanup.py",
 # ]
 
-# "before-populate-release" = ["python cleanup.py"]
+"before-populate-release" = ["python cleanup.py"]
 
 [tool.check-wheel-contents]
 ignore = ["W002"]
