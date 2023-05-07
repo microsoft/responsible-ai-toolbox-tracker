@@ -1,6 +1,6 @@
 {
     "name": "raitracker",
-    "version": "0.2.7",
+    "version": "0.0.1",
     "description": "Responsible AI Toolbox Tracker",
     "keywords": [
         "responsible ai tracker",
@@ -75,6 +75,7 @@
         "@lumino/widgets": "^1.37.1",
         "cat": "^0.2.0",
         "lodash": "^4.17.21",
+        "raitracker": "^0.2.8",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
         "react-redux": "^7.2.9",
