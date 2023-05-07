@@ -85,11 +85,6 @@ jobs:
       - name: Install tracker
         run: pip install -e .
 
-      - name: npm pack
-        shell: bash
-        run: |
-          npm pack --pack-destination dist
-
       - name: Prep Release
         id: prep-release
         uses: jupyter-server/jupyter_releaser/.github/actions/prep-release@v2
