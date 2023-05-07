@@ -2,9 +2,9 @@ name: 'Publish Release using jupyter-releaser'
 on:
   workflow_dispatch:
     inputs:
-      version_spec:
+      bumpType:
         type: choice
-        description: 'version options'
+        description: 'Version options'
         options:
           - major
           - minor
@@ -12,7 +12,7 @@ on:
           - prerelease
           - none
         required: true
-        default: 'patch'
+        default: 'minor'
       branch:
         description: 'The target branch'
         required: false
@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: jupyterlab/maintainer-tools/.github/actions/base-setup@v1
-      
+
       # -------------------
       # Checkout code
       - uses: actions/checkout@v3
