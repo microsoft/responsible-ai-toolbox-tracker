@@ -63,7 +63,7 @@ jobs:
       # install build
       - name: Install pypa/build
         run: >-
-          python -m pip install build
+          python -m pip install build --user
 
       # Install node
       - name: Setup node
