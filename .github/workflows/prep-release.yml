@@ -30,29 +30,29 @@ jobs:
         with:
           python-version: 3.9
 
-      # -------------------
-      # Install basic packages (not associated with the repo)
+      # # -------------------
+      # # Install basic packages (not associated with the repo)
 
-      - name: update and upgrade pip, semver
-        run: |
-          pip install --upgrade pip
-          pip install semver
+      # - name: update and upgrade pip, semver
+      #   run: |
+      #     pip install --upgrade pip
+      #     pip install semver
 
-      # -------------------
-      # Update the package version by bumping the version to the next
-      - name: Bump version
-        run: |
-          python bump_version.py ${{github.event.inputs.bumpType}}
+      # # -------------------
+      # # Update the package version by bumping the version to the next
+      # - name: Bump version
+      #   run: |
+      #     python bump_version.py ${{github.event.inputs.bumpType}}
 
-      # -------------------
-      # Install the package and all its dependencies
-      # Needs to do this after bumping the version, otherwise
-      # package.__version__ will point to the previous version
-      - name: Install current package
-        run: |
-          pip install --upgrade pip
-          pip install .[dev]
-          pip list
+      # # -------------------
+      # # Install the package and all its dependencies
+      # # Needs to do this after bumping the version, otherwise
+      # # package.__version__ will point to the previous version
+      # - name: Install current package
+      #   run: |
+      #     pip install --upgrade pip
+      #     pip install .[dev]
+      #     pip list
 
       # -------------------
       # install build
