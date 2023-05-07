@@ -61,7 +61,7 @@ jobs:
 
       - name: Finalize Release
         id: finalize-release
-        # env:
+        env:
         #   PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
         #   PYPI_TOKEN_MAP: ${{ secrets.PYPI_TOKEN_MAP }}
         #   TWINE_USERNAME: __token__
