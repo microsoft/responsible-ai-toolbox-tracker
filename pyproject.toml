@@ -111,15 +111,8 @@ before-build-npm = [
     "pip install jupyterlab==3.6.3",
     "npm run build",
 ]
-# after-bump-version = [
-#     "pip install -e .[dev]",
-#     "git checkout .",
-#     "jlpm build:prod",
-# ]
 
-"before-tag-release" = [
-    "python cleanup.py",
-]
+"before-tag-release" = ["python cleanup.py"]
 
 "before-populate-release" = ["python cleanup.py"]
 
