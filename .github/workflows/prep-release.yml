@@ -44,15 +44,15 @@ jobs:
       #   run: |
       #     python bump_version.py ${{github.event.inputs.bumpType}}
 
-      # # -------------------
-      # # Install the package and all its dependencies
-      # # Needs to do this after bumping the version, otherwise
-      # # package.__version__ will point to the previous version
-      # - name: Install current package
-      #   run: |
-      #     pip install --upgrade pip
-      #     pip install .[dev]
-      #     pip list
+      # -------------------
+      # Install the package and all its dependencies
+      # Needs to do this after bumping the version, otherwise
+      # package.__version__ will point to the previous version
+      - name: Install current package
+        run: |
+          pip install --upgrade pip
+          pip install .[dev]
+          pip list
 
       # -------------------
       # install build
