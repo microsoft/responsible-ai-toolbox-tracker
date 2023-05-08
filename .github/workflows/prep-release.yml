@@ -5,6 +5,9 @@ on:
       target:
         description: 'The owner/repo GitHub target'
         required: true
+      branch:
+        description: 'The target branch'
+        required: false
       version_spec:
         type: choice
         description: 'Version options'
@@ -21,38 +24,18 @@ jobs:
   prep_release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
       - uses: jupyterlab/maintainer-tools/.github/actions/base-setup@v1
+
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+          fetch-depth: 0
 
       # -------------------
       # Setup environment in remote runner
       - uses: actions/setup-python@v3
         with:
           python-version: 3.9
-
-      # # -------------------
-      # # Install basic packages (not associated with the repo)
-
-      # - name: update and upgrade pip, semver
-      #   run: |
-      #     pip install --upgrade pip
-      #     pip install semver
-
-      # # -------------------
-      # # Update the package version by bumping the version to the next
-      # - name: Bump version
-      #   run: |
-      #     python bump_version.py ${{github.event.inputs.bumpType}}
-
-      # -------------------
-      # Install the package and all its dependencies
-      # Needs to do this after bumping the version, otherwise
-      # package.__version__ will point to the previous version
-      - name: Install current package
-        run: |
-          pip install --upgrade pip
-          pip install .[dev]
-          pip list
 
       # -------------------
       # install build
@@ -92,7 +75,7 @@ jobs:
         id: prep-release
         uses: jupyter-server/jupyter_releaser/.github/actions/prep-release@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN  }}
+          token: ${{ secrets.ADMIN_GITHUB_TOKEN   }}
           version_spec: ${{ github.event.inputs.version_spec }}
           target: ${{ github.event.inputs.target }}
           branch: ${{ github.event.inputs.branch }}
