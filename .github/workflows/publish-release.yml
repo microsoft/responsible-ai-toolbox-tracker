@@ -35,17 +35,7 @@ jobs:
       # Setup environment in remote runner
       - uses: actions/setup-python@v3
         with:
-          python-version: 3.9
-
-      # -------------------
-      # Install the package and all its dependencies
-      # Needs to do this after bumping the version, otherwise
-      # package.__version__ will point to the previous version
-      - name: Install current package
-        run: |
-          pip install --upgrade pip
-          pip install .[dev]
-          pip list
+          python-version: 3.9   
 
       # -------------------
       # install build
@@ -80,7 +70,7 @@ jobs:
       # Install tracker
       - name: Install tracker
         run: pip install -e .
-        
+
       - name: Populate Release
         id: populate-release
         uses: jupyter-server/jupyter_releaser/.github/actions/populate-release@v2
