@@ -57,12 +57,12 @@ jobs:
           PYPI_TOKEN_MAP: ${{ secrets.PYPI_TOKEN_MAP }}
           TWINE_USERNAME: __token__
           NPM_TOKEN: ${{ secrets.NPMJS_API_TOKEN }}
-        uses: jupyter-server/jupyter-releaser/.github/actions/finalize-release@v2
+        uses: jupyter-server/jupyter_releaser/.github/actions/finalize-release@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           target: ${{ github.event.inputs.target }}
           release_url: ${{ steps.populate-release.outputs.release_url }}
-          publish_distribution: true
+          test_pypi: true
 
       - name: '** Next Step **'
         if: ${{ success() }}
