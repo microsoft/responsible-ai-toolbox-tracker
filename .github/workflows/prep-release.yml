@@ -24,18 +24,28 @@ jobs:
   prep_release:
     runs-on: ubuntu-latest
     steps:
-      - uses: jupyterlab/maintainer-tools/.github/actions/base-setup@v1
-
       - uses: actions/checkout@v3
         with:
           persist-credentials: false
           fetch-depth: 0
+
+      - uses: jupyterlab/maintainer-tools/.github/actions/base-setup@v1
 
       # -------------------
       # Setup environment in remote runner
       - uses: actions/setup-python@v3
         with:
           python-version: 3.9
+
+      # -------------------
+      # Install the package and all its dependencies
+      # Needs to do this after bumping the version, otherwise
+      # package.__version__ will point to the previous version
+      - name: Install current package
+        run: |
+          pip install --upgrade pip
+          pip install .[dev]
+          pip list
 
       # -------------------
       # install build
