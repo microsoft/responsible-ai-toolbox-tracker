@@ -1,7 +1,10 @@
-name: 'Publish Release using jupyter-releaser'
+name: 'Step 2: Publish Release'
 on:
   workflow_dispatch:
     inputs:
+      target:
+        description: 'The owner/repo GitHub target'
+        required: true
       bumpType:
         type: choice
         description: 'Version options'
