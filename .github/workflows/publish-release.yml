@@ -64,6 +64,13 @@ jobs:
           release_url: ${{ steps.populate-release.outputs.release_url }}
           test_pypi: true
 
+      - name: Publish to npm
+        run: |
+          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+          npm publish
+        env:
+          NPM_TOKEN: ${{ secrets.NPMJS_API_TOKEN }}
+
       - name: '** Next Step **'
         if: ${{ success() }}
         run: |
