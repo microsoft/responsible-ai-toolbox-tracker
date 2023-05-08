@@ -30,12 +30,15 @@ jobs:
   release-npmjs:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - uses: jupyterlab/maintainer-tools/.github/actions/base-setup@v1
-      
+
       # -------------------
       # Install tracker
-      - name: Install tracker
-        run: pip install -e .
+      - name: Dependencies Dependencies
+        shell: bash
+        run: |
+          pip install -e .
 
       - name: Populate Release
         id: populate-release
