@@ -99,6 +99,10 @@ npm = ["jlpm"]
 source_dir = "src"
 build_dir = "raitracker/labextension"
 
+[tool.hatch.data_files]
+from = "raitracker-0.0.4.tgz"
+to = "share/jupyter/lab/extensions/raitracker-0.0.4.tgz"
+
 # [tool.jupyter-releaser]
 # skip = ["build-python"]
 
