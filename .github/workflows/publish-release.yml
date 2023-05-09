@@ -53,7 +53,7 @@ jobs:
       - name: Finalize Release
         id: finalize-release
         env:
-          PYPI_TOKEN: ${{ secrets.TEST_PYPI_API_TOKEN }}
+          PYPI_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
           PYPI_TOKEN_MAP: ${{ secrets.PYPI_TOKEN_MAP }}
           TWINE_USERNAME: __token__
           NPM_TOKEN: ${{ secrets.NPMJS_API_TOKEN }}
@@ -62,12 +62,11 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           target: ${{ github.event.inputs.target }}
           release_url: ${{ steps.populate-release.outputs.release_url }}
-          test_pypi: true
 
       - name: Publish to npm
         run: |
           echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
-          npm publish
+          npm publish --tag patch --access public
         env:
           NPM_TOKEN: ${{ secrets.NPMJS_API_TOKEN }}
 
