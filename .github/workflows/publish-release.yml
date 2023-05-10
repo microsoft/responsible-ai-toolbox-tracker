@@ -34,6 +34,12 @@ jobs:
       - uses: jupyterlab/maintainer-tools/.github/actions/base-setup@v1
 
       # -------------------
+      # Update the package version by bumping the version to the next
+      - name: Bump version
+        run: |
+          python bump_version.py ${{github.event.inputs.bumpType}}
+            
+      # -------------------
       # Install tracker
       - name: Dependencies Dependencies
         shell: bash
